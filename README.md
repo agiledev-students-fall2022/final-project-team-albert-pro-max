@@ -18,10 +18,14 @@ Specifically, our product will allow the following functions:
 
 
 ## Members
-[Bernice Wu](https://github.com/Bernice55231),
-Elaine Shan, 
-Larry Li, 
-Richard Xu, 
+[Bernice Wu](https://github.com/Bernice55231)
+
+Elaine Shan
+
+Larry Li
+
+Richard Xu
+
 Jiaming Li
 
 ## Project History
