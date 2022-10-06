@@ -26,7 +26,7 @@ Specifically, our product will allow the following functions:
 
 [Richard Xu](https://github.com/Rxu64)
 
-Jiaming Li
+[Jiaming Li](https://github.com/ljm297)
 
 ## Project History
 Our project is brought up by Larry Li, and the other team members felt the same way and thus brain-storming about what functions the upgraded Albert should equip with. We listed all the ideas on the Google Doc and discussed the major functions that we could apply.
