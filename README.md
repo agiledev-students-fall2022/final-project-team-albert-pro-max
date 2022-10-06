@@ -18,15 +18,15 @@ Specifically, our product will allow the following functions:
 
 
 ## Members
-[Bernice Wu](https://github.com/Bernice55231)
+- [Bernice Wu](https://github.com/Bernice55231)
 
-[Elaine Shan](https://github.com/Yilin310)
+- [Elaine Shan](https://github.com/Yilin310)
 
-[Larry Li](https://github.com/86larryli)
+- [Larry Li](https://github.com/86larryli)
 
-[Richard Xu](https://github.com/Rxu64)
+- [Richard Xu](https://github.com/Rxu64)
 
-[Jiaming Li](https://github.com/ljm297)
+- [Jiaming Li](https://github.com/ljm297)
 
 ## Project History
 Our project is brought up by Larry Li, and the other team members felt the same way and thus brain-storming about what functions the upgraded Albert should equip with. We listed all the ideas on the Google Doc and discussed the major functions that we could apply.
@@ -38,4 +38,4 @@ Please see the [CONTRIBUTING.md](https://github.com/agiledev-students-fall2022/f
 
 |   Week   |  Product Owner  |  Scrum Master  |
 | -------- | --------------- | -------------- |
-|  Week 0  |   Elaine Shan   |   Bernice Wu   |
+|  Sprint 0  |   Elaine Shan   |   Bernice Wu   |
