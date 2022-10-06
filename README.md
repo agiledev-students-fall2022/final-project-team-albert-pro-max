@@ -35,5 +35,5 @@ Our project is brought up by Larry Li, and the other team members felt the same 
 Please see the CONTRIBUTING.md
 
 ## Project Roles
-Product Owner: Elaine Shan
-Scrum Master: [Bernice Wu](https://github.com/Bernice55231)
+- Product Owner: Elaine Shan
+- Scrum Master: [Bernice Wu](https://github.com/Bernice55231)
