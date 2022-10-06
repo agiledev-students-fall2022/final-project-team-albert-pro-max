@@ -24,7 +24,7 @@ Elaine Shan
 
 [Larry Li](https://github.com/86larryli)
 
-Richard Xu
+[Richard Xu](https://github.com/Rxu64)
 
 Jiaming Li
 
