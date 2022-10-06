@@ -22,7 +22,7 @@ Specifically, our product will allow the following functions:
 
 Elaine Shan
 
-Larry Li
+[Larry Li](https://github.com/86larryli)
 
 Richard Xu
 
