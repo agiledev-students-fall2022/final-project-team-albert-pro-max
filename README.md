@@ -18,7 +18,7 @@ Specifically, our product will allow the following functions:
 
 
 ## Members
-Bernice Wu, 
+[Bernice Wu](https://github.com/Bernice55231),
 Elaine Shan, 
 Larry Li, 
 Richard Xu, 
@@ -32,4 +32,4 @@ Please see the CONTRIBUTING.md
 
 ## Project Roles
 Product Owner: Elaine Shan
-Scrum Master: Bernice Wu
+Scrum Master: [Bernice Wu](https://github.com/Bernice55231)
