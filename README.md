@@ -32,7 +32,7 @@ Jiaming Li
 Our project is brought up by Larry Li, and the other team members felt the same way and thus brain-storming about what functions the upgraded Albert should equip with. We listed all the ideas on the Google Doc and discussed the major functions that we could apply.
 
 ## Contributions
-Please see the CONTRIBUTING.md
+Please see the [CONTRIBUTING.md](https://github.com/agiledev-students-fall2022/final-project-team-albert-pro-max/blob/master/CONTRIBUTING.md)
 
 ## Project Roles
 
