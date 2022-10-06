@@ -20,7 +20,7 @@ Specifically, our product will allow the following functions:
 ## Members
 [Bernice Wu](https://github.com/Bernice55231)
 
-Elaine Shan
+[Elaine Shan](https://github.com/Yilin310)
 
 [Larry Li](https://github.com/86larryli)
 
