@@ -10,25 +10,25 @@
 
 ### Schedule Page
 
-<center><img src="ux-design\Schedule_Page.png" height="400px" /></center>
+<p align="center"><img src="ux-design\Schedule_Page.png" height="400px" /></p>
 
 - The schedule page shows a calendar view of the courses a student enrolled in/on the waitlist/is watching.
 
 ### Search Page
 
-<center><img src="ux-design\Search_Page.png" height="400px" /></center>
+<p align="center"><img src="ux-design\Search_Page.png" height="400px" /></p>
 
 - The search page enables students to search the course catalog after inputting the term, school, and major (i.e., department).
 
 #### Search Filter
 
-<center><img src="ux-design\dropdown_selector.png" /></center>
+<p align="center"><img src="ux-design\dropdown_selector.png" /></p>
 
 - The search filter will show up when students click on the term/school/major button on the search page. It allows students to filter the course catalog.
 
 ### Course Catalog Page
 
-<center><img src="ux-design\Course_Catalog.png" height="400px" /></center>
+<p align="center"><img src="ux-design\Course_Catalog.png" height="400px" /></p>
 
 - The course catalog page is the page after student click the search button on the search page.
 
@@ -36,7 +36,7 @@
 
 ### Course Details Page
 
-<center><img src="ux-design\Course_Page.png" height="400px" /></center>
+<p align="center"><img src="ux-design\Course_Page.png" height="400px" /></p>
 
 - The course details page is the page after students click on a course on the course catalog page.
 
@@ -44,7 +44,7 @@
 
 ### Shopping Cart Page
 
-<center><img src="ux-design\Shopping_Cart.png" height="400px" /></center>
+<p align="center"><img src="ux-design\Shopping_Cart.png" height="400px" /></p>
 
 - The shopping cart page shows all the courses a student enrolled in/on the waitlist/is watching.
 
@@ -52,7 +52,7 @@
 
 ### Profile Page
 
-<center><img src="ux-design\Profile.png" height="400px" /></center>
+<p align="center"><img src="ux-design\Profile.png" height="400px" /></p>
 
 - The profile page shows the information on the user's account, including the profile image, username, and email.
 
@@ -60,7 +60,7 @@
 
 #### Profile Edit Input
 
-<center><img src="ux-design\edit_info.png" /></center>
+<p align="center"><img src="ux-design\edit_info.png" /></p>
 
 - This is the input box that shows after users click on the reset username/password/email button.
 
