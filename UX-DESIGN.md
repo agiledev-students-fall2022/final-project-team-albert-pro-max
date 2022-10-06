@@ -1,6 +1,7 @@
 # User Experience Design
 
 ## App Map
+![alt text](./App%20Map.png)
 
 ## Wireframe
 [Wireframe here](https://www.figma.com/file/iHBc9YzC9ZZtKyO3LYp8a5/Albert-Pro-Max-Wireframe-Diagrams?node-id=0%3A1)
