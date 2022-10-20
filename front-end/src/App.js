@@ -1,13 +1,18 @@
-// import logo from './logo.svg';
+
+import logo from './logo.svg';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import './App.css';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import CoursePage from './CoursePage';
 import ShoppingCart from './ShoppingCart';
+
 function App() {
   return (
     <div className="App">
-        <Router>
+      <Router>
         <main className="App-main">
           <Routes>
+            {/* a route to see a list of all messages */}
+            <Route path="/coursepage" element={<CoursePage id={6}/>} />
             <Route path="/shoppingcart" element={<ShoppingCart id={6}/>} />
           </Routes>
         </main>
