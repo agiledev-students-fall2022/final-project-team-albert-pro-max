@@ -1,0 +1,10 @@
+p {
+    flex: auto;
+    border: 1px dotted white;
+    margin: 20px;
+    padding: 20px;
+  }
+
+  .Search {
+    text-align: center;
+  }
