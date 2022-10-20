@@ -13,7 +13,7 @@ const CoursePage = props => {
         items.push(<Course key={i}/>)
     }
     return (
-        <div>
+        <div className='CoursePage'>
             <h2>Catalog</h2>
             {items}
         </div>
