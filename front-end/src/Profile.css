@@ -1,0 +1,36 @@
+.image-txt-container {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    margin: 60px;
+    margin-top:70px;
+  }
+.image-txt-container h2{
+    position:relative;
+    left: 30px;
+}
+.options{
+    line-height: 6;
+    margin: 30px;
+}
+button {
+    width: 80%;
+    color: #090909;
+    padding: 0.7em 1.7em;
+    font-size: 18px;
+    border-radius: 0.5em;
+    background: #e8e8e8;
+    border: 1px solid #e8e8e8;
+    transition: all .3s;
+    box-shadow: 6px 6px 12px #c5c5c5,
+                -6px -6px 12px #ffffff;
+   }
+   
+   button:hover {
+    border: 1px solid white;
+   }
+   
+   button:active {
+    box-shadow: 4px 4px 12px #c5c5c5,
+                -4px -4px 12px #ffffff;
+   }
