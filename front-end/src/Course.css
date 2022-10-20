@@ -1,0 +1,10 @@
+.course {
+    border: 2px none rgb(152, 176, 196);
+    background-color: rgb(212, 212, 212);
+    border-radius: 10px;
+    width: 55%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    justify-content: space-between;
+    display: inline-block;
+}
