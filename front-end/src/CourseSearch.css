@@ -1,10 +1,21 @@
-p {
-    flex: auto;
-    border: 1px dotted white;
-    margin: 20px;
-    padding: 20px;
-  }
-
-  .Search {
-    text-align: center;
-  }
+button {
+  width: 20%;
+  color: #090909;
+  padding: 0.1em;
+  font-size: 12px;
+  border-radius: 0.5em;
+  background: #e8e8e8;
+  border: 1px solid #e8e8e8;
+  transition: all .3s;
+  box-shadow: 1px 1px 2px #c5c5c5,
+              -1px -1px 2px #ffffff;
+ }
+ 
+ button:hover {
+  border: 1px solid white;
+ }
+ 
+ button:active {
+  box-shadow: 1px 1px 2px purple,
+              -1px -1px px purple;
+ }

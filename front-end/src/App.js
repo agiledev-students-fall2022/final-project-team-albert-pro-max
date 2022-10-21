@@ -3,6 +3,7 @@ import './App.css';
 import CoursePage from './CoursePage';
 import ShoppingCart from './ShoppingCart';
 import Profile from './Profile';
+import CourseSearch from './CourseSearch';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
             <Route path="/coursepage" element={<CoursePage id={6}/>} />
             <Route path="/shoppingcart" element={<ShoppingCart id={6}/>} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/coursesearch" element={<CourseSearch />} />
           </Routes>
         </main>
       </Router>

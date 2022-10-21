@@ -8,7 +8,7 @@ const DropDown = (props) => {
 
 const Search = (props) => {
   return (
-      <p onClick={props.action}>{props.name}</p>
+      <button onClick={props.action}>{props.name}</button>
   )
 }
 
@@ -40,6 +40,7 @@ const CourseSearch = props => {
 
       <div><select id="major-select">
         <option value="">--Please choose a major--</option>
+        <option value="cs">Computer Science</option>
       </select></div>
 
       <Search action={()=>{alert("you've clicked search!")}} name="search"/>
