@@ -1,8 +1,19 @@
 #watch{
     position: absolute;
-    right: 80px;
+    right: 25%;
+    width: 15%;
+
 }
 #show{
     position: absolute;
-    right: 20px;
+    right: 5%;
+    width: 15%;
+}
+
+.CourseInCart{
+    border: 1px;
+    background-color: rgb(212, 212, 212);
+    border-style: solid;
+    padding: 15px;
+    margin: 10px;
 }

@@ -9,7 +9,7 @@ const ShoppingCart = (props) =>{
     }
     return(
         <div className="ShoppingCart">
-            <h1>Shopping Cart</h1>
+            <h2>Shopping Cart</h2>
             {items}
         </div>
     )
