@@ -4,6 +4,7 @@ import CoursePage from './CoursePage';
 import ShoppingCart from './ShoppingCart';
 import Profile from './Profile';
 import CourseSearch from './CourseSearch';
+import Footer from './Footer';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route path="/coursesearch" element={<CourseSearch />} />
           </Routes>
         </main>
+        <Footer/>
       </Router>
     </div>
   );

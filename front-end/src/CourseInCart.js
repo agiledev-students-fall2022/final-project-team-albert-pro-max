@@ -12,13 +12,3 @@ const CourseInCart = () =>{
 
 }
 export default CourseInCart
-
-// const singleBox = {
-//     border: 1,
-//     borderColor: rgb(212, 212, 212),
-//     backgroundColor: "gray",
-//     borderStyle: "solid",
-//     padding: 15,
-//     margin: 10,
-
-// };
