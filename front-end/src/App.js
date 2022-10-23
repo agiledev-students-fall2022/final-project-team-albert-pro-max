@@ -6,6 +6,7 @@ import Profile from './Profile';
 import CourseSearch from './CourseSearch';
 import CourseDetails from './CourseDetails'
 import Footer from './Footer';
+import EditInfo from './EditInfo'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/coursesearch" element={<CourseSearch />} />
             <Route path="/coursedetails" element={<CourseDetails />} />
+            <Route path="/editinfo" element={<EditInfo />} />
           </Routes>
         </main>
         <Footer/>

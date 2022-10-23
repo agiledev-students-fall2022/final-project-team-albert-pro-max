@@ -1,0 +1,9 @@
+.EditInfo {
+    border: 1px;
+    background-color: rgb(212, 212, 212);
+    border-style: solid;
+    margin: 10px;
+    width: 50%;
+    padding: 12px 20px;
+    display: inline-block;
+}
