@@ -4,6 +4,7 @@ import CoursePage from './CoursePage';
 import ShoppingCart from './ShoppingCart';
 import Profile from './Profile';
 import CourseSearch from './CourseSearch';
+import CourseDetails from './CourseDetails'
 import Footer from './Footer';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
             <Route path="/shoppingcart" element={<ShoppingCart id={6}/>} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/coursesearch" element={<CourseSearch />} />
+            <Route path="/coursedetails" element={<CourseDetails />} />
           </Routes>
         </main>
         <Footer/>
