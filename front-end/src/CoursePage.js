@@ -10,7 +10,7 @@ const CoursePage = props => {
     const num = props.id;
     let items = [];
     for (let i = 0; i < num; i++) {
-        items.push(<Course key={i}/>)
+        items.push(<Course key={i} index={i}/>)
     }
     return (
         <div className='CoursePage'>

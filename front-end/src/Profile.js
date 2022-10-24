@@ -3,6 +3,7 @@ import ProfileLogo from './ProfileLogo.jpeg'
 import { Link } from 'react-router-dom'
 import Popup from './Popup'
 import { useState } from 'react'
+
 /**
  * A React component that represents the profile page of the app.
  * @param {*} param0 an object holding any props and a few function definitions passed to this component from its parent component
