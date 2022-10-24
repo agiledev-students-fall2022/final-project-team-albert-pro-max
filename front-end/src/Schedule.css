@@ -1,0 +1,22 @@
+table {
+    width: 100%;
+}
+
+td {
+    font-size: 7px;
+    text-align: left;
+}
+
+.weekday {
+    width: 16%;
+}
+
+table,
+th,
+td {
+    border: 1px solid;
+}
+
+.noshow {
+    visibility: hidden;
+}
