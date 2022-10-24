@@ -18,7 +18,9 @@ const Footer = () => {
       <Link to="/shoppingcart">
         <img src={cartLogo} alt="cart" width="30" height="30" id="cart"/>
       </Link>
-      <img src={scheduleLogo} alt="schedule" width="30" height="30" id="schedule"/>
+      <Link to="/schedule">
+        <img src={scheduleLogo} alt="schedule" width="30" height="30" id="schedule"/>
+      </Link>
     </div>
   )
 }

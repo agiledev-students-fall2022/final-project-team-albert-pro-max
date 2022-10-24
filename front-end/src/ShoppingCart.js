@@ -5,7 +5,7 @@ const ShoppingCart = (props) =>{
     const num = props.id
     let items = [];
     for (let i = 0; i < num; i++) {
-        items.push(<CourseInCart key={i}/>)
+        items.push(<CourseInCart key={i} show={props.show} setShow={props.setShow}/>) // add
     }
     return(
         <div className="ShoppingCart">
