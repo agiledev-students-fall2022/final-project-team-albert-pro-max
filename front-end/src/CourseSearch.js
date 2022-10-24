@@ -2,7 +2,7 @@ import './CourseSearch.css'
 
 const Search = (props) => {
   return (
-      <button onClick={props.action}>{props.name}</button>
+    <button onClick={props.action}>{props.name}</button>
   )
 }
 
@@ -37,7 +37,7 @@ const CourseSearch = props => {
         <option value="cs">Computer Science</option>
       </select></div>
 
-      <Search action={()=>{alert("you've clicked search!")}} name="search"/>
+      <Search action={() => { alert("you've clicked search!"); window.location.href = "/coursepage"; }} name="search" />
     </div>
   )
 }

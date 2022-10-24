@@ -1,6 +1,10 @@
 import './CourseDetails.css'
 
 const CourseSearch = props => {
+    function addShoppingCart() {
+        window.location.href = '/shoppingcart';
+    }
+
     return (
         <>
             <h2 className="course-title">CSCI-UA - 480<br />Agile Software Development</h2>
@@ -30,6 +34,10 @@ const CourseSearch = props => {
                     <tr>
                         <td>Syllabus</td>
                         <td><a href="https://nyu-agile-development.github.io/course-materials/syllabus/">Link to Course Syllabus</a></td>
+                    </tr>
+                    <tr>
+                        <td>Cart</td>
+                        <td><button onClick={addShoppingCart}>Add to Shopping Cart</button></td>
                     </tr>
                 </table>
             </div>
