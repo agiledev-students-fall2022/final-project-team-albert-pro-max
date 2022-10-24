@@ -1,11 +1,5 @@
 import './CourseSearch.css'
 
-const DropDown = (props) => {
-    return (
-        <p onClick={props.action}>{props.name}</p>
-    )
-}
-
 const Search = (props) => {
   return (
       <button onClick={props.action}>{props.name}</button>
