@@ -1,12 +1,11 @@
 import  './Popup.css'
+import EditInfo from'./EditInfo.js'
 const Popup = props => {
     return (props.trigger) ?(
       <>
         <div className="pop-up">
             <div className="pop-up-inner">
-                <button className='confirm' onClick={()=>props.setTrigger(false)}>confirm</button>
-                <button className='close' onClick={()=>props.setTrigger(false)}>close</button>
-                {props.children}
+                {<EditInfo></EditInfo>}
             </div>
         </div>
       </>
