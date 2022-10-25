@@ -14,4 +14,7 @@ const ShoppingCart = (props) =>{
         </div>
     )
 };
+ShoppingCart.defaultProps={
+    id : 0
+}
 export default ShoppingCart
