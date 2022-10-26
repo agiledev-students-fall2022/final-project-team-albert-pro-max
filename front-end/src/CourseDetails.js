@@ -3,13 +3,8 @@ import React,{ useEffect } from 'react'
 const CourseDetails = ({added, setAdd}) => {
     useEffect(()=>{
        console.log(added)
-        // setClickedArray(clickedArray => [...clickedArray,clicked])
-        // window.location.href = '/shoppingcart'
     });
-    // useEffect((name) => {
-    //     const newArr = [...added,name]
-    //     setAdd(newArr);
-    //   }, []);
+
     const courseName = "Agile Software Development"
     return (
         <>
