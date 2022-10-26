@@ -37,7 +37,7 @@ const CourseSearch = props => {
         <option value="cs">Computer Science</option>
       </select></div>
 
-      <Search action={() => { alert("you've clicked search!"); window.location.href = "/coursepage"; }} name="search" />
+      <Search action={() => { window.location.href = "/coursepage"; }} name="search" />
     </div>
   )
 }

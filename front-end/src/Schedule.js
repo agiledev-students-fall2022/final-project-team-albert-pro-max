@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 
 const Schedule = ({ show }) => {
     let scheduleRows = [];
-    const [courseBlock, setCourseBlock] = useState("")
+    const [courseBlock, setCourseBlock] = useState(null)
 
     useEffect(() => {
         if (show) {
