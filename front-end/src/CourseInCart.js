@@ -1,21 +1,38 @@
-import React from 'react'
-// import Button from './Button';
-import './CourseInCart.css'
-const CourseInCart = ({ show, setShow ,name}) => {
-    const handleShow = () => {
-        setShow(!show);
-        alert(show ? "course removed from schedule" : "course showed on schedule")
-    }
-    const handleWatch = () => {
-        alert("course added to watchlist\nyou will recieve an email when status changes");
-    }
-    return (
-        <div className="CourseInCart">
-            {name}
-            <button id='watch' onClick={handleWatch}>watch</button>
-            <button id='show' onClick={handleShow}>show</button>
-        </div>
-    )
+import React from "react";
+import "./CourseInCart.css";
+import { useState, useEffect } from "react";
+const CourseInCart = ({ show, setShow, name }) => {
+  const [showText, setShowText] = useState("show");
+  const [watchText, setWatchText] = useState("watch");
 
-}
-export default CourseInCart
+  const [watch, setWatch] = useState(false);
+
+  useEffect(() => {
+    if (show) setShowText("unshow");
+    else setShowText("show");
+  }, [show]);
+
+  useEffect(() => {
+    if (watch) setWatchText("unwatch");
+    else setWatchText("watch");
+  }, [watch]);
+
+  const handleShow = () => {
+    setShow(!show);
+  };
+  const handleWatch = () => {
+    setWatch(!watch);
+  };
+  return (
+    <div className="CourseInCart">
+      {name}
+      <button id="watch" onClick={handleWatch}>
+        {watchText}
+      </button>
+      <button id="show" onClick={handleShow}>
+        {showText}
+      </button>
+    </div>
+  );
+};
+export default CourseInCart;
