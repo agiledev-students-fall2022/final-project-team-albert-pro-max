@@ -1,13 +1,14 @@
 import './CourseDetails.css'
+import React,{ useEffect } from 'react'
+const CourseDetails = ({added, setAdd}) => {
+    useEffect(()=>{
+       console.log(added)
+    });
 
-const CourseSearch = props => {
-    function addShoppingCart() {
-        window.location.href = '/shoppingcart';
-    }
-
+    const courseName = "Agile Software Development"
     return (
         <>
-            <h2 className="course-title">CSCI-UA - 480<br />Agile Software Development</h2>
+            <h2 className="course-title">CSCI-UA - 480<br />{courseName}</h2>
 
             <div className="course-info">
                 <table>
@@ -37,7 +38,7 @@ const CourseSearch = props => {
                     </tr>
                     <tr>
                         <td>Cart</td>
-                        <td><button onClick={addShoppingCart}>Add to Shopping Cart</button></td>
+                        <td><button onClick={()=>setAdd([...added,courseName])}>Add to Shopping Cart</button></td>
                     </tr>
                 </table>
             </div>
@@ -67,4 +68,4 @@ const CourseSearch = props => {
 }
 
 // make this component available to be imported into any other file
-export default CourseSearch
+export default CourseDetails
