@@ -10,6 +10,7 @@ import Footer from './Footer';
 import EditInfo from './EditInfo';
 import Schedule from "./Schedule";
 import Signup from "./Signup";
+import Login from './Login';
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
             <Route path="/editinfo" element={<EditInfo />} />
             <Route path="/schedule" element={<Schedule show={show} />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/login" element={<Login />} />
           </Routes>
         </main>
         <Footer />
