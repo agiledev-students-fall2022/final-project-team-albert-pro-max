@@ -1,6 +1,6 @@
 import './CourseDetails.css'
 
-const CourseSearch = props => {
+const CourseDetails = props => {
     function addShoppingCart() {
         window.location.href = '/shoppingcart';
     }
@@ -67,4 +67,4 @@ const CourseSearch = props => {
 }
 
 // make this component available to be imported into any other file
-export default CourseSearch
+export default CourseDetails
