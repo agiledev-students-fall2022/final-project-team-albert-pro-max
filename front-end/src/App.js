@@ -13,17 +13,17 @@ import Schedule from "./Schedule";
 function App() {
 
   const [show, setShow] = useState(false) // should be an array of state
-
+  const [added,setAdd] = useState([])
   return (
     <div className="App">
       <Router>
         <main className="App-main">
           <Routes>
             <Route path="/coursepage" element={<CoursePage id={6}/>} />
-            <Route path="/shoppingcart" element={<ShoppingCart id={6} show={show} setShow={setShow}/>} />
+            <Route path="/shoppingcart" element={<ShoppingCart added={added} show={show} setShow={setShow}/>} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/coursesearch" element={<CourseSearch />} />
-            <Route path="/coursedetails" element={<CourseDetails />} />
+            <Route path="/coursedetails" element={<CourseDetails added = {added} setAdd={setAdd}/>} />
             <Route path="/editinfo" element={<EditInfo />} />
             <Route path="/schedule" element={<Schedule show={show}/>} />
           </Routes>
