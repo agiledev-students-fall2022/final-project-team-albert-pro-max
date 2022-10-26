@@ -5,6 +5,10 @@ const Schedule = ({ show }) => {
     let scheduleRows = [];
     const [courseBlock, setCourseBlock] = useState(null)
 
+    function handleClickCourse() {
+        window.location.href = "/coursedetails";
+    }
+
     useEffect(() => {
         if (show) {
             scheduleRows = [];
@@ -35,9 +39,9 @@ const Schedule = ({ show }) => {
                     if (hr === 12 && min === 30) {
                         scheduleRow.push(
                             <>
-                                <td rowSpan={15}>12:30-13:45<br />CSCI-UA 480<br />Agile Software Development</td>
+                                <td rowSpan={15} onClick={handleClickCourse}>12:30-13:45<br />CSCI-UA 480<br />Agile Software Development</td>
                                 <td className='noshow'></td>
-                                <td rowSpan={15}>12:30-13:45<br />CSCI-UA 480<br />Agile Software Development</td>
+                                <td rowSpan={15} onClick={handleClickCourse}>12:30-13:45<br />CSCI-UA 480<br />Agile Software Development</td>
                             </>
                         );
                     }
