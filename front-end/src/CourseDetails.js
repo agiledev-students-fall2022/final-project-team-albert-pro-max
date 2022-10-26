@@ -1,9 +1,13 @@
 import './CourseDetails.css'
-import React,{ useEffect } from 'react'
-const CourseDetails = ({added, setAdd}) => {
-    useEffect(()=>{
-       console.log(added)
+import React, { useEffect } from 'react'
+const CourseDetails = ({ added, setAdd }) => {
+    useEffect(() => {
+        console.log(added)
     });
+
+    function handleClickConflictIcon() {
+        alert("Time Conflict with:\nCSCI-UA - 480 Natural Language Processing\nTuTh 11:00AM - 12:45PM");
+    }
 
     const courseName = "Agile Software Development"
     return (
@@ -22,7 +26,7 @@ const CourseDetails = ({added, setAdd}) => {
                     </tr>
                     <tr>
                         <td>Days/Times</td>
-                        <td>TuTh 12:30PM - 1:45PM</td>
+                        <td><img className='icon-conflict' src="/prompt.svg" onClick={handleClickConflictIcon}></img>TuTh 12:30PM - 1:45PM</td>
                     </tr>
                     <tr>
                         <td>Location</td>
@@ -38,7 +42,7 @@ const CourseDetails = ({added, setAdd}) => {
                     </tr>
                     <tr>
                         <td>Cart</td>
-                        <td><button onClick={()=>setAdd([...added,courseName])}>Add to Shopping Cart</button></td>
+                        <td><button onClick={() => setAdd([...added, courseName])}>Add to Shopping Cart</button></td>
                     </tr>
                 </table>
             </div>
