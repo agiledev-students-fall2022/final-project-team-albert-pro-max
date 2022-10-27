@@ -20,15 +20,22 @@ const Profile = props => {
             </h2>
         </div>
         <p>netID@nyu.edu</p>
-        <div class='pop-up'>
+        {/* <div class='pop-up'>
           <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
             <h3>This is a popup window</h3>
           </Popup>
-        </div>
+        </div> */}
         <div class='options'>
-            <button class="button" onClick={()=>setButtonPopup(true)}>reset username<br></br></button>
-            <button class="button" onClick={()=>setButtonPopup(true)}>reset password<br></br></button>
-            <button class="button" onClick={()=>setButtonPopup(true)}>reset email<br></br></button>
+            <Link to='/edituser'>
+              <button class="button" >reset username<br></br></button>
+            </Link>
+            <Link to ="/editinfo">
+              <button class="button" >reset password<br></br></button>
+            </Link>
+            <Link to='/editemail'>
+              <button class="button" >reset email<br></br></button>
+            </Link>
+            
         </div>
         
        
