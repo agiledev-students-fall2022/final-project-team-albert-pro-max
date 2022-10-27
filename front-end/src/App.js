@@ -13,7 +13,7 @@ import Schedule from "./Schedule";
 function App() {
 
   const [show, setShow] = useState(false) // should be an array of state
-  const [added,setAdd] = useState([])
+  const [added, setAdd] = useState([])
   return (
     <div className="App">
       <Router>
