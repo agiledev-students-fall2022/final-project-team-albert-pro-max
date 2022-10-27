@@ -8,6 +8,8 @@ import CourseSearch from './CourseSearch';
 import CourseDetails from './CourseDetails'
 import Footer from './Footer';
 import EditInfo from './EditInfo';
+import EditUser from './EditUser';
+import EditEmail from './EditEmail';
 import Schedule from "./Schedule";
 import Signup from "./Signup";
 import Login from './Login';
@@ -28,6 +30,8 @@ function App() {
             <Route path="/coursesearch" element={<CourseSearch />} />
             <Route path="/coursedetails" element={<CourseDetails added={added} setAdd={setAdd} />} />
             <Route path="/editinfo" element={<EditInfo />} />
+            <Route path="/edituser" element={<EditUser />} />
+            <Route path="/editemail" element={<EditEmail />} />
             <Route path="/schedule" element={<Schedule show={show} />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
