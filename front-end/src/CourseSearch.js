@@ -1,10 +1,6 @@
+import { Link } from 'react-router-dom'
 import './CourseSearch.css'
 
-const Search = (props) => {
-  return (
-    <button onClick={props.action}>{props.name}</button>
-  )
-}
 
 /**
  * A React component that represents the Home page of the app.
@@ -14,7 +10,7 @@ const Search = (props) => {
 const CourseSearch = props => {
   return (
     <div className="Search">
-      <h1>Course Search</h1>
+      <h2>Course Search</h2>
 
       <div><select id="term-select">
         <option value="">--Please choose a term--</option>
@@ -37,7 +33,7 @@ const CourseSearch = props => {
         <option value="cs">Computer Science</option>
       </select></div>
 
-      <Search action={() => { window.location.href = "/coursepage"; }} name="search" />
+      <Link to ='/coursepage'><button>search</button></Link>
     </div>
   )
 }
