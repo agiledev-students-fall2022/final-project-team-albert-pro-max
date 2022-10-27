@@ -1,9 +1,17 @@
 import './CourseDetails.css'
 import React, { useEffect } from 'react'
-const CourseDetails = ({ added, setAdd }) => {
+import Course from './Course';
+const CourseDetails = ({added, setAdd}) => {
     useEffect(() => {
         console.log(added)
+        
     });
+    const AddCourse= (tempName)=>{
+        const courseIn = added.find((courseInList) => {return courseInList === tempName});
+        if(!courseIn){
+            setAdd([...added, tempName])
+        }
+    }
 
     function handleClickConflictIcon() {
         alert("Time Conflict with:\nCSCI-UA - 480 Natural Language Processing\nTuTh 11:00AM - 12:45PM");
@@ -42,7 +50,7 @@ const CourseDetails = ({ added, setAdd }) => {
                     </tr>
                     <tr>
                         <td>Cart</td>
-                        <td><button onClick={() => setAdd([...added, courseName])}>Add to Shopping Cart</button></td>
+                        <td><button onClick={() => AddCourse(courseName)}>Add to Shopping Cart</button></td>
                     </tr>
                 </table>
             </div>
