@@ -7,7 +7,7 @@ import Profile from './Profile';
 import CourseSearch from './CourseSearch';
 import CourseDetails from './CourseDetails'
 import Footer from './Footer';
-import EditInfo from './EditInfo';
+import EditPassword from './EditPassword';
 import EditUser from './EditUser';
 import EditEmail from './EditEmail';
 import Schedule from "./Schedule";
@@ -29,7 +29,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/coursesearch" element={<CourseSearch />} />
             <Route path="/coursedetails" element={<CourseDetails added={added} setAdd={setAdd} />} />
-            <Route path="/editinfo" element={<EditInfo />} />
+            <Route path="/editinfo" element={<EditPassword />} />
             <Route path="/edituser" element={<EditUser />} />
             <Route path="/editemail" element={<EditEmail />} />
             <Route path="/schedule" element={<Schedule show={show} />} />
