@@ -1,19 +1,19 @@
-table,
-tr,
-td,
-th {
+.Signup table,
+.Signup tr,
+.Signup td,
+.Signup th {
     border: 0;
 }
 
-input {
+.Signup input {
     width: 80%;
 }
 
-table {
+.Signup table {
     width: 100%;
     margin: 16px;
 }
 
-th {
+.Signup th {
     width: 30%;
 }

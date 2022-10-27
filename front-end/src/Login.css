@@ -1,19 +1,19 @@
-table,
-tr,
-td,
-th {
+.Login table,
+.Login tr,
+.Login td,
+.Login th {
     border: 0;
 }
 
-input {
+.Login input {
     width: 80%;
 }
 
-table {
+.Login table {
     width: 100%;
     margin: 16px;
 }
 
-th {
+.Login th {
     width: 30%;
 }

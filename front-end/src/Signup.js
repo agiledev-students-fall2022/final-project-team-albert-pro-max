@@ -6,7 +6,7 @@ const Signup = props => {
     }
 
     return (
-        <>
+        <div className='Signup'>
             <h2>Signup</h2>
 
             <table>
@@ -32,7 +32,7 @@ const Signup = props => {
             </table>
 
             <button onClick={handleClickSignup}>Signup</button>
-        </>
+        </div>
     )
 }
 

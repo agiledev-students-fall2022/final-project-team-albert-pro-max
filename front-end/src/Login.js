@@ -6,7 +6,7 @@ const Login = props => {
     }
 
     return (
-        <>
+        <div className='Login'>
             <h2>Login</h2>
 
             <table>
@@ -24,7 +24,7 @@ const Login = props => {
             <button onClick={handleClickLogin}>Login</button>
 
             <p>Not registered yet? <a href='/signup'>Create an account</a></p>
-        </>
+        </div>
     )
 }
 
