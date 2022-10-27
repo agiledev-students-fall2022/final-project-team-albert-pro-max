@@ -94,7 +94,7 @@ const Schedule = ({ show }) => {
     }, [show])
 
     return (
-        <>
+        <div className='Schedule'>
             <h2>Schedule</h2>
             <center>
                 <table>
@@ -113,7 +113,7 @@ const Schedule = ({ show }) => {
                     </tbody>
                 </table>
             </center>
-        </>
+        </div>
     )
 }
 

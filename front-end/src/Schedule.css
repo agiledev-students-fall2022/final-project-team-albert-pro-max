@@ -1,17 +1,17 @@
-table {
+.Schedule table {
     width: 100%;
 }
 
-td {
+.Schedule td {
     font-size: 7px;
     text-align: left;
 }
 
-.weekday {
+.Schedule.weekday {
     width: 16%;
 }
 
-table,
+.Schedule table,
 th,
 td {
     border: 1px solid;
