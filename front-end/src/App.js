@@ -21,7 +21,8 @@ function App() {
       <Router>
         <main className="App-main">
           <Routes>
-            <Route path="/coursepage" element={<CoursePage id={6} />} />
+            <Route path="/" element={<CourseSearch />} />
+            <Route path="/coursepage" element={<CoursePage />} />
             <Route path="/shoppingcart" element={<ShoppingCart added={added} show={show} setShow={setShow} />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/coursesearch" element={<CourseSearch />} />
