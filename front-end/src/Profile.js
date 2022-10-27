@@ -3,6 +3,7 @@ import ProfileLogo from './ProfileLogo.jpeg'
 import { Link } from 'react-router-dom'
 import Popup from './Popup'
 import { useState } from 'react'
+import mockUsers from './MockData/users.json';
 
 /**
  * A React component that represents the profile page of the app.
@@ -11,15 +12,17 @@ import { useState } from 'react'
  */
 const Profile = props => {
   const [buttonPopup,setButtonPopup]=useState(false);
+  const random = Math.floor(Math.random() * mockUsers.length);
+  const user = mockUsers[random];
     return (
       <>
         <div class="image-txt-container">
-            <img src={ProfileLogo} alt="profile logo" width="120" height="120" />
+            <img src={user.profile_img} alt="profile logo" width="120" height="120" />
             <h2>
-                username
+                {user.username}
             </h2>
         </div>
-        <p>netID@nyu.edu</p>
+        <p>{user.email}</p>
         {/* <div class='pop-up'>
           <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
             <h3>This is a popup window</h3>
