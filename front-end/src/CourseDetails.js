@@ -67,7 +67,7 @@ const CourseDetails = ({ added, setAdd }) => {
     }
 
     return (
-        <>
+        <div className='CourseDetails'>
             <h2 className="course-title">CSCI-UA - {course.course_number}<br />{course.course_name}</h2>
 
             <div className="course-info">
@@ -106,7 +106,7 @@ const CourseDetails = ({ added, setAdd }) => {
             </div>
 
             {recitationSections}
-        </>
+        </div>
     )
 }
 

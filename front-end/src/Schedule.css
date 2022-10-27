@@ -12,11 +12,11 @@
 }
 
 .Schedule table,
-th,
-td {
+.Schedule th,
+.Schedule td {
     border: 1px solid;
 }
 
-.noshow {
+.Schedule.noshow {
     visibility: hidden;
 }
