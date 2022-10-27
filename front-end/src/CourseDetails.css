@@ -20,3 +20,7 @@ th {
     width: 16px;
     height: 16px;
 }
+
+button {
+    width: fit-content;
+}
