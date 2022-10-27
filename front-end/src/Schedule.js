@@ -1,13 +1,11 @@
 import './Schedule.css'
+
+import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 
 const Schedule = ({ show }) => {
     let scheduleRows = [];
     const [courseBlock, setCourseBlock] = useState(null)
-
-    function handleClickCourse() {
-        window.location.href = "/coursedetails";
-    }
 
     useEffect(() => {
         if (show) {
@@ -32,22 +30,28 @@ const Schedule = ({ show }) => {
 
                     if (min % 30 === 0) {
                         scheduleRow.push(
-                            <th id={hr_str + min_str} rowSpan={6}>{hr_str}:{min_str}</th>
+                            <th id={hr_str + min_str} key={"th" + hr_str + min_str} rowSpan={6}>{hr_str}:{min_str}</th>
                         );
                     }
 
                     if (hr === 12 && min === 30) {
                         scheduleRow.push(
                             <>
-                                <td rowSpan={15} onClick={handleClickCourse}>12:30-13:45<br />CSCI-UA 480<br />Agile Software Development</td>
+                                <td rowSpan={15}><Link to={{
+                                    pathname: "/coursedetails",
+                                    search: `?id=1`
+                                }}>12:30-13:45<br />CSCI-UA 480<br />Agile Software Development</Link></td>
                                 <td className='noshow'></td>
-                                <td rowSpan={15} onClick={handleClickCourse}>12:30-13:45<br />CSCI-UA 480<br />Agile Software Development</td>
+                                <td rowSpan={15}><Link to={{
+                                    pathname: "/coursedetails",
+                                    search: `?id=1`
+                                }}>12:30-13:45<br />CSCI-UA 480<br />Agile Software Development</Link></td>
                             </>
                         );
                     }
 
                     scheduleRows.push(
-                        <tr>{scheduleRow}</tr>
+                        <tr key={"tr" + hr_str + min_str}>{scheduleRow}</tr>
                     );
                 }
             }
