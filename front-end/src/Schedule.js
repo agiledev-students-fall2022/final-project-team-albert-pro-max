@@ -75,12 +75,12 @@ const Schedule = ({ show }) => {
 
                     if (min % 30 === 0) {
                         scheduleRow.push(
-                            <th id={hr_str + min_str} rowSpan={6}>{hr_str}:{min_str}</th>
+                            <th id={hr_str + min_str} key={"th" + hr_str + min_str} rowSpan={6}>{hr_str}:{min_str}</th>
                         );
                     }
 
                     scheduleRows.push(
-                        <tr>{scheduleRow}</tr>
+                        <tr key={"tr" + hr_str + min_str}>{scheduleRow}</tr>
                     );
                 }
             }
