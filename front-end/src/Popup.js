@@ -1,5 +1,5 @@
 import  './Popup.css'
-import EditInfo from'./EditInfo.js'
+import EditInfo from'./EditPassword.js'
 const Popup = props => {
     return (props.trigger) ?(
       <>

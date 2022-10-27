@@ -1,7 +1,7 @@
 import './EditInfo.css'
 import { Link } from 'react-router-dom'
 
-const EditInfo = (prop) =>{
+const EditPassword = (prop) =>{
     return(
         <div className="editinfo">
             <h2>Change Password</h2>
@@ -20,4 +20,4 @@ const EditInfo = (prop) =>{
     )
 
 }
-export default EditInfo
+export default EditPassword
