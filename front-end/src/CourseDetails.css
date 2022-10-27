@@ -5,12 +5,12 @@
     border-collapse: collapse;
 }
 
-th,
-td {
+.CourseDetails th,
+.CourseDetails td {
     padding: 5px;
 }
 
-th {
+.CourseDetials th {
     text-align: left;
 }
 
@@ -21,6 +21,6 @@ th {
     height: 16px;
 }
 
-button {
+.CourseDetails button {
     width: fit-content;
 }

@@ -1,22 +1,22 @@
-table {
+.Schedule table {
     width: 100%;
 }
 
-td {
+.Schedule td {
     font-size: 7px;
     text-align: left;
 }
 
-.weekday {
+.Schedule .weekday {
     width: 16%;
 }
 
-table,
-th,
-td {
+.Schedule table,
+.Schedule th,
+.Schedule td {
     border: 1px solid;
 }
 
-.noshow {
+.Schedule .noshow {
     visibility: hidden;
 }
