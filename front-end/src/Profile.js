@@ -38,6 +38,9 @@ const Profile = props => {
             <Link to='/editemail'>
               <button class="button" >reset email<br></br></button>
             </Link>
+            <Link to ='/Signup'>
+              <button class="button"> log out <br></br></button>
+            </Link>
             
         </div>
         
