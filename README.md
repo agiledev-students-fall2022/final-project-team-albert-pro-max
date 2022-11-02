@@ -38,4 +38,7 @@ Please see the [CONTRIBUTING.md](https://github.com/agiledev-students-fall2022/f
 
 |   Week   |  Product Owner  |  Scrum Master  |
 | -------- | --------------- | -------------- |
-|  Sprint 0  |   Elaine Shan   |   Bernice Wu   |
+|  Sprint 1  |   Elaine Shan   |   Bernice Wu   |
+|  Sprint 2  |   Larry Li   |   Jiaming Li   |
+|  Sprint 3  |   Bernice Wu   |   Richard Xu   |
+|  Sprint 4  |   Jiaming Li   |   Elaine Shan   |
