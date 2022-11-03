@@ -1,0 +1,32 @@
+{
+  "name": "albert-pro-max",
+  "version": "1.0.0",
+  "description": "The back-end of your project will live in this directory.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agiledev-students-fall2022/final-project-team-albert-pro-max.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/agiledev-students-fall2022/final-project-team-albert-pro-max/issues"
+  },
+  "homepage": "https://github.com/agiledev-students-fall2022/final-project-team-albert-pro-max#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mongoose": "^6.7.1",
+    "passport": "^0.6.0"
+  },
+  "devDependencies": {
+    "chai": "^4.3.6",
+    "eslint": "^8.26.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-mocha": "^10.1.0",
+    "mocha": "^10.1.0"
+  }
+}
