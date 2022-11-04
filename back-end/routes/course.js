@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const axios = require('axios');
+require("dotenv").config({ silent: true });
 
 router.get('/search', (req, res) => {
     // THIS IS /course/search ROUTE
@@ -15,6 +17,10 @@ router.get('/search', (req, res) => {
 router.get('/catalog', (req, res) => {
     // THIS IS /course/catalog ROUTE
     // DO YOUR MAGIC
+    axios
+        .get(`${process.env.API_BASE_URL}?count=5&key=${process.env.API_SECRET_KEY}`)
+        .then(apiResponse => res.json(apiResponse.data))
+        .catch(err => next(err))
 });
 
 router.get('/details', (req, res) => {
