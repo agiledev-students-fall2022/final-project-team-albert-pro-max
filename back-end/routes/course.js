@@ -7,16 +7,9 @@ router.get('/search', (req, res, next) => {
     // THIS IS /course/search ROUTE
     // DO YOUR MAGIC
     axios
-        .get(`${process.env.API_BASE_URL+process.env.MAJOR}?count=3&key=${process.env.API_SECRET_KEY}`)
+        .get(`${process.env.API_BASE_URL+process.env.SCHOOL_AND_MAJOR}?count=21&key=${process.env.API_SECRET_KEY}`)
         .then(apiResponse => res.json(apiResponse.data))
         .catch(err => next(err));
-/*
-    res.json({
-        success: true,
-        data: [],
-        msg: "This is /course/search"
-    });
-*/
 });
 
 router.get('/catalog', (req, res) => {
