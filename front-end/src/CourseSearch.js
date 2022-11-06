@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import './CourseSearch.css'
-
+import axios from 'axios'
+import { useEffect, useState } from 'react'
 
 /**
  * A React component that represents the Home page of the app.
@@ -8,6 +9,21 @@ import './CourseSearch.css'
  * @returns The contents of this component, in JSX form.
  */
 const CourseSearch = props => {
+
+  const [school, setSchool] = useState([])
+  const [major, setMajor] = useState([])
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:3000/course/search')
+      .then(response => {
+        setSchool(response.data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  })
+
   return (
     <div className="Search">
       <h2>Course Search</h2>
@@ -22,10 +38,9 @@ const CourseSearch = props => {
 
       <div><select id="school-select">
         <option value="">--Please choose a school--</option>
-        <option value="cas">CAS</option>
-        <option value="tisch">Tisch</option>
-        <option value="stern">Stern</option>
-        <option value="steinhardt">Steinhardt</option>
+        {school.map(item => (
+          <option value={item.name}>{item.name}</option>
+        ))}
       </select></div>
 
       <div><select id="major-select">
