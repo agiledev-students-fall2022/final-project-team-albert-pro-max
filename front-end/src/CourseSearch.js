@@ -12,6 +12,7 @@ const CourseSearch = props => {
 
   const [school, setSchool] = useState([])
   const [major, setMajor] = useState([])
+  const [selectedMajor, setSelectedMajor] = useState(null)
 
   useEffect(() => {
     axios
@@ -24,28 +25,35 @@ const CourseSearch = props => {
       })
   }, [])
 
+  const handleSelectSchool = (event) => {
+    setMajor(school[parseInt(event.target.value) - 1].major)
+  }
+
+  const handleSelectMajor = (event) => {
+    setSelectedMajor(major[parseInt(event.target.value) - 1])
+    console.log(selectedMajor)
+  }
+
   return (
     <div className="Search">
       <h2>Course Search</h2>
 
-      <div><select id="term-select">
-        <option value="">--Please choose a term--</option>
-        <option value="fa21">Fall 2021</option>
-        <option value="sp22">Spring 2022</option>
-        <option value="fa22">Fall 2022</option>
-        <option value="sp23">Spring 2023</option>
+      <div><select>
+        <option value="">--Spring 2023 only--</option>
       </select></div>
 
-      <div><select id="school-select">
+      <div><select onChange={handleSelectSchool}>
         <option value="">--Please choose a school--</option>
-        {school.map(item => (
-          <option value={item.name}>{item.name}</option>
-        ))}
+        {school.map((item, index) => {
+          return <option key={index} value={item.id}>{item.name}</option>
+        })}
       </select></div>
 
-      <div><select id="major-select">
+      <div><select onChange={handleSelectMajor}>
         <option value="">--Please choose a major--</option>
-        <option value="cs">Computer Science</option>
+        {major.map((item, index) => {
+          return <option key={index} value={item.id}>{item.name}</option>
+        })}
       </select></div>
 
       <Link to ='/coursepage'><button>search</button></Link>
