@@ -12,7 +12,7 @@ router.get('/search', (req, res, next) => {
         .catch(err => next(err));
 });
 
-router.get('/catalog', (req, res) => {
+router.get('/catalog', (req, res, next) => {
     // THIS IS /course/catalog ROUTE
     // DO YOUR MAGIC
     axios
@@ -24,11 +24,23 @@ router.get('/catalog', (req, res) => {
 router.get('/details', (req, res) => {
     // THIS IS /course/details ROUTE
     // DO YOUR MAGIC
+
+    res.json({
+        success: true,
+        data: [],
+        msg: "This is /course/details"
+    });
 });
 
 router.post('/details/rating', (req, res) => {
     // THIS IS /course/details/rating ROUTE
     // DO YOUR MAGIC
+
+    res.json({
+        success: true,
+        data: [],
+        msg: "This is /course/rating"
+    });
 });
 
 module.exports = router;
