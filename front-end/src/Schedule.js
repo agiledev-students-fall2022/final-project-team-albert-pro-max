@@ -1,11 +1,26 @@
 import './Schedule.css'
-
+import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 
 const Schedule = ({ show }) => {
     let scheduleRows = [];
     const [courseBlock, setCourseBlock] = useState(null)
+
+    // this array contains courses that are supposed to be showed
+    const [showedCourse, setShowedCourse] = useState([])
+    useEffect(() => {
+      axios
+        .get('http://localhost:3001/cart')
+        .then(response => {
+            setShowedCourse(response.data.filter((e) => {
+                return e.show == true
+            }))
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }, [])
 
     useEffect(() => {
         if (show) {
