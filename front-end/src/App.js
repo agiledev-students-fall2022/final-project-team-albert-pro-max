@@ -19,7 +19,7 @@ function App() {
 
   const [show, setShow] = useState(false) // should be an array of state
   const [added, setAdd] = useState([])
-  const BACKEND_PORT = 3000
+  const BACKEND_PORT = 3001
   
   useEffect(() => {
     axios
