@@ -31,7 +31,7 @@ const CourseSearch = props => {
 
   const handleSelectMajor = (event) => {
     setSelectedMajor(major[parseInt(event.target.value) - 1])
-    console.log(selectedMajor)
+    console.log(major[parseInt(event.target.value) - 1])
   }
 
   return (

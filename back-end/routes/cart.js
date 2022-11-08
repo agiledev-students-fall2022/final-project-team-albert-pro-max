@@ -5,7 +5,7 @@ require("dotenv").config({ silent: true });
 
 router.get('/', (req, res) => {
     axios
-        .get(`${process.env.API_BASE_URL}?count=5&key=${process.env.API_SECRET_KEY}`)
+        .get(`${process.env.API_BASE_URL+process.env.COURSE_FOR_CART}?count=5&key=${process.env.API_SECRET_KEY}`)
         .then(data => {
             const in_cart = data.data.filter(function (el) {
                 return el.in_cart == true 
@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
 
 router.get('/watch', (req, res) => {
     axios
-        .get(`${process.env.API_BASE_URL}?count=5&key=${process.env.API_SECRET_KEY}`)
+        .get(`${process.env.API_BASE_URL+process.env.COURSE_FOR_CART}?count=5&key=${process.env.API_SECRET_KEY}`)
         .then(data => {
             const watch = data.data.filter(function (el) {
                 return el.in_cart == true &&
