@@ -1,7 +1,8 @@
 import './CoursePage.css'
 import Course from './Course'
-
-import mockCourses from './MockData/courses.json';
+import axios from 'axios'
+import { useState } from 'react'
+// import mockCourses from './MockData/courses.json';
 
 /**
  * A React component that represents the Home page of the app.
@@ -9,15 +10,21 @@ import mockCourses from './MockData/courses.json';
  * @returns The contents of this component, in JSX form.
  */
 const CoursePage = props => {
-    const num = mockCourses.length;
-    let items = [];
-    for (let i = 0; i < num; i++) {
-        items.push(<Course key={i} index={i} />)
-    }
+  const [courses, setCourses] = useState([]);
+    axios
+      .get('http://localhost:3001/course/catalog')
+      .then(response => {
+        setCourses(response.data);
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    
+    console.log(courses)
     return (
         <div className='CoursePage'>
             <h2>Catalog</h2>
-            {items}
+            {courses}
         </div>
     )
 }

@@ -16,7 +16,7 @@ const CourseSearch = props => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:3000/course/search')
+      .get('http://localhost:3001/course/search')
       .then(response => {
         setSchool(response.data)
       })
