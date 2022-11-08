@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css';
 import CoursePage from './CoursePage';
 import ShoppingCart from './ShoppingCart';
@@ -13,11 +13,24 @@ import EditEmail from './EditEmail';
 import Schedule from "./Schedule";
 import Signup from "./Signup";
 import Login from './Login';
+import axios from 'axios';
 
 function App() {
 
   const [show, setShow] = useState(false) // should be an array of state
   const [added, setAdd] = useState([])
+  const BACKEND_PORT = 3000
+  useEffect(() => {
+    axios
+      .get(`http://localhost:${BACKEND_PORT}/cart`)
+      .then(response => {
+        setAdd(response.data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }, [])
+
   return (
     <div className="App">
       <Router>
