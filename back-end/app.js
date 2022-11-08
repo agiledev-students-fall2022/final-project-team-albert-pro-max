@@ -17,7 +17,6 @@ app.use('/', index);
 app.use('/course', course);
 app.use('/profile', profile);
 app.use('/cart', cart);
-app.use('/schedule', schedule);
 
 const server = app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}...`);
