@@ -4,7 +4,6 @@ const index = require('./routes/index');
 const course = require('./routes/course');
 const profile = require('./routes/profile');
 const cart = require('./routes/cart');
-const schedule = require('./routes/schedule');
 
 const app = express();
 
