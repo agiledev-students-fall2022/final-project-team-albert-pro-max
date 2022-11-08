@@ -16,7 +16,7 @@ const CourseSearch = props => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:3000/course/search')
+      .get('http://localhost:3001/course/search')
       .then(response => {
         setSchool(response.data)
       })
@@ -31,7 +31,7 @@ const CourseSearch = props => {
 
   const handleSelectMajor = (event) => {
     setSelectedMajor(major[parseInt(event.target.value) - 1])
-    console.log(selectedMajor)
+    console.log(major[parseInt(event.target.value) - 1])
   }
 
   return (
