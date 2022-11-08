@@ -8,7 +8,7 @@ chai.use(chaiHttp);
 const server = require("../app");
 
 describe("GET request to /course/catalog route", () => {
-    it("it should respond with an HTTP 200 status code and an object in the response body", done => {
+    it("it should respond with an HTTP 200 status code and an array in the response body", done => {
         const test_id = 1;
         chai
             .request(server)
