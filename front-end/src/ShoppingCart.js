@@ -4,7 +4,7 @@ import './ShoppingCart.css'
 const ShoppingCart = (props) =>{
     const added = props.added
     const items = added.map((add) =>
-    <CourseInCart key={add.index} show={props.show} setShow={props.setShow} name = {add}/>
+    <CourseInCart key={add.id} show={props.show} setShow={props.setShow} name = {add.course_name}/>
   );
     return(
         <div className="ShoppingCart">

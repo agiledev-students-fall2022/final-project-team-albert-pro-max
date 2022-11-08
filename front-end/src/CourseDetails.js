@@ -10,10 +10,10 @@ const CourseDetails = ({ added, setAdd }) => {
         console.log("addedCourses:", added);
     });
 
-    const AddCourse = (tempName) => {
-        const courseIn = added.find((courseInList) => { return courseInList === tempName });
+    const AddCourse = (tempCourse) => {
+        const courseIn = added.find((courseInList) => { return courseInList.course_name === tempCourse.course_name});
         if (!courseIn) {
-            setAdd([...added, tempName])
+            setAdd([...added, tempCourse])
         }
     }
 
@@ -99,7 +99,7 @@ const CourseDetails = ({ added, setAdd }) => {
                         </tr>
                         <tr>
                             <td>Cart</td>
-                            <td><button onClick={() => AddCourse(course.course_name)}>Add to Shopping Cart</button></td>
+                            <td><button onClick={() => AddCourse(course)}>Add to Shopping Cart</button></td>
                         </tr>
                     </tbody>
                 </table>
