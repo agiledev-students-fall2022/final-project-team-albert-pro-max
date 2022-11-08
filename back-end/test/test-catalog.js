@@ -13,7 +13,7 @@ describe("GET request to /course/catalog route", () => {
 
         chai
             .request(server)
-            .get(`/course/catalog?id=${test_id}`)
+            .get(`/course/catalog`)
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.be.a("object");
