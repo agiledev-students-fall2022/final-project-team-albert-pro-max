@@ -25,7 +25,7 @@ describe("GET request to /course/details route", () => {
 });
 
 describe("GET request to /course/search route", () => {
-    it("it should respond with an HTTP 200 status code and an object in the response body", done => {
+    it("it should respond with an HTTP 200 status code and an array in the response body", done => {
 
         chai
             .request(server)
