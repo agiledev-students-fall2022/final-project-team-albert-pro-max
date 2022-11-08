@@ -24,4 +24,19 @@ describe("GET request to /course/details route", () => {
     })
 });
 
+describe("GET request to /course/search route", () => {
+    it("it should respond with an HTTP 200 status code and an object in the response body", done => {
+
+        chai
+            .request(server)
+            .get(`/course/search`)
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.be.a("array");
+                expect(Object.keys(res.body).length).to.equal(21);
+                done();
+            })
+    })
+});
+
 server.close();
