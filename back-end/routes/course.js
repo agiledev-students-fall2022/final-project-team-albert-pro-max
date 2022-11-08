@@ -26,6 +26,16 @@ router.get('/catalog', (req, res) => {
 router.get('/details', (req, res) => {
     // THIS IS /course/details ROUTE
     // DO YOUR MAGIC
+    const course_id = req.query.id;
+
+    if (!course_id) {
+        res.status(400).send("Missing param: id");
+    } else {
+        axios
+            .get(`${process.env.API_COURSE_DETAILS}&id=${course_id}`)
+            .then(apiResponse => res.json(apiResponse.data))
+            .catch(err => res.send(err));
+    }
 });
 
 router.post('/details/rating', (req, res) => {
