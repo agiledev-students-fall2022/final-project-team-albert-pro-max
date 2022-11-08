@@ -8,8 +8,9 @@ const schedule = require('./routes/schedule');
 
 const app = express();
 
-const PORT = 3000;
+const PORT = 3001;
 app.use(cors());
+
 // set bodyparser
 app.use(express.json());
 
