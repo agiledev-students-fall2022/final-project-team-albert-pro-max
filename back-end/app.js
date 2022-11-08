@@ -1,5 +1,5 @@
 const express = require('express');
-
+const cors = require('cors');
 const index = require('./routes/index');
 const course = require('./routes/course');
 const profile = require('./routes/profile');
@@ -8,7 +8,8 @@ const schedule = require('./routes/schedule');
 
 const app = express();
 
-const PORT = 3001;
+const PORT = 3001
+app.use(cors());
 
 // set bodyparser
 app.use(express.json());
@@ -19,6 +20,8 @@ app.use('/profile', profile);
 app.use('/cart', cart);
 app.use('/schedule', schedule);
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}...`);
 });
+
+module.exports = server;

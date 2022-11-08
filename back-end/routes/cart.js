@@ -1,20 +1,32 @@
 const express = require('express');
 const router = express.Router();
+const axios = require('axios');
+require("dotenv").config({ silent: true });
 
 router.get('/', (req, res) => {
-    // THIS IS /cart ROUTE
-    // DO YOUR MAGIC
-
-    res.json({
-        success: true,
-        data: [],
-        msg: "This is /cart"
-    });
+    axios
+        .get(`${process.env.API_BASE_URL}?count=5&key=${process.env.API_SECRET_KEY}`)
+        .then(data => {
+            const in_cart = data.data.filter(function (el) {
+                return el.in_cart == true 
+              });
+            res.json(in_cart)
+     
+        })
+        .catch(err => next(err));
 });
 
 router.get('/watch', (req, res) => {
-    // THIS IS /cart/watch ROUTE
-    // DO YOUR MAGIC
+    axios
+        .get(`${process.env.API_BASE_URL}?count=5&key=${process.env.API_SECRET_KEY}`)
+        .then(data => {
+            const watch = data.data.filter(function (el) {
+                return el.in_cart == true &&
+                        el.watch == true
+              });
+            res.json(watch)
+     
+        })
+        .catch(err => next(err));
 });
-
 module.exports = router;

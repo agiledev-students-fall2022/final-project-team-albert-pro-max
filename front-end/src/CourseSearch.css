@@ -19,3 +19,7 @@ button {
   box-shadow: 1px 1px 2px purple,
               -1px -1px px purple;
  }
+
+ select {
+  width: 50%;
+ }

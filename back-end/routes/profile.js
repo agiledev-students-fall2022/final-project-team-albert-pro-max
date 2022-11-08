@@ -1,15 +1,15 @@
 const express = require('express');
 const router = express.Router();
+const axios = require('axios');
+require("dotenv").config({ silent: true });
 
-router.get('/', (req, res) => {
+router.get('/', (req, res, next) => {
     // THIS IS /profile ROUTE
     // DO YOUR MAGIC HERE
-
-    res.json({
-        success: true,
-        data: [],
-        msg: "This is /profile"
-    });
+    axios
+        .get(`${process.env.API_BASE_URL}?key=${process.env.API_SECRET_KEY}`)
+        .then(apiResponse => res.json(apiResponse.data))
+        .catch(err => next(err));
 });
 
 router.post('/update', (req, res) => {
