@@ -18,7 +18,10 @@ router.get('/catalog', (req, res, next) => {
     axios
         .get(`${process.env.API_BASE_URL + process.env.COURSE}?count=5&key=${process.env.API_SECRET_KEY}`)
         .then(apiResponse => res.json(apiResponse.data))
-        .catch(err => console.log(err));
+        .catch(err => {
+            console.log("[ERROR:]", err);
+            next(err);
+        });
 });
 
 router.get('/details', (req, res) => {
