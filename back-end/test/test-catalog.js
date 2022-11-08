@@ -14,10 +14,6 @@ describe("GET request to /course/catalog route", () => {
             .request(server)
             .get(`/course/catalog`)
             .end((err, res) => {
-                if (err) {
-                    console.log(err);
-                }
-
                 res.should.have.status(200);
                 res.body.should.be.a("array");
                 expect(res.body.length).to.equal(5);
