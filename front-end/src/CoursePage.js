@@ -1,7 +1,7 @@
 import './CoursePage.css'
 import Course from './Course'
 import axios from 'axios'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 // import mockCourses from './MockData/courses.json';
 
 /**
@@ -11,20 +11,24 @@ import { useState } from 'react'
  */
 const CoursePage = props => {
   const [courses, setCourses] = useState([]);
+  useEffect(() => {
     axios
       .get('http://localhost:3001/course/catalog')
       .then(response => {
-        setCourses(response.data);
+        setCourses(response.data)
       })
       .catch(err => {
         console.log(err)
       })
-    
-    console.log(courses)
+  }, [])
+
     return (
         <div className='CoursePage'>
             <h2>Catalog</h2>
-            {courses}
+            {courses.map((item, index) => {
+              console.log(item)
+              return <Course key={index} id={item.id} course_name={item.course_name} loction={item.location} days={item.days} times={item.times}/>
+            })}
         </div>
     )
 }
