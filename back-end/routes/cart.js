@@ -29,4 +29,10 @@ router.get('/watch', (req, res) => {
         })
         .catch(err => next(err));
 });
+
+router.get('/show', (req, res) => {
+    // THIS IS /schedule/show ROUTE
+    // DO YOUR MAGIC
+});
+
 module.exports = router;
