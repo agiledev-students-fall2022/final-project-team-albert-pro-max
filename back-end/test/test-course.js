@@ -33,6 +33,7 @@ describe("GET request to /course/search route", () => {
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.be.a("array");
+                Object.keys(res.body[0]).should.be.a("array")
                 expect(Object.keys(res.body).length).to.equal(21);
                 done();
             })
