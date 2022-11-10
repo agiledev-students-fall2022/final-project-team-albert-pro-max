@@ -2,8 +2,8 @@ import'./Profile.css'
 import ProfileLogo from './ProfileLogo.jpeg'
 import { Link } from 'react-router-dom'
 import Popup from './Popup'
-import { useState } from 'react'
-import mockUsers from './MockData/users.json';
+import { useEffect,useState } from 'react'
+import axios from 'axios'
 
 /**
  * A React component that represents the profile page of the app.
@@ -11,9 +11,20 @@ import mockUsers from './MockData/users.json';
  * @returns The contents of this component, in JSX form.
  */
 const Profile = props => {
-  const [buttonPopup,setButtonPopup]=useState(false);
-  const random = Math.floor(Math.random() * mockUsers.length);
-  const user = mockUsers[random];
+  //const [buttonPopup,setButtonPopup]=useState(false);
+  //const random = Math.floor(Math.random() * mockUsers.length);
+  //const user = mockUsers[random];
+  const [user, setUser] = useState([]);
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/profile')
+      .then(response => {
+        setUser(response.data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }, [])
     return (
       <>
         <div class="image-txt-container">
