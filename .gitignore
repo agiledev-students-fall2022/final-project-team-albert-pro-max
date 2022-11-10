@@ -125,3 +125,5 @@ typings/
 **/.jekyll-cache
 **/_site/
 back-end/myvar.env
+
+.vscode

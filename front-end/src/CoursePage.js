@@ -2,6 +2,7 @@ import './CoursePage.css'
 import Course from './Course'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 // import mockCourses from './MockData/courses.json';
 
 /**
@@ -10,6 +11,10 @@ import { useEffect, useState } from 'react'
  * @returns The contents of this component, in JSX form.
  */
 const CoursePage = props => {
+
+  const id = new URLSearchParams(useLocation().search).get("id");
+  console.log(id)
+
   const [courses, setCourses] = useState([]);
   useEffect(() => {
     axios
