@@ -15,7 +15,8 @@ describe("GET request to /profile route", () => {
             .get(`/profile`)
             .end((err, res) => {
                 res.should.have.status(200);
-                res.body.should.be.a("Array");
+                res.body.should.be.a("object");
+                res.body.should.have.property("id", test_id);
                 done();
             })
     })

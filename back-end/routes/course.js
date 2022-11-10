@@ -43,12 +43,11 @@ router.get('/details', (req, res) => {
 router.post('/details/rating', (req, res) => {
     // THIS IS /course/details/rating ROUTE
     // DO YOUR MAGIC
-
-    res.json({
-        success: true,
-        data: [],
-        msg: "This is /course/rating"
-    });
+    const courseObj = {
+        id: req.body.course_id,
+        rating:req.body.rating
+    }
+    res.json({success: 'rating Successfully!'});
 });
 
 module.exports = router;
