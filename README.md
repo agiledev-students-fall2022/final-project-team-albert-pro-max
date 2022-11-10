@@ -1,3 +1,5 @@
+![Python build & test](https://github.com/agiledev-students-fall2022/final-project-team-albert-pro-max/actions/workflows/node.js.yml/badge.svg)
+
 # Albert Pro Max
 
 ## Product Vision Statement
