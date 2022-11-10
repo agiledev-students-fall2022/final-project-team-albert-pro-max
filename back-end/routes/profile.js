@@ -7,8 +7,7 @@ router.get('/', (req, res, next) => {
     // THIS IS /profile ROUTE
     // DO YOUR MAGIC HERE
     axios
-       // .get(`${process.env.API_BASE_URL+process.env.PROFILE}?count=1&key=${process.env.API_SECRET_KEY}`)
-        .get("https://my.api.mockaroo.com/users.json?key=6a06c960")
+        .get(`${process.env.API_BASE_URL+process.env.PROFILE}?count=1&key=${process.env.API_SECRET_KEY}`)
         .then(apiResponse => res.json(apiResponse.data))
         .catch(err => next(err));
 });
