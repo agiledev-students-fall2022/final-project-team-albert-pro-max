@@ -10,6 +10,7 @@ const Login = props => {
             <h2>Login</h2>
 
             <table>
+              <tbody>
                 <tr>
                     <th>Username: </th>
                     <td><input type={"text"} placeholder='Type your username here...'></input></td>
@@ -19,6 +20,7 @@ const Login = props => {
                     <th>Password: </th>
                     <td><input type={"password"} placeholder='Type your password here...'></input></td>
                 </tr>
+                </tbody>
             </table>
 
             <button onClick={handleClickLogin}>Login</button>
