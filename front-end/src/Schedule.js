@@ -3,28 +3,44 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 
+const Block = () => {
+    return (
+        <>
+            <td rowSpan={15}><Link to={{
+                pathname: "/coursedetails",
+                search: `?id=1`
+            }}>12:30-13:45<br />CSCI-UA 480<br />Agile Software Development</Link></td>
+            <td className='noshow'></td>
+            <td rowSpan={15}><Link to={{
+                pathname: "/coursedetails",
+                search: `?id=1`
+            }}>12:30-13:45<br />CSCI-UA 480<br />Agile Software Development</Link></td>
+        </>
+    )
+}
+
 const Schedule = ({ show }) => {
-    let scheduleRows = [];
     const [courseBlock, setCourseBlock] = useState(null)
 
     // this array contains courses that are supposed to be showed
-    const [showedCourse, setShowedCourse] = useState([])
+    // const [showedCourse, setShowedCourse] = useState([])
     useEffect(() => {
       axios
         .get('http://localhost:3001/cart')
-        .then(response => {
+        .then(/*response => {
             setShowedCourse(response.data.filter((e) => {
-                return e.show == true
+                return e.show === true
             }))
-        })
+        }*/)
         .catch(err => {
             console.log(err)
         })
     }, [])
 
     useEffect(() => {
+        let scheduleRows = [];
+
         if (show) {
-            scheduleRows = [];
 
             for (let hr = 8; hr <= 20; hr++) {
                 for (let min = 0; min <= 55; min += 5) {
@@ -51,17 +67,7 @@ const Schedule = ({ show }) => {
 
                     if (hr === 12 && min === 30) {
                         scheduleRow.push(
-                            <>
-                                <td rowSpan={15}><Link to={{
-                                    pathname: "/coursedetails",
-                                    search: `?id=1`
-                                }}>12:30-13:45<br />CSCI-UA 480<br />Agile Software Development</Link></td>
-                                <td className='noshow'></td>
-                                <td rowSpan={15}><Link to={{
-                                    pathname: "/coursedetails",
-                                    search: `?id=1`
-                                }}>12:30-13:45<br />CSCI-UA 480<br />Agile Software Development</Link></td>
-                            </>
+                            <Block key={1} />
                         );
                     }
 
@@ -73,7 +79,6 @@ const Schedule = ({ show }) => {
 
             setCourseBlock(scheduleRows);
         } else {
-            scheduleRows = [];
 
             for (let hr = 8; hr <= 20; hr++) {
                 for (let min = 0; min <= 55; min += 5) {

@@ -1,7 +1,5 @@
 import'./Profile.css'
-import ProfileLogo from './ProfileLogo.jpeg'
 import { Link } from 'react-router-dom'
-import Popup from './Popup'
 import { useEffect,useState } from 'react'
 import axios from 'axios'
 
@@ -27,7 +25,7 @@ const Profile = props => {
   }, [])
     return (
       <>
-        <div class="image-txt-container">
+        <div className="image-txt-container">
             <img src={user.profile_img} alt="profile logo" width="120" height="120" />
             <h2>
                 {user.username}
@@ -39,18 +37,18 @@ const Profile = props => {
             <h3>This is a popup window</h3>
           </Popup>
         </div> */}
-        <div class='options'>
+        <div className='options'>
             <Link to='/edituser'>
-              <button class="button" >reset username<br></br></button>
+              <button className="button" >reset username<br></br></button>
             </Link>
             <Link to ="/editinfo">
-              <button class="button" >reset password<br></br></button>
+              <button className="button" >reset password<br></br></button>
             </Link>
             <Link to='/editemail'>
-              <button class="button" >reset email<br></br></button>
+              <button className="button" >reset email<br></br></button>
             </Link>
             <Link to ='/Signup'>
-              <button class="button"> log out <br></br></button>
+              <button className="button"> log out <br></br></button>
             </Link>
             
         </div>
