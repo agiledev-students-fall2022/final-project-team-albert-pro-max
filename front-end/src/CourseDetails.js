@@ -12,54 +12,56 @@ const CourseDetails = ({ added, setAdd }) => {
     const [recitationSections, setRecitationSections] = useState(<></>);
 
     useEffect(() => {
-        axios
-            .get('http://localhost:3001/course/details?id=' + courseId)
-            .then(response => {
-                console.log(response.data);
-                setCourseDetails(response.data);
+        return () => {
+            axios
+                .get('http://localhost:3001/course/details?id=' + courseId)
+                .then(response => {
+                    console.log(response.data);
+                    setCourseDetails(response.data);
 
-                if (response.data.recitations.length > 0) {
-                    const recitationTableRows = [];
+                    if (response.data.recitations.length > 0) {
+                        const recitationTableRows = [];
 
-                    for (let i = 0; i < response.data.recitations.length; i++) {
-                        let recitation = response.data.recitations[i];
+                        for (let i = 0; i < response.data.recitations.length; i++) {
+                            let recitation = response.data.recitations[i];
 
-                        recitationTableRows.push(
-                            <tr key={recitation.id}>
-                                <td>{recitation.id}</td>
-                                <td>{recitation.days}</td>
-                                <td>{recitation.times}</td>
-                                <td>{recitation.location}</td>
-                                <td>{recitation.instructor_first_name} {recitation.instructor_last_name}</td>
-                            </tr>
-                        );
+                            recitationTableRows.push(
+                                <tr key={recitation.id}>
+                                    <td>{recitation.id}</td>
+                                    <td>{recitation.days}</td>
+                                    <td>{recitation.times}</td>
+                                    <td>{recitation.location}</td>
+                                    <td>{recitation.instructor_first_name} {recitation.instructor_last_name}</td>
+                                </tr>
+                            );
+                        }
+
+                        setRecitationSections(<>
+                            <h3>Recitation Sections</h3>
+
+                            <div className="course-recitation-info">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Section</th>
+                                            <th>Day</th>
+                                            <th>Time</th>
+                                            <th>Location</th>
+                                            <th>Instructor</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {recitationTableRows}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </>);
                     }
-
-                    setRecitationSections(<>
-                        <h3>Recitation Sections</h3>
-
-                        <div className="course-recitation-info">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Section</th>
-                                        <th>Day</th>
-                                        <th>Time</th>
-                                        <th>Location</th>
-                                        <th>Instructor</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {recitationTableRows}
-                                </tbody>
-                            </table>
-                        </div>
-                    </>);
-                }
-            })
-            .catch(err => {
-                console.log(err)
-            })
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        }
     }, []);
 
     const AddCourse = (tempCourse) => {
