@@ -7,7 +7,7 @@ router.get('/', (req, res, next) => {
     // THIS IS /profile ROUTE
     // DO YOUR MAGIC HERE
     axios
-        .get(`${process.env.API_BASE_URL+process.env.PROFILE}?count=1&key=${process.env.API_SECRET_KEY}`)
+        .get(`${process.env.API_BASE_URL + process.env.PROFILE}?count=1&key=${process.env.API_SECRET_KEY}`)
         .then(apiResponse => res.json(apiResponse.data))
         .catch(err => next(err));
 });
@@ -15,6 +15,16 @@ router.get('/', (req, res, next) => {
 router.post('/update', (req, res) => {
     // THIS IS /profile/update ROUTE
     // DO YOUR MAGIC
+
+    const updateInfo = {
+        field: req.body.field,
+        newValue: req.body.newValue
+    }
+
+    res.json({
+        success: 1,
+        msg: `${req.body.field} successfully updated`
+    });
 });
 
 module.exports = router;
