@@ -46,3 +46,6 @@ jobs:
       working-directory: ./back-end
     - run: npm test
       working-directory: ./back-end
+    - name: Run ESLint
+      run: npx eslint . --ext .js
+      working-directory: ./back-end
