@@ -16,13 +16,13 @@ router.post('/update', (req, res) => {
     // THIS IS /profile/update ROUTE
     // DO YOUR MAGIC
 
-    const updateInfo = {
-        field: req.body.field,
-        newValue: req.body.newValue
-    }
+    // const updateInfo = {
+    //     field: req.body.field,
+    //     newValue: req.body.newValue
+    // };
 
     res.json({
-        success: 1,
+        success: true,
         msg: `${req.body.field} successfully updated`
     });
 });

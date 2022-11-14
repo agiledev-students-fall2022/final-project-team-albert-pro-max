@@ -28,13 +28,13 @@ router.get('/details', (req, res) => {
     // THIS IS /course/details ROUTE
     // DO YOUR MAGIC
 
-    const course_id = req.query.id;
+    const courseId = req.query.id;
 
-    if (!course_id) {
+    if (!courseId) {
         res.status(400).send("Missing param: id");
     } else {
         axios
-            .get(`${process.env.API_COURSE_DETAILS}&id=${course_id}`)
+            .get(`${process.env.API_COURSE_DETAILS}&id=${courseId}`)
             .then(apiResponse => res.json(apiResponse.data))
             .catch(err => res.send(err));
     }
@@ -43,11 +43,15 @@ router.get('/details', (req, res) => {
 router.post('/details/rating', (req, res) => {
     // THIS IS /course/details/rating ROUTE
     // DO YOUR MAGIC
-    const courseObj = {
-        id: req.body.course_id,
-        rating:req.body.rating
-    }
-    res.json({success: 'rating Successfully!'});
+
+    // const courseObj = {
+    //     id: req.body.course_id,
+    //     rating: req.body.rating
+    // };
+
+    res.json({
+        success: true
+    });
 });
 
 module.exports = router;

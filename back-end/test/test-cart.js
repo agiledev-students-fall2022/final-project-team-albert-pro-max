@@ -1,8 +1,8 @@
 const { expect } = require('chai');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const should = chai.should();
 
+chai.should();
 chai.use(chaiHttp);
 
 const server = require("../app");
@@ -16,7 +16,7 @@ describe("GET request to /cart route", () => {
                 res.should.have.status(200);
                 res.body.should.be.a("Array");
                 done();
-            })
+            });
     });
 
     it("all courses returned should have boolean in_cart = true", done => {
@@ -25,10 +25,10 @@ describe("GET request to /cart route", () => {
             .get(`/cart`)
             .end((err, res) => {
                 res.body.every(el => {
-                    expect(el).to.have.property('in_cart', true)
-                })
+                    expect(el).to.have.property('in_cart', true);
+                });
                 done();
-            })
+            });
     });
 });
 
@@ -42,7 +42,7 @@ describe("GET request to /cart/watch route", () => {
                 res.body.should.be.a("Array");
 
                 done();
-            })
+            });
     });
 
     it("all courses returned should have boolean watch = true", done => {
@@ -51,10 +51,10 @@ describe("GET request to /cart/watch route", () => {
             .get(`/cart/watch`)
             .end((err, res) => {
                 res.body.every(el => {
-                    expect(el).to.have.property('watch', true)
-                })
+                    expect(el).to.have.property('watch', true);
+                });
                 done();
-            })
+            });
     });
 });
 
@@ -67,7 +67,7 @@ describe("GET request to /cart/show route", () => {
                 res.should.have.status(200);
                 res.body.should.be.a("Array");
                 done();
-            })
+            });
     });
 
     it("all courses returned should have boolean show = true", done => {
@@ -77,9 +77,9 @@ describe("GET request to /cart/show route", () => {
             .end((err, res) => {
                 res.body.every(el => {
                     expect(el).to.have.property('show', true);
-                })
+                });
                 done();
-            })
+            });
     });
 });
 
