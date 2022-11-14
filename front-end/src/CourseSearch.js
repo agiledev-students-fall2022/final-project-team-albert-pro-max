@@ -12,7 +12,8 @@ const CourseSearch = props => {
 
   const [school, setSchool] = useState([])
   const [major, setMajor] = useState([])
-  const [selectedMajor, setSelectedMajor] = useState(null)
+  const [schoolID, setSchoolID] = useState(-1)
+  const [majorID, setMajorID] = useState(-1)
 
   useEffect(() => {
     axios
@@ -27,11 +28,12 @@ const CourseSearch = props => {
 
   const handleSelectSchool = (event) => {
     setMajor(school[parseInt(event.target.value) - 1].major)
+    setSchoolID(parseInt(event.target.value))
   }
 
   const handleSelectMajor = (event) => {
-    setSelectedMajor(major[parseInt(event.target.value) - 1])
     console.log(major[parseInt(event.target.value) - 1])
+    setMajorID(parseInt(event.target.value))
   }
 
   return (
@@ -56,7 +58,12 @@ const CourseSearch = props => {
         })}
       </select></div>
 
-      <Link to ='/coursepage'><button>search</button></Link>
+      <Link to={{
+        pathname: '/coursepage',
+        search: `?id=${schoolID + '-' + majorID}`
+      }}>
+        <button>search</button>
+      </Link>
     </div>
   )
 }
