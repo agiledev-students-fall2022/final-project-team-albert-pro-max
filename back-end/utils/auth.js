@@ -5,6 +5,7 @@ const mongoose = require('mongoose'),
     ExtractJWT = passportJWT.ExtractJwt,
     LocalStrategy = require('passport-local').Strategy;
 const User = mongoose.model("User");
+require("dotenv").config();
 
     
 passport.use(new LocalStrategy(User.authenticate()));
