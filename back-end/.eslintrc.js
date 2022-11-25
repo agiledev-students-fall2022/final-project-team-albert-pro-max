@@ -39,6 +39,8 @@ module.exports = {
         "array-bracket-spacing": ["error"],
 
         "no-console": ["off"],
-        "no-prototype-builtins": ["off"]
+        "no-prototype-builtins": ["off"],
+
+        "no-unused-vars": ["off"]
     }
 };

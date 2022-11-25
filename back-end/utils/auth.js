@@ -19,15 +19,12 @@ passport.use(new JWTStrategy({
             .exec((err, usr) => {
                 if(err) {
                     cb(null, false);
-                } else {
-                    if(usr) {
+                } else if(usr) {
                         cb(null, usr);
                     } else {
                         cb(null, false);
                     }
-                    
-                }
-            })
+            });
             
     }
 ));

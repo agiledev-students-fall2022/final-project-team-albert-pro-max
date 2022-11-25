@@ -8,7 +8,7 @@ require("dotenv").config();
 const jwtOptions = {
     jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
     secretOrKey   : process.env.JWT_SECRET
-}
+};
 
 const mongoose = require('mongoose');
 require('../utils/db');
@@ -41,9 +41,9 @@ router.post('/register', (req, res) => {
         } else {
             passport.authenticate('local')(req, res, function () {
                 // console.log("enter here, authentication", user);
-                const payload = { id: user.id } // some data we'll encode into the token
+                const payload = { id: user.id }; // some data we'll encode into the token
                 const token = jwt.sign(payload, jwtOptions.secretOrKey);
-                res.json({ success: true, username: user.username, token: token })
+                res.json({ success: true, username: user.username, token: token });
                 // res.json({ success: 1});
             });
         }
@@ -56,9 +56,9 @@ router.post('/login', (req, res, next) => {
     passport.authenticate('local', (err, user) => {
         if(user) {
           req.logIn(user, (err) => {
-            const payload = { id: user.id } // some data we'll encode into the token
-            const token = jwt.sign(payload, jwtOptions.secretOrKey) // create a signed token
-            res.json({ success: true, username: user.username, token: token }) // send the token to the client to store
+            const payload = { id: user.id }; // some data we'll encode into the token
+            const token = jwt.sign(payload, jwtOptions.secretOrKey); // create a signed token
+            res.json({ success: true, username: user.username, token: token }); // send the token to the client to store
           });
         } else {
             res
