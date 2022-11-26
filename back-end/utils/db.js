@@ -50,9 +50,10 @@ const Recitation = new mongoose.Schema({
 
 User.plugin(passportLocalMongoose);
 
-mongoose.model('User', User);
-mongoose.model('Course', Course);
-mongoose.model('Recitation', Recitation);
+const user = mongoose.model('User', User);
+const course = mongoose.model('Course', Course);
+const recitation = mongoose.model('Recitation', Recitation);
+
 
 if (process.env.NODE_ENV === 'PRODUCTION') {
     const dburl = "mongodb+srv://" + process.env.DB_USERNAME + ":" + process.env.DB_PASSWORD + process.env.DB_URL; 
@@ -69,3 +70,9 @@ mongoose.connection.on('connecting', () => {
 mongoose.connection.on('connected', () => {
     console.log("[INFO] Connected to database!");
 });
+
+module.exports = {
+    user,
+    course,
+    recitation
+}

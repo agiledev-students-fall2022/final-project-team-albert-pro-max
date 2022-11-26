@@ -32,7 +32,7 @@ const CoursePage = props => {
             <h2>Catalog</h2>
             {courses.map((item, index) => {
               console.log(item)
-              return <Course key={index} id={item.id} course_name={item.course_name} loction={item.location} days={item.days} times={item.times}/>
+              return <Course key={index} id={item.id} course_name={item.course_name} location={item.location} day={item.day} times={item.time}/>
             })}
         </div>
     )
