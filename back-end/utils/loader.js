@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 
 const Course = mongoose.model("Course");
 
-filePath = path.resolve("mockdata/Econ.json");
+const filePath = path.resolve("mockdata/Econ.json");
 
 fs.readFile(filePath, (err, jsonString) => {
   if (err) {
