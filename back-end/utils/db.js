@@ -58,4 +58,4 @@ module.exports = {
     user,
     course,
     recitation
-}
+};
