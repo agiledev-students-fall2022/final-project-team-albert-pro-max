@@ -23,7 +23,7 @@ const Course = new mongoose.Schema({
     course_description: { type: String, required: false },
     units: { type: String, required: true }, // 4
     class_number: { type: String, required: true }, // 7441
-    session: {type: String, required: true}, // 1 01/23/2023 - 05/08/2023
+    session: { type: String, required: true }, // 1 01/23/2023 - 05/08/2023
     section_number: { type: String, required: true }, // 001
     class_status: { type: String, required: true }, // Wait List (0)
     instruction_mode: { type: String, required: true }, // In-Person
@@ -56,7 +56,7 @@ const recitation = mongoose.model('Recitation', Recitation);
 
 
 if (process.env.NODE_ENV === 'PRODUCTION') {
-    const dburl = "mongodb+srv://" + process.env.DB_USERNAME + ":" + process.env.DB_PASSWORD + process.env.DB_URL; 
+    const dburl = "mongodb+srv://" + process.env.DB_USERNAME + ":" + process.env.DB_PASSWORD + "@" + process.env.DB_URL;
     // console.log(dburl);
     mongoose.connect(dburl);
 } else {
