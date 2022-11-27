@@ -15,7 +15,7 @@ fs.readFile(filePath, (err, jsonString) => {
 
   const data = JSON.parse(jsonString);
 
-  for (let info of data) {
+  for (const info of data) {
     const course = new Course({
       school_name: info.school_name, // College of Arts and Science
       department_name: info.department_name, // Computer Science
