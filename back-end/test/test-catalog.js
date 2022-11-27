@@ -5,9 +5,13 @@ const chaiHttp = require('chai-http');
 chai.should();
 chai.use(chaiHttp);
 
-const server = require("../app");
+let server;
 
 describe("GET request to /course/catalog route", () => {
+    before(async function () {
+        server = await require("../app");
+    });
+
     it("it should respond with an HTTP 200 status code and an array in the response body", done => {
         chai
             .request(server)
@@ -19,5 +23,3 @@ describe("GET request to /course/catalog route", () => {
             });
     });
 });
-
-server.close();
