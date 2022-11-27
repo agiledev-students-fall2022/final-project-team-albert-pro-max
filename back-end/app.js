@@ -40,6 +40,7 @@ module.exports = (async function () {
     if (process.env.NODE_ENV === 'PRODUCTION') {
         console.log("[INFO] Running <PRODUCTION> mode...");
         const dburl = "mongodb+srv://" + process.env.DB_USERNAME + ":" + process.env.DB_PASSWORD + "@" + process.env.DB_URL;
+        console.log(dburl);
         await mongoose.connect(dburl);
     } else {
         console.log("[INFO] Running <DEV> mode...");
@@ -47,7 +48,7 @@ module.exports = (async function () {
     }
 
     const server = app.listen(PORT, () => {
-        console.log(`Listening on port ${PORT}...`);
+        console.log(`[INFO] Listening on port ${PORT}...`);
     });
 
     return server;
