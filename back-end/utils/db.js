@@ -54,23 +54,6 @@ const user = mongoose.model('User', User);
 const course = mongoose.model('Course', Course);
 const recitation = mongoose.model('Recitation', Recitation);
 
-
-if (process.env.NODE_ENV === 'PRODUCTION') {
-    const dburl = "mongodb+srv://" + process.env.DB_USERNAME + ":" + process.env.DB_PASSWORD + "@" + process.env.DB_URL;
-    // console.log(dburl);
-    mongoose.connect(dburl);
-} else {
-    mongoose.connect("mongodb://localhost/albert-pro-max-local");
-}
-
-mongoose.connection.on('connecting', () => {
-    console.log("[INFO] Connecting to database...");
-});
-
-mongoose.connection.on('connected', () => {
-    console.log("[INFO] Connected to database!");
-});
-
 module.exports = {
     user,
     course,
