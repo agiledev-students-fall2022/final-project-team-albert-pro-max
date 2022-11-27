@@ -37,17 +37,14 @@ jobs:
         echo COURSE_FOR_CART=${{ secrets.COURSE_FOR_CART }} >> .env
         echo SCHOOL_AND_MAJOR=${{ secrets.SCHOOL_AND_MAJOR }} >> .env
         echo PROFILE=${{ secrets.PROFILE }} >> .env
+        echo API_COURSE_DETAILS=${{ secrets.API_COURSE_DETAILS }} >> .env
         
         echo JWT_SECRET=${{ secrets.JWT_SECRET }} >> .env
-        echo DB_URL=${{ secrets.DB_URL }}
-        echo DB_URL=${{ secrets.DB_URL }} >> .env
+        echo "DB_URL=${{ secrets.DB_URL }}" >> .env
         echo DB_USERNAME=${{ secrets.DB_USERNAME }} >> .env
         echo DB_PASSWORD=${{ secrets.DB_PASSWORD }} >> .env
         
         echo NODE_ENV=PRODUCTION >> .env
-        
-        
-        echo API_COURSE_DETAILS=${{ secrets.API_COURSE_DETAILS }} >> .env
       working-directory: ./back-end
     - run: npm ci
       working-directory: ./back-end
