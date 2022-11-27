@@ -39,9 +39,14 @@ mongoose.connection.on('connected', () => {
 module.exports = (async function () {
     if (process.env.NODE_ENV === 'PRODUCTION') {
         console.log("[INFO] Running <PRODUCTION> mode...");
-        const dburl = "mongodb+srv://" + process.env.DB_USERNAME + ":" + process.env.DB_PASSWORD + "@" + process.env.DB_URL;
-        console.log(dburl);
-        await mongoose.connect(dburl);
+
+        const connection_url = "mongodb+srv://" + process.env.DB_USERNAME + ":" + process.env.DB_PASSWORD + "@" + process.env.DB_URL;
+        console.log("DB_USERNAME:", process.env.DB_USERNAME);
+        console.log("DB_PASSWORD:", process.env.DB_PASSWORD);
+        console.log("DB_URL:", process.env.DB_URL);
+        console.log("connection_url:", connection_url);
+
+        await mongoose.connect(connection_url);
     } else {
         console.log("[INFO] Running <DEV> mode...");
         await mongoose.connect("mongodb://localhost/albert-pro-max-local");
