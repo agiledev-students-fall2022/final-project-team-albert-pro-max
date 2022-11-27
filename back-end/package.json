@@ -4,7 +4,7 @@
   "description": "The back-end of your project will live in this directory.",
   "main": "app.js",
   "scripts": {
-    "test": "npx nyc mocha --timeout 5000"
+    "test": "npx nyc mocha --timeout 5000 --exit"
   },
   "repository": {
     "type": "git",
