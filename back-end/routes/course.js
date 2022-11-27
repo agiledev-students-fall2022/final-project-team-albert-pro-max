@@ -15,7 +15,6 @@ router.get('/search', (req, res, next) => {
 });
 
 router.get('/catalog', async (req, res, next) => {
-
     course.find()
         .then(data => {
             console.log(data);
@@ -23,7 +22,7 @@ router.get('/catalog', async (req, res, next) => {
         })
         .catch(err => {
             console.log("[ERROR:]", err);
-            next(err);
+            res.status(500).json(err);
         });
 });
 
