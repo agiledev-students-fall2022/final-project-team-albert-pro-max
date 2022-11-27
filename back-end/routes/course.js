@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
+const { course } = require('../utils/db.js');
 require("dotenv").config({ silent: true });
 
 router.get('/search', (req, res, next) => {
@@ -10,17 +11,17 @@ router.get('/search', (req, res, next) => {
         .get(`${process.env.API_BASE_URL + process.env.SCHOOL_AND_MAJOR}?count=21&key=${process.env.API_SECRET_KEY}`)
         .then(apiResponse => res.json(apiResponse.data))
         .catch(err => next(err));
+
 });
 
-router.get('/catalog', (req, res, next) => {
-    // THIS IS /course/catalog ROUTE
-    // DO YOUR MAGIC
-    axios
-        .get(`${process.env.API_BASE_URL + process.env.COURSE}?count=5&key=${process.env.API_SECRET_KEY}`)
-        .then(apiResponse => res.json(apiResponse.data))
+router.get('/catalog', async (req, res, next) => {
+    course.find()
+        .then(data => {
+            res.json(data);
+        })
         .catch(err => {
             console.log("[ERROR:]", err);
-            next(err);
+            res.status(500).json(err);
         });
 });
 

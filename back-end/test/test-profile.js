@@ -4,9 +4,13 @@ const chaiHttp = require('chai-http');
 chai.should();
 chai.use(chaiHttp);
 
-const server = require("../app");
+let server;
 
 describe("GET request to /profile route", () => {
+    before(async function () {
+        server = await require("../app");
+    });
+
     it("it should respond with an HTTP 200 status code and an object in the response body", done => {
         const testId = 1;
         chai
@@ -36,5 +40,3 @@ describe("GET request to /profile/update route", () => {
             });
     });
 });
-
-server.close();
