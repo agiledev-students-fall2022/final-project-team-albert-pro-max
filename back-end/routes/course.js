@@ -4,27 +4,23 @@ const axios = require('axios');
 const { course } = require('../utils/db.js');
 require("dotenv").config({ silent: true });
 
-const collectMajors = async () => {
-    const schools = await course.distinct('school_name')
-    let list = []
-    schools.map(async (item, index) => {
-        const majors = await course.distinct('department_name', { school_name: item })
-        let school = {
-            school_id: index,
-            school_name: item,
-            majors: majors
-        }
-        list.push(school)
-    })
-    return list
-}
-
 router.get('/search', async (req, res, next) => {
     // THIS IS /course/search ROUTE
     // DO YOUR MAGIC
     try {
-        const r = await collectMajors()
-        res.json(r)
+        const schools = await course.distinct('school_name')
+        let list = []
+        await Promise.all(schools.map(async (item, index) => {
+            const majors = await course.distinct('department_name', { school_name: item })
+            let school = {
+                school_id: index,
+                school_name: item,
+                majors: majors
+            }
+            list.push(school)
+        }))
+        console.log(list)
+        res.json(list)
     } catch (err) {
         console.error(err)
         res.status(500).json({
