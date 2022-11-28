@@ -8,23 +8,23 @@ router.get('/search', async (req, res, next) => {
     // THIS IS /course/search ROUTE
     // DO YOUR MAGIC
     try {
-        const schools = await course.distinct('school_name')
-        let list = []
+        const schools = await course.distinct('school_name');
+        const list = [];
         await Promise.all(schools.map(async (item, index) => {
-            const majors = await course.distinct('department_name', { school_name: item })
-            let school = {
+            const majors = await course.distinct('department_name', { school_name: item });
+            const school = {
                 school_id: index,
                 school_name: item,
                 majors: majors
-            }
-            list.push(school)
-        }))
-        res.json(list)
+            };
+            list.push(school);
+        }));
+        res.json(list);
     } catch (err) {
-        console.error(err)
+        console.error(err);
         res.status(500).json({
           error: err,
-        })
+        });
     }
 });
 
