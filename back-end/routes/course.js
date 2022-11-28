@@ -19,7 +19,6 @@ router.get('/search', async (req, res, next) => {
             }
             list.push(school)
         }))
-        console.log(list)
         res.json(list)
     } catch (err) {
         console.error(err)
