@@ -12,8 +12,8 @@ const CourseSearch = props => {
 
   const [school, setSchool] = useState([])
   const [major, setMajor] = useState([])
-  const [schoolID, setSelectedSchool] = useState(null)
-  const [majorID, setSelectedMajor] = useState(null)
+  const [schoolID, setSelectedSchool] = useState("*")
+  const [majorID, setSelectedMajor] = useState("*")
 
   useEffect(() => {
     axios
@@ -41,18 +41,18 @@ const CourseSearch = props => {
       <h2>Course Search</h2>
 
       <div><select>
-        <option value="">--Spring 2023 only--</option>
+        <option value="*">--Spring 2023 only--</option>
       </select></div>
 
       <div><select onChange={handleSelectSchool}>
-        <option value="">--Please choose a school--</option>
+        <option value="*">--Please choose a school--</option>
         {school.map((item, index) => {
           return <option key={index} value={item.school_id}>{item.school_name}</option>
         })}
       </select></div>
 
       <div><select onChange={handleSelectMajor}>
-        <option value="">--Please choose a major--</option>
+        <option value="*">--Please choose a major--</option>
         {major.map((item, index) => {
           return <option key={index} value={item}>{item}</option>
         })}

@@ -3,6 +3,7 @@ import Course from './Course'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 // import mockCourses from './MockData/courses.json';
 
 /**
@@ -13,7 +14,7 @@ import { useLocation } from 'react-router-dom'
 const CoursePage = props => {
 
   const id = new URLSearchParams(useLocation().search).get("id");
-  console.log(id)
+  const info = id.split("-")
 
   const [courses, setCourses] = useState([]);
   useEffect(() => {
@@ -27,6 +28,15 @@ const CoursePage = props => {
       })
   }, [])
 
+  if (info[0] === "*" || info[1] === "*") {
+    return (
+      <div>
+      <h2>Invalid Search</h2>
+      <Link to="/coursesearch">
+        <button>back</button>
+      </Link></div>
+    )
+  } else {
     return (
         <div className='CoursePage'>
             <h2>Catalog</h2>
@@ -36,6 +46,7 @@ const CoursePage = props => {
             })}
         </div>
     )
+  }
 }
 
 // make this component available to be imported into any other file
