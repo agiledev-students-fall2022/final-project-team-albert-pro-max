@@ -4,14 +4,33 @@ const axios = require('axios');
 const { course } = require('../utils/db.js');
 require("dotenv").config({ silent: true });
 
-router.get('/search', (req, res, next) => {
+const collectMajors = async () => {
+    const schools = await course.distinct('school_name')
+    let list = []
+    schools.map(async (item, index) => {
+        const majors = await course.distinct('department_name', { school_name: item })
+        let school = {
+            school_id: index,
+            school_name: item,
+            majors: majors
+        }
+        list.push(school)
+    })
+    return list
+}
+
+router.get('/search', async (req, res, next) => {
     // THIS IS /course/search ROUTE
     // DO YOUR MAGIC
-    axios
-        .get(`${process.env.API_BASE_URL + process.env.SCHOOL_AND_MAJOR}?count=21&key=${process.env.API_SECRET_KEY}`)
-        .then(apiResponse => res.json(apiResponse.data))
-        .catch(err => next(err));
-
+    try {
+        const r = await collectMajors()
+        res.json(r)
+    } catch (err) {
+        console.error(err)
+        res.status(500).json({
+          error: err,
+        })
+    }
 });
 
 router.get('/catalog', async (req, res, next) => {

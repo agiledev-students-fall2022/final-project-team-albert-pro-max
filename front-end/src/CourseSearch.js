@@ -47,7 +47,7 @@ const CourseSearch = props => {
       <div><select onChange={handleSelectSchool}>
         <option value="">--Please choose a school--</option>
         {school.map((item, index) => {
-          return <option key={index} value={item.id}>{item.name}</option>
+          return <option key={index} value={item.school_id}>{item.school_name}</option>
         })}
       </select></div>
 
