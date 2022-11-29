@@ -13,16 +13,18 @@ describe("GET request to /course/details route", () => {
     });
 
     it("it should respond with an HTTP 200 status code and an object in the response body", done => {
-        const testId = 639;
-
+        const testId = '63858d5792cdc839bf93fb10';
+        
         chai
             .request(server)
-            .get(`/course/details?id=${testId}`)
+            .get(`/course/details/${testId}`)
             .end((err, res) => {
                 res.should.have.status(200);
-                res.body.should.be.a("object");
-                res.body.should.have.property("id", testId);
-                expect(Object.keys(res.body).length).to.equal(14);
+                res.body.should.be.a("array");
+                res.body.every(el => {
+                    expect(el).to.have.property('id',testId);
+                });
+                // expect(Object.keys(res.body).length).to.equal(14);
                 done();
             });
     });
