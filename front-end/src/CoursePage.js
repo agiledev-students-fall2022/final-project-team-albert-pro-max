@@ -17,6 +17,7 @@ const CoursePage = props => {
   const info = id.split("-")
 
   const [courses, setCourses] = useState([]);
+
   useEffect(() => {
     axios
       .get('http://localhost:3001/course/catalog')
@@ -42,7 +43,7 @@ const CoursePage = props => {
             <h2>Catalog</h2>
             {courses.map((item, index) => {
               console.log(item)
-              return <Course key={index} id={item.id} course_name={item.course_name} location={item.location} day={item.day} times={item.time}/>
+              return <Course key={index} id={item._id} course_name={item.course_name} location={item.location} day={item.day} times={item.time}/>
             })}
         </div>
     )
