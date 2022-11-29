@@ -4,8 +4,7 @@ const { course } = require('../utils/db.js');
 require("dotenv").config({ silent: true });
 
 router.get('/search', async (req, res, next) => {
-    // THIS IS /course/search ROUTE
-    // DO YOUR MAGIC
+
     try {
         const schools = await course.distinct('school_name');
         const list = [];
@@ -39,18 +38,12 @@ router.get('/catalog', async (req, res, next) => {
 });
 
 router.get('/details/:id', async (req, res, next) => {
-    // THIS IS /course/details ROUTE
-    // DO YOUR MAGIC
 
     const courseId = req.params.id;
 
     if (!courseId) {
         res.status(400).send("Missing param: id");
     } else {
-        // axios
-        //     .get(`${process.env.API_COURSE_DETAILS}&id=${courseId}`)
-        //     .then(apiResponse => res.json(apiResponse.data))
-        //     .catch(err => res.send(err));
         console.log("back",courseId);
         course.find({_id:courseId})
         .then(data => {
