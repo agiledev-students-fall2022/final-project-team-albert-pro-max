@@ -27,3 +27,21 @@ describe("GET request to /course/details route", () => {
             });
     });
 });
+
+describe("GET request to /course/search route", () => {
+    before(async function () {
+        server = await require("../app");
+    });
+
+    it("it should respond with an HTTP 200 status code and an array in the response body", done => {
+
+        chai
+            .request(server)
+            .get(`/course/search`)
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.be.a("array");
+                done();
+            });
+    });
+});
