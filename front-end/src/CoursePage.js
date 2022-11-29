@@ -20,7 +20,7 @@ const CoursePage = props => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:3001/course/catalog')
+      .get('http://localhost:3001/course/catalog/' + id)
       .then(response => {
         setCourses(response.data)
       })

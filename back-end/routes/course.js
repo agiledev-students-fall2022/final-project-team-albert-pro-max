@@ -26,8 +26,12 @@ router.get('/search', async (req, res, next) => {
     }
 });
 
-router.get('/catalog', async (req, res, next) => {
-    course.find()
+router.get('/catalog/:id', async (req, res, next) => {
+
+    const id = req.params.id;
+    const info = id.split("-");
+
+    course.find({school_name: info[0], department_name: info[1]})
         .then(data => {
             res.json(data);
         })
