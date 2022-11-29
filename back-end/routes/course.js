@@ -51,10 +51,10 @@ router.get('/details/:id', async (req, res, next) => {
         //     .get(`${process.env.API_COURSE_DETAILS}&id=${courseId}`)
         //     .then(apiResponse => res.json(apiResponse.data))
         //     .catch(err => res.send(err));
-        console.log("back",courseId)
+        console.log("back",courseId);
         course.find({_id:courseId})
         .then(data => {
-            console.log(data)
+            console.log(data);
             res.json(data);
         })
         .catch(err => {
