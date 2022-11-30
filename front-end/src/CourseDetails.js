@@ -1,12 +1,13 @@
 import { useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-
+import { Link } from 'react-router-dom'
 
 import './CourseDetails.css';
 
 const CourseDetails = ({ added, setAdd }) => {
-    const courseId = new URLSearchParams(useLocation().search).get("id");
+    const info = new URLSearchParams(useLocation().search).get("id").split("-");
+    const courseId = info[0]
 
     const [courseDetails, setCourseDetails] = useState([]);
     const [recitationSections, setRecitationSections] = useState(<></>);
@@ -120,6 +121,10 @@ const CourseDetails = ({ added, setAdd }) => {
                 </div>
     
                 {recitationSections}
+                <Link to={{
+                    pathname: '/coursepage',
+                    search: `?id=${info[1] + '-' + info[2]}`
+                }}><button>back</button></Link>
             </div>
         )
     }
