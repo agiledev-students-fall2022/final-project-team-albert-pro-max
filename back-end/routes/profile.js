@@ -5,8 +5,9 @@ const { user } = require('../utils/db.js');
 require("dotenv").config({ silent: true });
 
 router.get('/', (req, res, next) => {
-    user.find()
+    user.findOne({username: 'elaine'})
     .then(data => {
+        console.log(data)
         res.json(data);
     })
     .catch(err => {
