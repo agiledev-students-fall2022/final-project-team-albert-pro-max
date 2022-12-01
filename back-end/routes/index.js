@@ -33,7 +33,7 @@ router.post('/register', (req, res) => {
     // THIS IS /register ROUTE
     // DO YOUR MAGIC
     const {username, password, email} = req.body;
-    console.log(req.body);
+    // console.log(req.body);
     User.register(new User({username, email }), password, (err, user) => {
         if (err) {
             console.log(err);

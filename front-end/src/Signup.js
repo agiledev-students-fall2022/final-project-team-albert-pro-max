@@ -1,29 +1,40 @@
 import './Signup.css'
 import axios from "axios"
-import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 
 const Signup = props => {
-    const [username, setUsername] = useState("")
-    const [password, setPassword] = useState("")
-    const [repassword, setRepassword] = useState("")
-    const [email, setEmail] = useState("")
     
     const handleClickSignup = (evt) => {
-        setUsername(document.getElementById("username").value);
-        setPassword(document.getElementById("password").value);
-        setEmail(document.getElementById("email").value);
-        axios.post('http://localhost:3001/register', {
-            username: username,
-            password: password,
-            email: email
-        })
-        .then(function (response) {
-            console.log(response);
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+        const repassword = document.getElementById("repassword").value;
+        const email = document.getElementById("email").value;
+        
+        if(password !== repassword) {
+            const popup = document.getElementById("myPopup");
+            popup.classList.toggle("show");
+        }
+        else {
+            axios.post('http://localhost:3001/register', {
+                username: username,
+                password: password,
+                email: email
+            })
+            .then(function (response) {
+                console.log(response);
+                const res = response.data;
+                if(res.success) {
+                    window.location.href = "/login";
+                } else {
+                    const popup = document.getElementById("myPopup");
+                    popup.textContent = "Registered Failed!";
+                    popup.classList.toggle("show");
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        }
+        
     }
 
     return (
@@ -48,7 +59,10 @@ const Signup = props => {
 
                 <tr>
                     <th>Confirm Password: </th>
-                    <td><input id="repassword" type={"password"} placeholder='Type your password again...'></input></td>
+                    <td id="confirm">
+                        <input id="repassword" type={"password"} placeholder='Type your password again...'></input>
+                        <span class="popuptext" id="myPopup">Confirm Password Failed</span>
+                    </td>
                 </tr>
             </table>
 
