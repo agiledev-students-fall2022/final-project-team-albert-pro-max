@@ -13,11 +13,13 @@ const Profile = props => {
   //const random = Math.floor(Math.random() * mockUsers.length);
   //const user = mockUsers[random];
   const [user, setUser] = useState([]);
+  const username = localStorage.getItem("username");
   useEffect(() => {
     axios
-      .get('http://localhost:3001/profile')
+      .get('http://localhost:3001/profile/'+username)
       .then(response => {
         setUser(response.data)
+        //console.log(response.data)
       })
       .catch(err => {
         console.log(err)
