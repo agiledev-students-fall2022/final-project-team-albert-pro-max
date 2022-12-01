@@ -1,12 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const axios = require('axios');
 const { course } = require('../utils/db.js');
 require("dotenv").config({ silent: true });
 
 router.get('/search', async (req, res, next) => {
-    // THIS IS /course/search ROUTE
-    // DO YOUR MAGIC
+
     try {
         const schools = await course.distinct('school_name');
         const list = [];
@@ -28,8 +26,12 @@ router.get('/search', async (req, res, next) => {
     }
 });
 
-router.get('/catalog', async (req, res, next) => {
-    course.find()
+router.get('/catalog/:id', async (req, res, next) => {
+
+    const id = req.params.id;
+    const info = id.split("-");
+
+    course.find({school_name: info[0], department_name: info[1]})
         .then(data => {
             res.json(data);
         })
@@ -39,19 +41,21 @@ router.get('/catalog', async (req, res, next) => {
         });
 });
 
-router.get('/details', (req, res) => {
-    // THIS IS /course/details ROUTE
-    // DO YOUR MAGIC
+router.get('/details/:id', async (req, res, next) => {
 
-    const courseId = req.query.id;
+    const courseId = req.params.id;
 
     if (!courseId) {
         res.status(400).send("Missing param: id");
     } else {
-        axios
-            .get(`${process.env.API_COURSE_DETAILS}&id=${courseId}`)
-            .then(apiResponse => res.json(apiResponse.data))
-            .catch(err => res.send(err));
+        course.find({_id:courseId})
+        .then(data => {
+            res.json(data);
+        })
+        .catch(err => {
+            console.log("[ERROR:]", err);
+            res.status(500).json(err);
+        });
     }
 });
 

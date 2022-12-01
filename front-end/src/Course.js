@@ -5,7 +5,7 @@ const Course = prop => {
   return (
       <Link to={{
           pathname: "/coursedetails",
-          search: `?id=${prop.id}`
+          search: `?id=${prop.id + "-" + prop.school + "-" + prop.major}`
       }}>
           <div className="course">
               <div>{prop.course_name}</div>

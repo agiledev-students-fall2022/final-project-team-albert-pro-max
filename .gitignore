@@ -126,4 +126,9 @@ typings/
 **/_site/
 back-end/myvar.env
 
+# IDE junks
 .vscode
+.idea
+
+# Python
+__pycache__
