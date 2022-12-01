@@ -48,10 +48,8 @@ router.get('/details/:id', async (req, res, next) => {
     if (!courseId) {
         res.status(400).send("Missing param: id");
     } else {
-        console.log("back",courseId);
         course.find({_id:courseId})
         .then(data => {
-            console.log(data);
             res.json(data);
         })
         .catch(err => {
