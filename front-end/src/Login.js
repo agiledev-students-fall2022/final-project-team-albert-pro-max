@@ -2,6 +2,10 @@ import './Login.css'
 
 const Login = props => {
     function handleClickLogin() {
+        //TODO: check username and password via http response
+        const username= document.getElementById('username').value
+        //const password= document.getElementById('password').value
+        localStorage.setItem('username',username)
         window.location.href = "/profile";
     }
 
@@ -13,12 +17,12 @@ const Login = props => {
               <tbody>
                 <tr>
                     <th>Username: </th>
-                    <td><input type={"text"} placeholder='Type your username here...'></input></td>
+                    <td><input type={"text"} id='username' placeholder='Type your username here...'></input></td>
                 </tr>
 
                 <tr>
                     <th>Password: </th>
-                    <td><input type={"password"} placeholder='Type your password here...'></input></td>
+                    <td><input type={"password"} id='password' placeholder='Type your password here...'></input></td>
                 </tr>
                 </tbody>
             </table>
