@@ -4,8 +4,10 @@ const axios = require('axios');
 const { user } = require('../utils/db.js');
 require("dotenv").config({ silent: true });
 
-router.get('/', (req, res, next) => {
-    user.findOne({username: 'elaine'})
+router.get('/:username', (req, res, next) => {
+    const username=req.params.username;
+
+  /*   user.findOne({username: 'elaine'})
     .then(data => {
         console.log(data)
         res.json(data);
@@ -13,7 +15,20 @@ router.get('/', (req, res, next) => {
     .catch(err => {
         console.log("[ERROR:]", err);
         res.status(500).json(err);
-    });
+    }); */
+
+    if (!username) {
+        res.status(400).send("Missing param: username");
+    } else {
+        user.findOne({username:username})
+        .then(data => {
+            res.json(data);
+        })
+        .catch(err => {
+            console.log("[ERROR:]", err);
+            res.status(500).json(err);
+        });
+    }
 });
 
 router.post('/update', (req, res) => {
