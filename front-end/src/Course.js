@@ -11,6 +11,7 @@ const Course = prop => {
                 <b>{prop.course_name}</b>
                 <div>Location: {prop.location}</div>
                 <div>Time: {prop.days} {prop.times}</div>
+                <div>Prof: {prop.instructor.join("; ")}</div>
             </div>
         </Link>
 

@@ -46,27 +46,33 @@ const CoursePage = props => {
         <h2>Catalog</h2>
         {courses.map((item, index) => {
           // console.log(item)
+          if (item.instructor.length == 0) {
+            item.instructor.push("TBD");
+          }
+
           if (item.multi_topics == 1) {
             return <Course
               key={index}
               id={item._id}
+              school={info[0]}
+              major={info[1]}
               course_name={item.department_code + " " + item.course_number + " " + item.course_name + ": " + item.topic}
               location={item.location}
               days={item.days}
               times={item.times}
-              school={info[0]}
-              major={info[1]}
+              instructor={item.instructor}
             />
           } else {
             return <Course
               key={index}
               id={item._id}
+              school={info[0]}
+              major={info[1]}
               course_name={item.department_code + " " + item.course_number + " " + item.course_name}
               location={item.location}
               days={item.days}
               times={item.times}
-              school={info[0]}
-              major={info[1]}
+              instructor={item.instructor}
             />
           }
         })}
