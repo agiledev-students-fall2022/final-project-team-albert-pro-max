@@ -1,6 +1,6 @@
 import './Schedule.css'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 
 const Block = () => {
@@ -20,21 +20,26 @@ const Block = () => {
 }
 
 const Schedule = ({ show }) => {
+    const jwtToken = localStorage.getItem("token"); // the JWT token, if we have already received one and stored it in localStorage
+    console.log(`JWT token: ${jwtToken}`); // debugging
+    const [isLoggedIn, setIsLoggedIn] = useState(jwtToken && true);
+
     const [courseBlock, setCourseBlock] = useState(null)
 
     // this array contains courses that are supposed to be showed
     // const [showedCourse, setShowedCourse] = useState([])
     useEffect(() => {
-      axios
-        .get('http://localhost:3001/cart')
-        .then(/*response => {
+        axios
+            .get('http://localhost:3001/cart')
+            .then(/*response => {
             setShowedCourse(response.data.filter((e) => {
                 return e.show === true
             }))
         }*/)
-        .catch(err => {
-            console.log(err)
-        })
+            .catch(err => {
+                console.log(err);
+                setIsLoggedIn(false);
+            })
     }, [])
 
     useEffect(() => {
@@ -114,26 +119,32 @@ const Schedule = ({ show }) => {
     }, [show])
 
     return (
-        <div className='Schedule'>
-            <h2>Schedule</h2>
-            <center>
-                <table>
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th className='weekday'>Mon</th>
-                            <th className='weekday'>Tue</th>
-                            <th className='weekday'>Wed</th>
-                            <th className='weekday'>Thu</th>
-                            <th className='weekday'>Fri</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {courseBlock}
-                    </tbody>
-                </table>
-            </center>
-        </div>
+        <>
+            {isLoggedIn ? (
+                <div className='Schedule'>
+                    <h2>Schedule</h2>
+                    <center>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th className='weekday'>Mon</th>
+                                    <th className='weekday'>Tue</th>
+                                    <th className='weekday'>Wed</th>
+                                    <th className='weekday'>Thu</th>
+                                    <th className='weekday'>Fri</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {courseBlock}
+                            </tbody>
+                        </table>
+                    </center>
+                </div>
+            ) : (
+                <Navigate to="/login" />
+            )}
+        </>
     )
 }
 

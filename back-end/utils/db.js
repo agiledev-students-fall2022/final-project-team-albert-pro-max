@@ -4,7 +4,7 @@ require('dotenv').config();
 
 const User = new mongoose.Schema({
     // username, password
-    avatar: { type: String, required: true },
+    avatar: { type: String, required: false },
     email: { type: String, required: true },
     cart: [{
         course: { type: mongoose.Schema.Types.ObjectId, ref: 'Course' },
