@@ -13,16 +13,16 @@ const Profile = props => {
   //const random = Math.floor(Math.random() * mockUsers.length);
   //const user = mockUsers[random];
   const [user, setUser] = useState([]);
-  // useEffect(() => {
-  //   axios
-  //     .get('http://localhost:3001/profile')
-  //     .then(response => {
-  //       setUser(response.data)
-  //     })
-  //     .catch(err => {
-  //       console.log(err)
-  //     })
-  // }, [])
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/profile')
+      .then(response => {
+        setUser(response.data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }, [])
     return (
       <>
         <div className="image-txt-container">

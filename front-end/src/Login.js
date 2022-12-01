@@ -1,8 +1,27 @@
 import './Login.css'
+import axios from "axios"
 
 const Login = props => {
     function handleClickLogin() {
-        window.location.href = "/profile";
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+        axios.post('http://localhost:3001/login', {
+            username: username,
+            password: password
+        })
+        .then(function (response) {
+            console.log(response);
+            const res = response.data;
+            if(res.success) {
+                window.location.href = "/profile";
+            } else {
+                window.location.href = "/login";
+            }
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+
     }
 
     return (
@@ -13,18 +32,17 @@ const Login = props => {
               <tbody>
                 <tr>
                     <th>Username: </th>
-                    <td><input type={"text"} placeholder='Type your username here...'></input></td>
+                    <td><input id="username" type={"text"} placeholder='Type your username here...'></input></td>
                 </tr>
 
                 <tr>
                     <th>Password: </th>
-                    <td><input type={"password"} placeholder='Type your password here...'></input></td>
+                    <td><input id="password" type={"password"} placeholder='Type your password here...'></input></td>
                 </tr>
                 </tbody>
             </table>
 
             <button onClick={handleClickLogin}>Login</button>
-
             <p>Not registered yet? <a href='/signup'>Create an account</a></p>
         </div>
     )
