@@ -19,15 +19,17 @@ const CoursePage = props => {
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/course/catalog/' + id)
-      .then(response => {
-        setCourses(response.data)
-        console.log(response.data);
-      })
-      .catch(err => {
-        console.log(err)
-      })
+    return () => {
+      axios
+        .get('http://localhost:3001/course/catalog/' + id)
+        .then(response => {
+          setCourses(response.data)
+          console.log(response.data);
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
   }, [])
 
   if (info[0] === "*" || info[1] === "*") {
