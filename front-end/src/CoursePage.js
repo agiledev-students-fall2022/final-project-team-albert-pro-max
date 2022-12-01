@@ -19,33 +19,64 @@ const CoursePage = props => {
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/course/catalog/' + id)
-      .then(response => {
-        setCourses(response.data)
-      })
-      .catch(err => {
-        console.log(err)
-      })
+    return () => {
+      axios
+        .get('http://localhost:3001/course/catalog/' + id)
+        .then(response => {
+          setCourses(response.data)
+          console.log(response.data);
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
   }, [])
 
   if (info[0] === "*" || info[1] === "*") {
     return (
       <div>
-      <h2>Invalid Search</h2>
-      <Link to="/coursesearch">
-        <button>back</button>
-      </Link></div>
+        <h2>Invalid Search</h2>
+        <Link to="/coursesearch">
+          <button>back</button>
+        </Link></div>
     )
   } else {
     return (
-        <div className='CoursePage'>
-            <h2>Catalog</h2>
-            {courses.map((item, index) => {
-              console.log(item)
-              return <Course key={index} id={item._id} course_name={item.course_name} location={item.location} day={item.day} times={item.time} school={info[0]} major={info[1]}/>
-            })}
-        </div>
+      <div className='CoursePage'>
+        <h2>Catalog</h2>
+        {courses.map((item, index) => {
+          // console.log(item)
+          if (item.instructor.length == 0) {
+            item.instructor.push("TBD");
+          }
+
+          if (item.multi_topics == 1) {
+            return <Course
+              key={index}
+              id={item._id}
+              school={info[0]}
+              major={info[1]}
+              course_name={item.department_code + " " + item.course_number + " " + item.course_name + ": " + item.topic}
+              location={item.location}
+              days={item.days}
+              times={item.times}
+              instructor={item.instructor}
+            />
+          } else {
+            return <Course
+              key={index}
+              id={item._id}
+              school={info[0]}
+              major={info[1]}
+              course_name={item.department_code + " " + item.course_number + " " + item.course_name}
+              location={item.location}
+              days={item.days}
+              times={item.times}
+              instructor={item.instructor}
+            />
+          }
+        })}
+      </div>
     )
   }
 }

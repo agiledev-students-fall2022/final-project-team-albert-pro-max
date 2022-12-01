@@ -21,7 +21,7 @@ router.get('/search', async (req, res, next) => {
     } catch (err) {
         console.error(err);
         res.status(500).json({
-          error: err,
+            error: err,
         });
     }
 });
@@ -31,7 +31,7 @@ router.get('/catalog/:id', async (req, res, next) => {
     const id = req.params.id;
     const info = id.split("-");
 
-    course.find({school_name: info[0], department_name: info[1]})
+    course.find({ school_name: info[0], department_name: info[1], component: "Lecture" }).sort({ course_number: 1, section_number: 1 })
         .then(data => {
             res.json(data);
         })
@@ -48,14 +48,14 @@ router.get('/details/:id', async (req, res, next) => {
     if (!courseId) {
         res.status(400).send("Missing param: id");
     } else {
-        course.find({_id:courseId})
-        .then(data => {
-            res.json(data);
-        })
-        .catch(err => {
-            console.log("[ERROR:]", err);
-            res.status(500).json(err);
-        });
+        course.find({ _id: courseId })
+            .then(data => {
+                res.json(data);
+            })
+            .catch(err => {
+                console.log("[ERROR:]", err);
+                res.status(500).json(err);
+            });
     }
 });
 
