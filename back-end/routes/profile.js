@@ -2,14 +2,20 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios');
 require("dotenv").config({ silent: true });
+const passport = require('passport');
 
-router.get('/', (req, res, next) => {
+router.get('/', passport.authenticate("jwt", { session: false }), (req, res) => {
     // THIS IS /profile ROUTE
-    // DO YOUR MAGIC HERE
-    axios
-        .get(`${process.env.API_BASE_URL + process.env.PROFILE}?count=1&key=${process.env.API_SECRET_KEY}`)
-        .then(apiResponse => res.json(apiResponse.data))
-        .catch(err => next(err));
+    res.json({
+        success: true,
+        user: {
+            id: req.user.username,
+            username: req.user.username,
+            email: req.user.email
+        },
+        message:
+            "Congratulations: you have accessed this route because you have a valid JWT token!",
+    });
 });
 
 router.post('/update', (req, res) => {

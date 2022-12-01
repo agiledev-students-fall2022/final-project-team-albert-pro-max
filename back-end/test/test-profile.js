@@ -11,15 +11,12 @@ describe("GET request to /profile route", () => {
         server = await require("../app");
     });
 
-    it("it should respond with an HTTP 200 status code and an object in the response body", done => {
-        const testId = 1;
+    it("it should respond with an HTTP 401 when no Authorization header presents", done => {
         chai
             .request(server)
             .get(`/profile`)
             .end((err, res) => {
-                res.should.have.status(200);
-                res.body.should.be.a("object");
-                res.body.should.have.property("id", testId);
+                res.should.have.status(401);
                 done();
             });
     });
