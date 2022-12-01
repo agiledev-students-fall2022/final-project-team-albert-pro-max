@@ -1,6 +1,6 @@
-import'./Profile.css'
-import { Link } from 'react-router-dom'
-import { useEffect,useState } from 'react'
+import './Profile.css'
+import { Link, Navigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
 
 /**
@@ -9,54 +9,59 @@ import axios from 'axios'
  * @returns The contents of this component, in JSX form.
  */
 const Profile = props => {
-  //const [buttonPopup,setButtonPopup]=useState(false);
-  //const random = Math.floor(Math.random() * mockUsers.length);
-  //const user = mockUsers[random];
+
+  const jwtToken = localStorage.getItem("token"); // the JWT token, if we have already received one and stored it in localStorage
+  console.log(`JWT token: ${jwtToken}`); // debugging
+  const [isLoggedIn, setIsLoggedIn] = useState(jwtToken && true);
+
   const [user, setUser] = useState([]);
+
   useEffect(() => {
     axios
-      .get('http://localhost:3001/profile')
+      .get('http://localhost:3001/profile', {
+        headers: { Authorization: `Bearer ${jwtToken}` }, // pass the token, if any, to the server
+      })
       .then(response => {
-        setUser(response.data)
+        setUser(response.data.user)
       })
       .catch(err => {
-        console.log(err)
+        console.log(err);
+        setIsLoggedIn(false);
       })
   }, [])
-    return (
-      <>
-        <div className="image-txt-container">
+  return (
+    <>
+      {isLoggedIn ? (
+        <>
+          <div className="image-txt-container">
             <img src={user.profile_img} alt="profile logo" width="120" height="120" />
             <h2>
-                {user.username}
+              {user.username}
             </h2>
-        </div>
-        <p>{user.email}</p>
-        {/* <div class='pop-up'>
-          <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
-            <h3>This is a popup window</h3>
-          </Popup>
-        </div> */}
-        <div className='options'>
+          </div>
+
+          <p>{user.email}</p>
+
+          <div className='options'>
             <Link to='/edituser'>
               <button className="button" >reset username<br></br></button>
             </Link>
-            <Link to ="/editinfo">
+            <Link to="/editinfo">
               <button className="button" >reset password<br></br></button>
             </Link>
             <Link to='/editemail'>
               <button className="button" >reset email<br></br></button>
             </Link>
-            <Link to ='/Signup'>
+            <Link to='/Signup'>
               <button className="button"> log out <br></br></button>
             </Link>
-            
-        </div>
-        
-       
-        
-      </>
-    )
-  }
+          </div>
+        </>
+      ) : (
+        <Navigate to="/login" />
+      )}
+    </>
+  )
+}
 
-  export default Profile;
+export default Profile;

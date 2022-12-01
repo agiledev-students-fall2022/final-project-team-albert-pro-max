@@ -9,19 +9,19 @@ const Login = props => {
             username: username,
             password: password
         })
-        .then(function (response) {
-            console.log(response);
-            const res = response.data;
-            if(res.success) {
-                window.location.href = "/profile";
-            } else {
-                window.location.href = "/login";
-            }
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
-
+            .then(function (response) {
+                console.log(response);
+                const res = response.data;
+                if (res.success && res.token) {
+                    localStorage.setItem("token", res.token);
+                    window.location.href = "/profile";
+                } else {
+                    window.location.href = "/login";
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
 
     return (
@@ -29,16 +29,16 @@ const Login = props => {
             <h2>Login</h2>
 
             <table>
-              <tbody>
-                <tr>
-                    <th>Username: </th>
-                    <td><input id="username" type={"text"} placeholder='Type your username here...'></input></td>
-                </tr>
+                <tbody>
+                    <tr>
+                        <th>Username: </th>
+                        <td><input id="username" type={"text"} placeholder='Type your username here...'></input></td>
+                    </tr>
 
-                <tr>
-                    <th>Password: </th>
-                    <td><input id="password" type={"password"} placeholder='Type your password here...'></input></td>
-                </tr>
+                    <tr>
+                        <th>Password: </th>
+                        <td><input id="password" type={"password"} placeholder='Type your password here...'></input></td>
+                    </tr>
                 </tbody>
             </table>
 

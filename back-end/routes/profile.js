@@ -6,12 +6,12 @@ const passport = require('passport');
 
 router.get('/', passport.authenticate("jwt", { session: false }), (req, res) => {
     // THIS IS /profile ROUTE
-    // DO YOUR MAGIC HERE
     res.json({
         success: true,
         user: {
             id: req.user.username,
             username: req.user.username,
+            email: req.user.email
         },
         message:
             "Congratulations: you have accessed this route because you have a valid JWT token!",
