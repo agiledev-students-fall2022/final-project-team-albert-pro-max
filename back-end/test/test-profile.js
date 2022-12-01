@@ -12,14 +12,13 @@ describe("GET request to /profile route", () => {
     });
 
     it("it should respond with an HTTP 200 status code and an object in the response body", done => {
-        const testId = 1;
+        const username = "elaine";
         chai
             .request(server)
-            .get(`/profile`)
+            .get(`/profile/${username}`)
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.be.a("object");
-                res.body.should.have.property("id", testId);
                 done();
             });
     });
