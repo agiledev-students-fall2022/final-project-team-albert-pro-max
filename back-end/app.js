@@ -5,6 +5,7 @@ const index = require('./routes/index');
 const course = require('./routes/course');
 const profile = require('./routes/profile');
 const cart = require('./routes/cart');
+const schedule = require('./routes/schedule');
 const mongoose = require('mongoose');
 // const morgan = require("morgan"); // middleware for nice logging of incoming HTTP requests
 
@@ -27,6 +28,7 @@ app.use('/', index);
 app.use('/course', course);
 app.use('/profile', profile);
 app.use('/cart', cart);
+app.use('/schedule', schedule);
 
 mongoose.connection.on('connecting', () => {
     console.log("[INFO] Connecting to database...");
