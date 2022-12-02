@@ -9,19 +9,19 @@ const Login = props => {
             username: username,
             password: password
         })
-            .then(function (response) {
-                console.log(response);
-                const res = response.data;
-                if (res.success && res.token) {
-                    localStorage.setItem("token", res.token);
-                    window.location.href = "/profile";
-                } else {
-                    window.location.href = "/login";
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        .then(function (response) {
+            console.log(response);
+            const res = response.data;
+            if (res.success && res.token) {
+                localStorage.setItem("token", res.token);
+                window.location.href = "/profile";
+            } else {
+                window.location.href = "/login";
+            }
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
     }
 
     return (

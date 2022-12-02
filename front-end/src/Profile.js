@@ -11,7 +11,7 @@ import axios from 'axios'
 const Profile = props => {
 
   const jwtToken = localStorage.getItem("token"); // the JWT token, if we have already received one and stored it in localStorage
-  console.log(`JWT token: ${jwtToken}`); // debugging
+  // console.log(`JWT token: ${jwtToken}`); // debugging
   const [isLoggedIn, setIsLoggedIn] = useState(jwtToken && true);
 
   const [user, setUser] = useState([]);
@@ -29,6 +29,7 @@ const Profile = props => {
         setIsLoggedIn(false);
       })
   }, [])
+  
   return (
     <>
       {isLoggedIn ? (
@@ -52,7 +53,7 @@ const Profile = props => {
             <Link to='/editemail'>
               <button className="button" >reset email<br></br></button>
             </Link>
-            <Link to='/Signup'>
+            <Link to='/login'>
               <button className="button"> log out <br></br></button>
             </Link>
           </div>
