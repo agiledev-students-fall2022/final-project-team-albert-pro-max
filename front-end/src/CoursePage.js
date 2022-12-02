@@ -24,7 +24,7 @@ const CoursePage = props => {
         .get('http://localhost:3001/course/catalog/' + id)
         .then(response => {
           setCourses(response.data)
-          console.log(response.data);
+          // console.log(response.data);
         })
         .catch(err => {
           console.log(err)
@@ -61,6 +61,7 @@ const CoursePage = props => {
               days={item.days}
               times={item.times}
               instructor={item.instructor}
+              instruction_mode={item.instruction_mode}
             />
           } else {
             return <Course
@@ -73,6 +74,7 @@ const CoursePage = props => {
               days={item.days}
               times={item.times}
               instructor={item.instructor}
+              instruction_mode={item.instruction_mode}
             />
           }
         })}

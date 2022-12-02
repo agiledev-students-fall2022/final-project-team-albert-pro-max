@@ -1,10 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const { course } = require('../utils/db.js');
+const { course, recitation } = require('../utils/db.js');
 require("dotenv").config({ silent: true });
 
 router.get('/search', async (req, res, next) => {
-
     try {
         const schools = await course.distinct('school_name');
         const list = [];
@@ -27,7 +26,6 @@ router.get('/search', async (req, res, next) => {
 });
 
 router.get('/catalog/:id', async (req, res, next) => {
-
     const id = req.params.id;
     const info = id.split("-");
 
@@ -42,35 +40,30 @@ router.get('/catalog/:id', async (req, res, next) => {
 });
 
 router.get('/details/:id', async (req, res, next) => {
-
     const courseId = req.params.id;
 
     if (!courseId) {
         res.status(400).send("Missing param: id");
     } else {
-        course.find({ _id: courseId })
-            .then(data => {
-                res.json(data);
+        course.findOne({ _id: courseId })
+            .then(courseDetails => {
+                recitation.find({ lecture_id: courseId })
+                    .then(recitations => {
+                        res.json({
+                            courseDetails: courseDetails,
+                            recitations: recitations
+                        });
+                    })
+                    .catch(err => {
+                        console.log("[ERROR:]", err);
+                        res.status(500).json(err);
+                    });
             })
             .catch(err => {
                 console.log("[ERROR:]", err);
                 res.status(500).json(err);
             });
     }
-});
-
-router.post('/details/rating', (req, res) => {
-    // THIS IS /course/details/rating ROUTE
-    // DO YOUR MAGIC
-
-    // const courseObj = {
-    //     id: req.body.course_id,
-    //     rating: req.body.rating
-    // };
-
-    res.json({
-        success: true
-    });
 });
 
 module.exports = router;

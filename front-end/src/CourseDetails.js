@@ -5,126 +5,167 @@ import { Link } from 'react-router-dom'
 
 import './CourseDetails.css';
 
-const CourseDetails = ({ added, setAdd }) => {
-    const info = new URLSearchParams(useLocation().search).get("id").split("-");
-    const courseId = info[0]
+const CourseDetails = () => {
+    const jwtToken = localStorage.getItem("token"); // the JWT token, if we have already received one and stored it in localStorage
+    const [isLoggedIn, setIsLoggedIn] = useState(jwtToken && true);
 
-    const [courseDetails, setCourseDetails] = useState([]);
-    const [recitationSections, setRecitationSections] = useState(<></>);
+    const courseId = new URLSearchParams(useLocation().search).get("id");
+
+    const [courseDetails, setCourseDetails] = useState({});
+    const [recitations, setRecitations] = useState([]);
+    const [recitationTableRows, setRecitationTableRows] = useState(<></>);
+
     useEffect(() => {
-        console.log("front",courseId)
-        const fetchData = async () => {
-            const res = await axios
+        return () => {
+            console.log("courseId:", courseId);
+
+            axios
                 .get('http://localhost:3001/course/details/' + courseId)
                 .then(response => {
-                    console.log(response.data);
-                    setCourseDetails(response.data);
+                    console.log("response.data:", response.data);
 
-                    if (response.data.hasOwnProperty('recitations')&&response.data.recitations.length > 0) {
-                        const recitationTableRows = [];
+                    if (response.data.multi_topics == 1) {
+                        response.data.course_name += " " + response.data.topic
+                    }
 
-                        for (let i = 0; i < response.data.recitations.length; i++) {
-                            let recitation = response.data.recitations[i];
+                    setCourseDetails(response.data.courseDetails);
+                    setRecitations(response.data.recitations);
 
-                            recitationTableRows.push(
-                                <tr key={recitation.id}>
-                                    <td>{recitation.id}</td>
-                                    <td>{recitation.days}</td>
-                                    <td>{recitation.times}</td>
-                                    <td>{recitation.location}</td>
-                                    <td>{recitation.instructor_first_name} {recitation.instructor_last_name}</td>
-                                </tr>
-                            );
+                    const recitationTableRowsLocal = [];
+
+                    for (let i = 0; i < response.data.recitations.length; i++) {
+                        let recitation = response.data.recitations[i];
+
+                        if (recitation.instructor.length == 0) {
+                            recitation.instructor.push("TBD");
                         }
 
-                        setRecitationSections(<>
-                            <h3>Recitation Sections</h3>
-
-                            <div className="course-recitation-info">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Section</th>
-                                            <th>Day</th>
-                                            <th>Time</th>
-                                            <th>Location</th>
-                                            <th>Instructor</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {recitationTableRows}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </>);
+                        recitationTableRowsLocal.push(
+                            <tr key={recitation._id}>
+                                <td>{recitation.section_number}</td>
+                                <td>{recitation.days}</td>
+                                <td>{recitation.times}</td>
+                                <td>{recitation.instruction_mode}</td>
+                                <td>{recitation.building_room}</td>
+                                <td>{recitation.instructor}</td>
+                                <td><button onClick={() => AddCourse(response.data.courseDetails, recitation)}>Add</button></td>
+                            </tr>
+                        );
                     }
+
+                    setRecitationTableRows(recitationTableRowsLocal);
+                }).catch(err => {
+                    console.log(err)
                 })
         }
-        fetchData()
-        .catch(err => {
-            console.log(err)
-        })
-    }, ['http://localhost:3001/course/details/' + courseId]);
+    }, []);
 
-    const AddCourse = (tempCourse) => {
-        const courseIn = added.find((courseInList) => { return courseInList.course_name === tempCourse.course_name });
-        if (!courseIn) {
-            setAdd([...added, tempCourse])
+    function AddCourse(courseDetails, recitationSection) {
+        if (!isLoggedIn) {
+            window.location.href = "/login";
         }
+
+        console.log("AddCourse courseDetails:", courseDetails);
+        console.log("AddCourse recitationSection:", recitationSection);
+
+        axios
+            .post("http://localhost:3001/cart/add", {
+                courseId: courseDetails._id,
+                recitationId: recitationSection ? recitationSection._id : null
+            }, {
+                headers: { Authorization: `Bearer ${jwtToken}` },
+            })
+            .then(function (response) {
+                console.log(response.data);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
 
-    function handleClickConflictIcon() {
-        alert("Time Conflict with:\nCSCI-UA - 480 Natural Language Processing\nTuTh 11:00AM - 12:45PM");
-    }
-
-
-    console.log("frontdetailstest",courseDetails)
-    // console.log("departmentcode",course.department_code)
-    if(courseDetails.length>0){
+    if (courseDetails) {
         return (
             <div className='CourseDetails'>
-                <h2 className="course-title">{courseDetails[0].department_code} - {courseDetails[0].course_number}<br />{courseDetails[0].course_name}</h2>
-    
+                <h2 className="course-title">{courseDetails.department_code} - {courseDetails.course_number}<br />{courseDetails.course_name}</h2>
+
                 <div className="course-info">
                     <table>
                         <tbody>
                             <tr>
-                                <td>Section</td>
-                                <td>{courseDetails[0].section_number}</td>
+                                <td>Class#</td>
+                                <td>{courseDetails.class_number}</td>
                             </tr>
                             <tr>
-                                <td>Professor</td>
-                                <td>{courseDetails[0].instructor} </td>
+                                <td>Section</td>
+                                <td>{courseDetails.section_number}</td>
+                            </tr>
+                            <tr>
+                                <td>Instructor</td>
+                                <td>{courseDetails.instructor} </td>
                             </tr>
                             <tr>
                                 <td>Days/Times</td>
-                                <td><img className='icon-conflict' src="/prompt.svg" onClick={handleClickConflictIcon}></img>{courseDetails[0].day} {courseDetails[0].time}</td>
+                                <td>{courseDetails.days} {courseDetails.times}</td>
+                            </tr>
+                            <tr>
+                                <td>Instruction Mode</td>
+                                <td>{courseDetails.instruction_mode}</td>
                             </tr>
                             <tr>
                                 <td>Location</td>
-                                <td>{courseDetails[0].location}</td>
+                                <td>{courseDetails.location}</td>
                             </tr>
                             <tr>
-                                <td>Course Rating</td>
-                                <td>{courseDetails[0].rating} / 5.0 <button>Submit My Rating</button></td>
+                                <td>Building Room</td>
+                                <td>{courseDetails.building_room}</td>
                             </tr>
                             <tr>
                                 <td>Syllabus</td>
-                                <td><a href={courseDetails[0].syllabus}>Link to Course Syllabus</a></td>
+                                <td><a href={courseDetails.syllabus}>Link to Course Syllabus</a></td>
                             </tr>
-                            <tr>
-                                <td>Cart</td>
-                                <td><button onClick={() => AddCourse(courseDetails[0])}>Add to Shopping Cart</button></td>
-                            </tr>
+                            {recitations.length == 0 ? (
+                                <tr>
+                                    <td>Cart</td>
+                                    <td><button onClick={() => AddCourse(courseDetails)}>Add to Shopping Cart</button></td>
+                                </tr>
+                            ) : (
+                                <></>
+                            )}
                         </tbody>
                     </table>
                 </div>
-    
-                {recitationSections}
+
+                {recitations.length > 0 ? (
+                    <div className="recitation-info">
+                        <h3>Recitation Sections</h3>
+
+                        <div className="course-recitation-info">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Section</th>
+                                        <th>Days</th>
+                                        <th>Times</th>
+                                        <th>Instruction Mode</th>
+                                        <th>Building Room</th>
+                                        <th>Instructor</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {recitationTableRows}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                ) : (
+                    <></>
+                )}
+
                 <Link to={{
                     pathname: '/coursepage',
-                    search: `?id=${info[1] + '-' + info[2]}`
-                }}><button>back</button></Link>
+                    search: `?id=${courseDetails.school_name + '-' + courseDetails.department_name}`
+                }}><button>Back</button></Link>
             </div>
         )
     }
