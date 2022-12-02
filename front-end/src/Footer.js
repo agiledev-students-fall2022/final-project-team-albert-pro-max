@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom'
 const Footer = () => {
   return (
     <div className="Footer-footer">
-      <Link to ="/login">
+      <Link to ="/profile">
         <img src={profileLogo} alt="profile" width="30" height="30" id="profile"/>
       </Link>
       <Link to="/coursesearch">
