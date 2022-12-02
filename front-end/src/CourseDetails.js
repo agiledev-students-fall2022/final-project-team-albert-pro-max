@@ -5,39 +5,82 @@ import { Link } from 'react-router-dom'
 
 import './CourseDetails.css';
 
-const CourseDetails = ({ added, setAdd }) => {
+const CourseDetails = () => {
+    const jwtToken = localStorage.getItem("token"); // the JWT token, if we have already received one and stored it in localStorage
+    const [isLoggedIn, setIsLoggedIn] = useState(jwtToken && true);
+
     const courseId = new URLSearchParams(useLocation().search).get("id");
 
     const [courseDetails, setCourseDetails] = useState({});
-    const [recitationSections, setRecitationSections] = useState(<></>);
+    const [recitations, setRecitations] = useState([]);
+    const [recitationTableRows, setRecitationTableRows] = useState(<></>);
+
     useEffect(() => {
         return () => {
             console.log("courseId:", courseId);
 
-            const fetchData = async () => {
-                const res = await axios
-                    .get('http://localhost:3001/course/details/' + courseId)
-                    .then(response => {
-                        console.log("response.data:", response.data);
+            axios
+                .get('http://localhost:3001/course/details/' + courseId)
+                .then(response => {
+                    console.log("response.data:", response.data);
 
-                        if (response.data.multi_topics == 1) {
-                            response.data.course_name += " " + response.data.topic
+                    if (response.data.multi_topics == 1) {
+                        response.data.course_name += " " + response.data.topic
+                    }
+
+                    setCourseDetails(response.data.courseDetails);
+                    setRecitations(response.data.recitations);
+
+                    const recitationTableRowsLocal = [];
+
+                    for (let i = 0; i < response.data.recitations.length; i++) {
+                        let recitation = response.data.recitations[i];
+
+                        if (recitation.instructor.length == 0) {
+                            recitation.instructor.push("TBD");
                         }
 
-                        setCourseDetails(response.data);
-                    }).catch(err => {
-                        console.log(err)
-                    })
-            }
-            fetchData();
+                        recitationTableRowsLocal.push(
+                            <tr key={recitation._id}>
+                                <td>{recitation.section_number}</td>
+                                <td>{recitation.days}</td>
+                                <td>{recitation.times}</td>
+                                <td>{recitation.instruction_mode}</td>
+                                <td>{recitation.building_room}</td>
+                                <td>{recitation.instructor}</td>
+                                <td><button onClick={() => AddCourse(response.data.courseDetails, recitation)}>Add</button></td>
+                            </tr>
+                        );
+                    }
+
+                    setRecitationTableRows(recitationTableRowsLocal);
+                }).catch(err => {
+                    console.log(err)
+                })
         }
     }, []);
 
-    const AddCourse = (tempCourse) => {
-        const courseIn = added.find((courseInList) => { return courseInList.course_name === tempCourse.course_name });
-        if (!courseIn) {
-            setAdd([...added, tempCourse])
+    function AddCourse(courseDetails, recitationSection) {
+        if (!isLoggedIn) {
+            window.location.href = "/login";
         }
+
+        console.log("AddCourse courseDetails:", courseDetails);
+        console.log("AddCourse recitationSection:", recitationSection);
+
+        axios
+            .post("http://localhost:3001/cart/add", {
+                courseId: courseDetails._id,
+                recitationId: recitationSection ? recitationSection._id : null
+            }, {
+                headers: { Authorization: `Bearer ${jwtToken}` },
+            })
+            .then(function (response) {
+                console.log(response.data);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
 
     if (courseDetails) {
@@ -49,11 +92,15 @@ const CourseDetails = ({ added, setAdd }) => {
                     <table>
                         <tbody>
                             <tr>
+                                <td>Class#</td>
+                                <td>{courseDetails.class_number}</td>
+                            </tr>
+                            <tr>
                                 <td>Section</td>
                                 <td>{courseDetails.section_number}</td>
                             </tr>
                             <tr>
-                                <td>Professor</td>
+                                <td>Instructor</td>
                                 <td>{courseDetails.instructor} </td>
                             </tr>
                             <tr>
@@ -61,26 +108,64 @@ const CourseDetails = ({ added, setAdd }) => {
                                 <td>{courseDetails.days} {courseDetails.times}</td>
                             </tr>
                             <tr>
+                                <td>Instruction Mode</td>
+                                <td>{courseDetails.instruction_mode}</td>
+                            </tr>
+                            <tr>
                                 <td>Location</td>
                                 <td>{courseDetails.location}</td>
+                            </tr>
+                            <tr>
+                                <td>Building Room</td>
+                                <td>{courseDetails.building_room}</td>
                             </tr>
                             <tr>
                                 <td>Syllabus</td>
                                 <td><a href={courseDetails.syllabus}>Link to Course Syllabus</a></td>
                             </tr>
-                            <tr>
-                                <td>Cart</td>
-                                <td><button onClick={() => AddCourse(courseDetails)}>Add to Shopping Cart</button></td>
-                            </tr>
+                            {recitations.length == 0 ? (
+                                <tr>
+                                    <td>Cart</td>
+                                    <td><button onClick={() => AddCourse(courseDetails)}>Add to Shopping Cart</button></td>
+                                </tr>
+                            ) : (
+                                <></>
+                            )}
                         </tbody>
                     </table>
                 </div>
 
-                {recitationSections}
+                {recitations.length > 0 ? (
+                    <div className="recitation-info">
+                        <h3>Recitation Sections</h3>
+
+                        <div className="course-recitation-info">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Section</th>
+                                        <th>Days</th>
+                                        <th>Times</th>
+                                        <th>Instruction Mode</th>
+                                        <th>Building Room</th>
+                                        <th>Instructor</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {recitationTableRows}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                ) : (
+                    <></>
+                )}
+
                 <Link to={{
                     pathname: '/coursepage',
                     search: `?id=${courseDetails.school_name + '-' + courseDetails.department_name}`
-                }}><button>back</button></Link>
+                }}><button>Back</button></Link>
             </div>
         )
     }

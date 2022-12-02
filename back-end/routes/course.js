@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { course } = require('../utils/db.js');
+const { course, recitation } = require('../utils/db.js');
 require("dotenv").config({ silent: true });
 
 router.get('/search', async (req, res, next) => {
@@ -46,8 +46,18 @@ router.get('/details/:id', async (req, res, next) => {
         res.status(400).send("Missing param: id");
     } else {
         course.findOne({ _id: courseId })
-            .then(data => {
-                res.json(data);
+            .then(courseDetails => {
+                recitation.find({ lecture_id: courseId })
+                    .then(recitations => {
+                        res.json({
+                            courseDetails: courseDetails,
+                            recitations: recitations
+                        });
+                    })
+                    .catch(err => {
+                        console.log("[ERROR:]", err);
+                        res.status(500).json(err);
+                    });
             })
             .catch(err => {
                 console.log("[ERROR:]", err);

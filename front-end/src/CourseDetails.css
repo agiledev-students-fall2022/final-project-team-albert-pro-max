@@ -24,3 +24,14 @@
 .CourseDetails button {
     width: fit-content;
 }
+
+.course-recitation-info table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+.course-recitation-info th,
+.course-recitation-info td {
+    width: 15%;
+    overflow: hidden;
+}
