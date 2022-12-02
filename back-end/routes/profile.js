@@ -60,7 +60,7 @@ router.post('/update/password', passport.authenticate("jwt", { session: false })
                         msg: `${req.body.field} successfully updated`
                     });
                 }
-            })
+            });
         }
     });
 });
