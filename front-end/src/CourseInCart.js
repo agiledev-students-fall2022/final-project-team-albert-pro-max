@@ -1,36 +1,44 @@
 import React from "react";
 import "./CourseInCart.css";
-import { useState, useEffect } from "react";
-const CourseInCart = ({ show, setShow, name }) => {
-  const [showText, setShowText] = useState("show");
-  const [watchText, setWatchText] = useState("watch");
+import axios from 'axios';
 
-  const [watch, setWatch] = useState(false);
+const CourseInCart = (props) => {
+  const jwtToken = localStorage.getItem("token");
+  function changeShow(cartId) {
+        axios.post("http://localhost:3001/cart/show", {
+            cartId: cartId,
+            newShow: props.show ? false : true
+        }, {
+            headers: { Authorization: `Bearer ${jwtToken}` },
+        }).then(response => {
+            console.log(response.data);
+        }).catch(err => {
+            console.log(err)
+        });
+    }
 
-  useEffect(() => {
-    if (show) setShowText("unshow");
-    else setShowText("show");
-  }, [show]);
-
-  useEffect(() => {
-    if (watch) setWatchText("unwatch");
-    else setWatchText("watch");
-  }, [watch]);
-
-  const handleShow = () => {
-    setShow(!show);
-  };
-  const handleWatch = () => {
-    setWatch(!watch);
-  };
+    function changeWatch(cartId) {
+        axios.post("http://localhost:3001/cart/watch", {
+            cartId: cartId,
+            newWatch: props.watch ? false : true
+        }, {
+            headers: { Authorization: `Bearer ${jwtToken}` },
+        }).then(response => {
+            console.log(response.data);
+        }).catch(err => {
+            console.log(err)
+        });
+    }
   return (
     <div className="CourseInCart">
-      {name}
-      <button id="watch" onClick={handleWatch}>
-        {watchText}
+      {props.departmentCode + " " + props.courseNumber + " " + props.courseName}
+
+      <button id="watch" onClick={changeWatch(props.id)}>
+        {props.watch ? "Unwatch" : "Watch"}
       </button>
-      <button id="show" onClick={handleShow}>
-        {showText}
+
+      <button id="show" onClick={changeShow(props.id)}>
+        {props.watch ? "Unshow" : "Show"}
       </button>
     </div>
   );
