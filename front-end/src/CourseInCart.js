@@ -1,36 +1,20 @@
 import React from "react";
 import "./CourseInCart.css";
-import { useState, useEffect } from "react";
-const CourseInCart = ({ show, setShow, name }) => {
-  const [showText, setShowText] = useState("show");
-  const [watchText, setWatchText] = useState("watch");
+import axios from 'axios';
 
-  const [watch, setWatch] = useState(false);
+const CourseInCart = (props) => {
+  const jwtToken = localStorage.getItem("token");
 
-  useEffect(() => {
-    if (show) setShowText("unshow");
-    else setShowText("show");
-  }, [show]);
-
-  useEffect(() => {
-    if (watch) setWatchText("unwatch");
-    else setWatchText("watch");
-  }, [watch]);
-
-  const handleShow = () => {
-    setShow(!show);
-  };
-  const handleWatch = () => {
-    setWatch(!watch);
-  };
   return (
     <div className="CourseInCart">
-      {name}
-      <button id="watch" onClick={handleWatch}>
-        {watchText}
+      {props.departmentCode + " " + props.courseNumber + " " + props.courseName}
+
+      <button id="watch" onClick={changeWatch(props.id)}>
+        {props.watch ? "Unwatch" : "Watch"}
       </button>
-      <button id="show" onClick={handleShow}>
-        {showText}
+
+      <button id="show" onClick={changeShow(props.id)}>
+        {props.watch ? "Unshow" : "Show"}
       </button>
     </div>
   );

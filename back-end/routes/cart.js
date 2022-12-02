@@ -5,17 +5,10 @@ const axios = require('axios');
 const { course, recitation, user } = require('../utils/db.js');
 require("dotenv").config({ silent: true });
 
-router.get('/', (req, res, next) => {
-    axios
-        .get(`${process.env.API_BASE_URL + process.env.COURSE_FOR_CART}?count=5&key=${process.env.API_SECRET_KEY}`)
-        .then(data => {
-            const inCart = data.data.filter(function (el) {
-                return el.in_cart === true;
-            });
-            res.json(inCart);
+router.get('/', passport.authenticate("jwt", { session: false }), async (req, res) => {
+    const userResult = await user.findOne(req.user._id).populate(["cart.course", "cart.recitation"]);
 
-        })
-        .catch(err => next(err));
+    res.json({ cart: userResult.cart });
 });
 
 router.post('/add', passport.authenticate("jwt", { session: false }), async (req, res) => {
@@ -49,32 +42,12 @@ router.post('/add', passport.authenticate("jwt", { session: false }), async (req
     }
 });
 
-router.get('/watch', (req, res, next) => {
-    axios
-        .get(`${process.env.API_BASE_URL + process.env.COURSE_FOR_CART}?count=5&key=${process.env.API_SECRET_KEY}`)
-        .then(data => {
-            const watch = data.data.filter(function (el) {
-                return el.in_cart === true &&
-                    el.watch === true;
-            });
-            res.json(watch);
-
-        })
-        .catch(err => next(err));
+router.post('/watch', passport.authenticate("jwt", { session: false }), async (req, res) => {
+    // Handle change watch
 });
 
-router.get('/show', (req, res, next) => {
-    // THIS IS /cart/show ROUTE
-    // DO YOUR MAGIC
-    axios
-        .get(`${process.env.API_BASE_URL + process.env.COURSE_FOR_CART}?count=5&key=${process.env.API_SECRET_KEY}`)
-        .then(apiResponse => {
-            const show = apiResponse.data.filter(ele => {
-                return ele.in_cart === true && ele.show === true;
-            });
-            res.json(show);
-        })
-        .catch(err => next(err));
+router.post('/show', passport.authenticate("jwt", { session: false }), async (req, res) => {
+    // Handle change show
 });
 
 module.exports = router;
