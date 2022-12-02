@@ -12,13 +12,12 @@ describe("GET request to /cart route", () => {
         server = await require("../app");
     });
 
-    it("it should respond with an HTTP 200 status code and an array in the response body", done => {
+    it("it should respond with an HTTP 401 status code when no Authorization header presents", done => {
         chai
             .request(server)
             .get(`/cart`)
             .end((err, res) => {
-                res.should.have.status(200);
-                res.body.should.be.a("Array");
+                res.should.have.status(401);
                 done();
             });
     });
