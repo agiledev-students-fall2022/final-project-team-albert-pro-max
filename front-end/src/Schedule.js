@@ -112,7 +112,9 @@ const Schedule = () => {
   const [showedCourse, setShowedCourse] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:3001/schedule")
+      .get("http://localhost:3001/schedule", {
+        headers: { Authorization: `Bearer ${jwtToken}` }, // pass the token, if any, to the server
+      })
       .then((response) => {
         setShowedCourse(
           response.data.map((item, index) => {
@@ -185,7 +187,7 @@ const Schedule = () => {
       }
     }
     setCourseBlock(scheduleRows);
-  }, []);
+  }, [showedCourse]);
 
   return (
     <>

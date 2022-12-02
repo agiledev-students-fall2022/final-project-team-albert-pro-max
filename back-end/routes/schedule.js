@@ -6,9 +6,8 @@ require("dotenv").config({ silent: true });
 
 router.get('/', passport.authenticate("jwt", { session: false }), async (req, res) => {
   try {
-    const me = await user.findOne({username: 'rxu64'});
     const list = [];
-    await Promise.all(me.cart.map(async (item, index) => {
+    await Promise.all(req.user.cart.map(async (item, index) => {
       if (item.show === true) {
         const c = await course.findOne({_id: item.course});
         list.push(c);
