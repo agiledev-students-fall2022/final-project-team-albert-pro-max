@@ -11,23 +11,23 @@ const EditPassword = (prop) =>{
         if (newPassword !== confirmPassword) {
             const popup = document.getElementById("myPopup");
             popup.classList.toggle("show");
+        } else {
+            axios.post('http://localhost:3001/profile/update/password', {
+                newPassword: newPassword
+            }, {
+                headers: { Authorization: `Bearer ${jwtToken}` }
+            })
+            .then(function (response) {
+                console.log('enter here');
+                console.log(response);
+                localStorage.setItem("token", jwtToken);
+                window.location.href = "/profile";
+            })
+            .catch(function (error) {
+                console.log('enter error');
+                console.log(error);
+            });
         }
-        axios.post('http://localhost:3001/profile/update/password', {
-            newPassword: newPassword
-        }, {
-            headers: { Authorization: `Bearer ${jwtToken}` }
-        })
-        .then(function (response) {
-            console.log('enter here');
-            console.log(response);
-            const res = response.data;
-            localStorage.setItem("token", jwtToken);
-            window.location.href = "/profile";
-        })
-        .catch(function (error) {
-            console.log('enter error');
-            console.log(error);
-        });
     };
 
     return(

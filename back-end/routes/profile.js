@@ -52,9 +52,11 @@ router.post('/update/password', passport.authenticate("jwt", { session: false })
             res.json({success: false});
         } else {
             user.setPassword(req.body.newPassword, function(err, user) {
+                console.log('newPassword: ', req.body.newPassword);
                 if(err) {
                     res.json({success: false});
                 } else {
+                    console.log("enter here: succeeded in updating password??");
                     res.json({
                         success: true, 
                         msg: `${req.body.field} successfully updated`
