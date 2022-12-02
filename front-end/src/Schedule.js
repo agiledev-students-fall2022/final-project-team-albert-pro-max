@@ -148,7 +148,7 @@ const Schedule = () => {
         console.log(err);
         setIsLoggedIn(false);
       });
-  }, []);
+  }, [jwtToken]);
 
   useEffect(() => {
     let scheduleRows = [];
