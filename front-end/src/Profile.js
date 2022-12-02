@@ -1,4 +1,5 @@
 import './Profile.css'
+import ProfileLogo from './ProfileLogo.jpeg'
 import { Link, Navigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
@@ -34,7 +35,7 @@ const Profile = props => {
       {isLoggedIn ? (
         <>
           <div className="image-txt-container">
-            <img src={user.profile_img} alt="profile logo" width="120" height="120" />
+            <img src={ProfileLogo} alt="profile logo" width="120" height="120" />
             <h2>
               {user.username}
             </h2>
