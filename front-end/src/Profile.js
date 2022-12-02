@@ -30,7 +30,11 @@ const Profile = props => {
         setIsLoggedIn(false);
       })
   }, [])
-
+  
+  const clearUser = () => {
+    localStorage.removeItem("token");
+  };
+  
   return (
     <>
       {isLoggedIn ? (
@@ -52,7 +56,7 @@ const Profile = props => {
               <button className="button" >reset email<br></br></button>
             </Link>
             <Link to='/login'>
-              <button className="button"> log out <br></br></button>
+              <button className="button" onClick={clearUser}> log out <br></br></button>
             </Link>
           </div>
         </>
