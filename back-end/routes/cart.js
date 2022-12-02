@@ -43,11 +43,43 @@ router.post('/add', passport.authenticate("jwt", { session: false }), async (req
 });
 
 router.post('/watch', passport.authenticate("jwt", { session: false }), async (req, res) => {
-    // Handle change watch
+    const { cartItemId, newWatch } = req.body;
+
+    const updateResult = await user.updateOne(
+        {
+            _id: req.user._id,
+            cart: {
+                $elemMatch: { _id: cartItemId }
+            },
+        },
+        { $set: { "cart.$.watch": newWatch } }
+    );
+
+    if (updateResult.acknowledged) {
+        res.json({ success: true });
+    } else {
+        res.json({ success: false });
+    }
 });
 
 router.post('/show', passport.authenticate("jwt", { session: false }), async (req, res) => {
-    // Handle change show
+    const { cartItemId, newShow } = req.body;
+
+    const updateResult = await user.updateOne(
+        {
+            _id: req.user._id,
+            cart: {
+                $elemMatch: { _id: cartItemId }
+            },
+        },
+        { $set: { "cart.$.show": newShow } }
+    );
+
+    if (updateResult.acknowledged) {
+        res.json({ success: true });
+    } else {
+        res.json({ success: false });
+    }
 });
 
 module.exports = router;

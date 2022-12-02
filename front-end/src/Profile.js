@@ -12,7 +12,7 @@ import axios from 'axios'
 const Profile = props => {
 
   const jwtToken = localStorage.getItem("token"); // the JWT token, if we have already received one and stored it in localStorage
-  // console.log(`JWT token: ${jwtToken}`); // debugging
+  console.log(`JWT token: ${jwtToken}`); // debugging
   const [isLoggedIn, setIsLoggedIn] = useState(jwtToken && true);
 
   const [user, setUser] = useState([]);
@@ -30,7 +30,7 @@ const Profile = props => {
         setIsLoggedIn(false);
       })
   }, [])
-  
+
   return (
     <>
       {isLoggedIn ? (
