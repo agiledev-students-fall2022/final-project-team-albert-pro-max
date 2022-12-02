@@ -1,4 +1,5 @@
 import './Profile.css'
+import ProfileLogo from './ProfileLogo.jpeg'
 import { Link, Navigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
@@ -11,7 +12,7 @@ import axios from 'axios'
 const Profile = props => {
 
   const jwtToken = localStorage.getItem("token"); // the JWT token, if we have already received one and stored it in localStorage
-  console.log(`JWT token: ${jwtToken}`); // debugging
+  // console.log(`JWT token: ${jwtToken}`); // debugging
   const [isLoggedIn, setIsLoggedIn] = useState(jwtToken && true);
 
   const [user, setUser] = useState([]);
@@ -29,12 +30,13 @@ const Profile = props => {
         setIsLoggedIn(false);
       })
   }, [])
+  
   return (
     <>
       {isLoggedIn ? (
         <>
           <div className="image-txt-container">
-            <img src={user.profile_img} alt="profile logo" width="120" height="120" />
+            <img src={ProfileLogo} alt="profile logo" width="120" height="120" />
             <h2>
               {user.username}
             </h2>
@@ -52,7 +54,7 @@ const Profile = props => {
             <Link to='/editemail'>
               <button className="button" >reset email<br></br></button>
             </Link>
-            <Link to='/Signup'>
+            <Link to='/login'>
               <button className="button"> log out <br></br></button>
             </Link>
           </div>
