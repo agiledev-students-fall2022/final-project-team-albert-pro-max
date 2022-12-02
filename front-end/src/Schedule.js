@@ -21,7 +21,7 @@ const Block = () => {
 
 const Schedule = ({ show }) => {
     const jwtToken = localStorage.getItem("token"); // the JWT token, if we have already received one and stored it in localStorage
-    console.log(`JWT token: ${jwtToken}`); // debugging
+    // console.log(`JWT token: ${jwtToken}`); // debugging
     const [isLoggedIn, setIsLoggedIn] = useState(jwtToken && true);
 
     const [courseBlock, setCourseBlock] = useState(null)
