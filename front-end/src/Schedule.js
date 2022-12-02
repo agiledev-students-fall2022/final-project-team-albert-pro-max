@@ -198,12 +198,12 @@ const Schedule = () => {
             <table>
               <thead>
                 <tr>
-                  <th></th>
-                  <th className="weekday">Mon</th>
-                  <th className="weekday">Tue</th>
-                  <th className="weekday">Wed</th>
-                  <th className="weekday">Thu</th>
-                  <th className="weekday">Fri</th>
+                  <th id='firstblock'></th>
+                  <th className="weekday" id='M'>Mon</th>
+                  <th className="weekday" id='T'>Tue</th>
+                  <th className="weekday" id='W'>Wed</th>
+                  <th className="weekday" id='Th'>Thu</th>
+                  <th className="weekday" id='F'>Fri</th>
                 </tr>
               </thead>
               <tbody>{courseBlock}</tbody>

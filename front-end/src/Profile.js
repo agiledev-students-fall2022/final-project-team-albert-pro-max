@@ -46,7 +46,7 @@ const Profile = props => {
             </h2>
           </div>
 
-          <p>{user.email}</p>
+          <p id="email">{user.email}</p>
 
           <div className='options'>
             <Link to='/edituser'>

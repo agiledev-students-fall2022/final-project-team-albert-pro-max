@@ -62,7 +62,8 @@ const CourseSearch = props => {
         pathname: '/coursepage',
         search: `?id=${schoolID + '-' + majorID}`
       }}>
-        <button>search</button>
+        <br/>
+        <button id="searchbtn">SEARCH !</button>
       </Link>
     </div>
   )

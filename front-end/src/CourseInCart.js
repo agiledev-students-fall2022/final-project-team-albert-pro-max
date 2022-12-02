@@ -41,8 +41,7 @@ const CourseInCart = (props) => {
 
   return (
     <div className="CourseInCart">
-      {props.departmentCode + " " + props.courseNumber + " " + props.courseName}
-
+      <h4 id='dep'>{props.departmentCode}
       <button id="watch" onClick={() => changeWatch(props.id)}>
         {props.watch ? "Unwatch" : "Watch"}
       </button>
@@ -50,6 +49,12 @@ const CourseInCart = (props) => {
       <button id="show" onClick={() => changeShow(props.id)}>
         {props.show ? "Unshow" : "Show"}
       </button>
+      </h4>
+      {props.courseNumber + " " + props.courseName}
+
+      
+
+      
     </div>
   );
 };
