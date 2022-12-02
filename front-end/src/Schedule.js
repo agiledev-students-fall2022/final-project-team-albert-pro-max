@@ -119,7 +119,7 @@ const Schedule = () => {
         setShowedCourse(
           response.data.map((item, index) => {
             let duration = 0;
-            let time = item.time.split(" ");
+            let time = item.times.split(" ");
             let start = time[0].split(".");
             let startH = parseInt(start[0]);
             if (time[1] === "PM") startH += 12;
@@ -133,8 +133,8 @@ const Schedule = () => {
             return {
               key: index,
               id: item._id,
-              days: item.day,
-              times: item.time,
+              days: item.days,
+              times: item.times,
               startH: startH,
               startM: startM,
               duration: duration,
@@ -148,7 +148,7 @@ const Schedule = () => {
         console.log(err);
         setIsLoggedIn(false);
       });
-  }, []);
+  }, [jwtToken]);
 
   useEffect(() => {
     let scheduleRows = [];
