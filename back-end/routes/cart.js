@@ -23,7 +23,7 @@ router.post('/add', passport.authenticate("jwt", { session: false }), async (req
 
     const userAddedCourses = req.user.cart.map(ele => ele.course.toString());
 
-    if (userAddedCourses.indexOf(courseId) != -1) {
+    if (userAddedCourses.indexOf(courseId) !== -1) {
         res.json({ success: true, message: "Course already in cart" });
     } else {
         const cartItem = {
@@ -31,7 +31,7 @@ router.post('/add', passport.authenticate("jwt", { session: false }), async (req
             recitation: recitationId,
             watch: false,
             show: false
-        }
+        };
 
         const updateResult = await user.updateOne({
             _id: req.user._id,
