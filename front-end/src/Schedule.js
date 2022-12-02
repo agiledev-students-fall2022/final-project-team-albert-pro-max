@@ -122,11 +122,11 @@ const Schedule = () => {
             let time = item.times.split(" ");
             let start = time[0].split(".");
             let startH = parseInt(start[0]);
-            if (time[1] === "PM") startH += 12;
+            if (time[1] === "PM" && time[0].indexOf("12") != 0) startH += 12;
             let startM = parseInt(start[1]);
             let end = time[3].split(".");
             let endH = parseInt(end[0]);
-            if (time[4] === "PM") endH += 12;
+            if (time[4] === "PM" && time[3].indexOf("12") != 0) endH += 12;
             let endM = parseInt(end[1]);
             duration += (endH - startH) * 12;
             duration += (endM - startM) / 5;
@@ -179,7 +179,7 @@ const Schedule = () => {
 
         for (let i = 0; i < showedCourse.length; i++) {
           if (showedCourse[i].startH === hr && showedCourse[i].startM === min) {
-            scheduleRow.push(<Block key={i} id={showedCourse[i].id} days={showedCourse[i].days} times={showedCourse[i].times} duration={showedCourse[i].duration} course_number={showedCourse[i].course_number} course_name={showedCourse[i].course_name}/>);
+            scheduleRow.push(<Block key={i} id={showedCourse[i].id} days={showedCourse[i].days} times={showedCourse[i].times} duration={showedCourse[i].duration} course_number={showedCourse[i].course_number} course_name={showedCourse[i].course_name} />);
           }
         }
 
