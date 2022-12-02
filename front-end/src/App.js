@@ -43,7 +43,6 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/coursesearch" element={<CourseSearch />} />
             <Route path="/coursedetails" element={<CourseDetails added={added} setAdd={setAdd} />} />
-            <Route path="/editinfo" element={<EditPassword />} />
             <Route path="/edituser" element={<EditUser />} />
             <Route path="/editemail" element={<EditEmail />} />
             <Route path="/schedule" element={<Schedule show={show} />} />
