@@ -82,4 +82,20 @@ router.post('/show', passport.authenticate("jwt", { session: false }), async (re
     }
 });
 
+router.post('/', passport.authenticate("jwt", { session: false }), async (req, res) => {
+    const { cartItemId } = req.body;
+
+    const updateResult = await user.update(
+        {_id: req.user._id},
+        {$pull: { 'cart': { _id: cartItemId } }
+        }
+    );
+
+    if (updateResult.acknowledged) {
+        res.json({ success: true });
+    } else {
+        res.json({ success: false });
+    }
+});
+
 module.exports = router;
