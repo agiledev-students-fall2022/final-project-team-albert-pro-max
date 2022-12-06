@@ -102,6 +102,8 @@ const Block = ({ id, days, times, duration, course_number, course_name }) => {
 };
 
 const Schedule = () => {
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
+
   const jwtToken = localStorage.getItem("token"); // the JWT token, if we have already received one and stored it in localStorage
   // console.log(`JWT token: ${jwtToken}`); // debugging
   const [isLoggedIn, setIsLoggedIn] = useState(jwtToken && true);
@@ -112,7 +114,7 @@ const Schedule = () => {
   const [showedCourse, setShowedCourse] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:3001/schedule", {
+      .get(`${BASE_URL}/schedule`, {
         headers: { Authorization: `Bearer ${jwtToken}` }, // pass the token, if any, to the server
       })
       .then((response) => {

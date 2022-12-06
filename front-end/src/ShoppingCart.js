@@ -5,18 +5,18 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 
 const ShoppingCart = () => {
+    const BASE_URL = process.env.REACT_APP_BASE_URL;
+
     const jwtToken = localStorage.getItem("token"); // the JWT token, if we have already received one and stored it in localStorage
     const [isLoggedIn, setIsLoggedIn] = useState(jwtToken && true);
 
     const [userCart, setUserCart] = useState([]);
     const [cartCourses, setCartCourses] = useState([]);
 
-    
-
     useEffect(() => {
         return () => {
             axios
-                .get('http://localhost:3001/cart', {
+                .get(`${BASE_URL}/cart`, {
                     headers: { Authorization: `Bearer ${jwtToken}` }, // pass the token, if any, to the server
                 })
                 .then(response => {
