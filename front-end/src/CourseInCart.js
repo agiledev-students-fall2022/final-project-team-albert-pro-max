@@ -73,12 +73,15 @@ const CourseInCart = (props) => {
         Delete
       </button>
 
+=======
+>>>>>>> 978f970676d6ea21de7de3e0d1c9797b27b1d906
       </h4>
       {props.courseName}
       <br/>
       {props.days+" "+props.times}
 
-
+=======
+>>>>>>> 978f970676d6ea21de7de3e0d1c9797b27b1d906
 
 
     </div>
