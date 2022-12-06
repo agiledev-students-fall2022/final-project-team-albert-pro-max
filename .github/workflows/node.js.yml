@@ -45,6 +45,7 @@ jobs:
         echo DB_PASSWORD=${{ secrets.DB_PASSWORD }} >> .env
         
         echo NODE_ENV=PRODUCTION >> .env
+      working-directory: ./back-end
     - name: 'Create Front-end .env File'
       run: |
         touch .env
