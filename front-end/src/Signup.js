@@ -2,6 +2,7 @@ import './Signup.css'
 import axios from "axios"
 
 const Signup = props => {
+    const BASE_URL = process.env.REACT_APP_BASE_URL;
 
     const handleClickSignup = (evt) => {
         const username = document.getElementById("username").value;
@@ -14,7 +15,7 @@ const Signup = props => {
             popup.classList.toggle("show");
         }
         else {
-            axios.post('http://localhost:3001/register', {
+            axios.post(`${BASE_URL}/register`, {
                 username: username,
                 password: password,
                 email: email

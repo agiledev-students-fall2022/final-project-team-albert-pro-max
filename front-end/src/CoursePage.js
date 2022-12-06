@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom'
  * @returns The contents of this component, in JSX form.
  */
 const CoursePage = props => {
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
 
   const id = new URLSearchParams(useLocation().search).get("id");
   const info = id.split("-")
@@ -21,7 +22,7 @@ const CoursePage = props => {
   useEffect(() => {
     return () => {
       axios
-        .get('http://localhost:3001/course/catalog/' + id)
+        .get(`${BASE_URL}/course/catalog/${id}`)
         .then(response => {
           setCourses(response.data)
           // console.log(response.data);

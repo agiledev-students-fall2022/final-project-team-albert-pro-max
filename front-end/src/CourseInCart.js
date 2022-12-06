@@ -3,10 +3,12 @@ import "./CourseInCart.css";
 import axios from 'axios';
 
 const CourseInCart = (props) => {
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
+
   const jwtToken = localStorage.getItem("token");
 
   function changeShow(cartItemId) {
-    axios.post("http://localhost:3001/cart/show", {
+    axios.post(`${BASE_URL}/cart/show`, {
       cartItemId: cartItemId,
       newShow: props.show ? false : true
     }, {
@@ -23,7 +25,7 @@ const CourseInCart = (props) => {
   }
 
   function changeWatch(cartItemId) {
-    axios.post("http://localhost:3001/cart/watch", {
+    axios.post(`${BASE_URL}/cart/watch`, {
       cartItemId: cartItemId,
       newWatch: props.watch ? false : true
     }, {
@@ -42,19 +44,19 @@ const CourseInCart = (props) => {
   return (
     <div className="CourseInCart">
       <h4 id='dep'>{props.departmentCode}
-      <button id="watch" onClick={() => changeWatch(props.id)}>
-        {props.watch ? "Unwatch" : "Watch"}
-      </button>
+        <button id="watch" onClick={() => changeWatch(props.id)}>
+          {props.watch ? "Unwatch" : "Watch"}
+        </button>
 
-      <button id="show" onClick={() => changeShow(props.id)}>
-        {props.show ? "Unshow" : "Show"}
-      </button>
+        <button id="show" onClick={() => changeShow(props.id)}>
+          {props.show ? "Unshow" : "Show"}
+        </button>
       </h4>
       {props.courseNumber + " " + props.courseName}
 
-      
 
-      
+
+
     </div>
   );
 };

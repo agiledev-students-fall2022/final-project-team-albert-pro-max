@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom'
 import './CourseDetails.css';
 
 const CourseDetails = () => {
+    const BASE_URL = process.env.REACT_APP_BASE_URL;
+
     const jwtToken = localStorage.getItem("token"); // the JWT token, if we have already received one and stored it in localStorage
     const [isLoggedIn, setIsLoggedIn] = useState(jwtToken && true);
 
@@ -20,7 +22,7 @@ const CourseDetails = () => {
             console.log("courseId:", courseId);
 
             axios
-                .get('http://localhost:3001/course/details/' + courseId)
+                .get(`${BASE_URL}/course/details/${courseId}`)
                 .then(response => {
                     console.log("response.data:", response.data);
 
@@ -69,7 +71,7 @@ const CourseDetails = () => {
         console.log("AddCourse recitationSection:", recitationSection);
 
         axios
-            .post("http://localhost:3001/cart/add", {
+            .post(`${BASE_URL}/cart/add`, {
                 courseId: courseDetails._id,
                 recitationId: recitationSection ? recitationSection._id : null
             }, {

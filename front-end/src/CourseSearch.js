@@ -10,6 +10,8 @@ import { useEffect, useState } from 'react'
  */
 const CourseSearch = props => {
 
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
+
   const [school, setSchool] = useState([])
   const [major, setMajor] = useState([])
   const [schoolID, setSelectedSchool] = useState("*")
@@ -17,7 +19,7 @@ const CourseSearch = props => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:3001/course/search')
+      .get(`${BASE_URL}/course/search`)
       .then(response => {
         setSchool(response.data)
       })
@@ -62,7 +64,7 @@ const CourseSearch = props => {
         pathname: '/coursepage',
         search: `?id=${schoolID + '-' + majorID}`
       }}>
-        <br/>
+        <br />
         <button id="searchbtn">SEARCH !</button>
       </Link>
     </div>

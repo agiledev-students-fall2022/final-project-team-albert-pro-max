@@ -10,6 +10,7 @@ import axios from 'axios'
  * @returns The contents of this component, in JSX form.
  */
 const Profile = props => {
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
 
   const jwtToken = localStorage.getItem("token"); // the JWT token, if we have already received one and stored it in localStorage
   console.log(`JWT token: ${jwtToken}`); // debugging
@@ -19,7 +20,7 @@ const Profile = props => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:3001/profile', {
+      .get(`${BASE_URL}/profile`, {
         headers: { Authorization: `Bearer ${jwtToken}` }, // pass the token, if any, to the server
       })
       .then(response => {
@@ -30,11 +31,11 @@ const Profile = props => {
         setIsLoggedIn(false);
       })
   }, [])
-  
+
   const clearUser = () => {
     localStorage.removeItem("token");
   };
-  
+
   return (
     <>
       {isLoggedIn ? (

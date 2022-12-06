@@ -2,26 +2,28 @@ import './Login.css'
 import axios from "axios"
 
 const Login = props => {
+    const BASE_URL = process.env.REACT_APP_BASE_URL;
+
     function handleClickLogin() {
         const username = document.getElementById("username").value;
         const password = document.getElementById("password").value;
-        axios.post('http://localhost:3001/login', {
+        axios.post(`${BASE_URL}/login`, {
             username: username,
             password: password
         })
-        .then(function (response) {
-            console.log(response);
-            const res = response.data;
-            if (res.success && res.token) {
-                localStorage.setItem("token", res.token);
-                window.location.href = "/profile";
-            } else {
-                window.location.href = "/login";
-            }
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+            .then(function (response) {
+                console.log(response);
+                const res = response.data;
+                if (res.success && res.token) {
+                    localStorage.setItem("token", res.token);
+                    window.location.href = "/profile";
+                } else {
+                    window.location.href = "/login";
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
 
     return (
