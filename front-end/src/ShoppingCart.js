@@ -38,6 +38,8 @@ const ShoppingCart = () => {
                                 courseName={cartItem.course.course_name}
                                 watch={cartItem.watch}
                                 show={cartItem.show}
+                                days = {cartItem.course.days}
+                                times= {cartItem.course.times}
                             />
                         );
                     }
