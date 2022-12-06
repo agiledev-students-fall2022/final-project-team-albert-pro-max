@@ -39,9 +39,26 @@ const CourseInCart = (props) => {
     });
   }
 
+  function handleDelete(cartItemId){
+    axios.post("http://localhost:3001/cart",{
+      cartItemId:cartItemId,
+    },{
+      headers:{ Authorization: `Bearer ${jwtToken}` },
+    }
+    ).then(response =>{
+      console.log(response.data);
+    
+      if (response.data.success) {
+        window.location.reload();
+      }
+    }).catch(err =>{
+      console.log(err)
+    })
+  }
+
   return (
     <div className="CourseInCart">
-      <h4 id='dep'>{props.departmentCode}
+      <h4 id='dep'>{props.departmentCode+" "+props.courseNumber}
       <button id="watch" onClick={() => changeWatch(props.id)}>
         {props.watch ? "Unwatch" : "Watch"}
       </button>
@@ -49,8 +66,14 @@ const CourseInCart = (props) => {
       <button id="show" onClick={() => changeShow(props.id)}>
         {props.show ? "Unshow" : "Show"}
       </button>
+
+      <button id="delete" onClick={() => handleDelete(props.id)}>
+        Delete
+      </button>
       </h4>
-      {props.courseNumber + " " + props.courseName}
+      {props.courseName}
+      <br/>
+      {props.days+" "+props.times}
 
       
 
