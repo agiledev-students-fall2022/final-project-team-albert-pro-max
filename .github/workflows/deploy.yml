@@ -28,4 +28,4 @@ jobs:
           cd final-project-team-albert-pro-max
           git pull
           
-          docker compose up --build
+          docker compose up --build --detach
