@@ -10,6 +10,10 @@ router.get('/', passport.authenticate("jwt", { session: false }), async (req, re
     await Promise.all(req.user.cart.map(async (item, index) => {
       if (item.show === true) {
         const c = await course.findOne({_id: item.course});
+        if (item.recitation !== null) {
+          const r = await recitation.findOne({_id: item.recitation});
+          list.push(r);
+        }
         list.push(c);
       }
     }));

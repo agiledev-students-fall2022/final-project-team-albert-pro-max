@@ -124,25 +124,39 @@ const Schedule = () => {
             let time = item.times.split(" ");
             let start = time[0].split(".");
             let startH = parseInt(start[0]);
-            if (time[1] === "PM" && time[0].indexOf("12") != 0) startH += 12;
+            if (time[1] === "PM" && time[0].indexOf("12") !== 0) startH += 12;
             let startM = parseInt(start[1]);
             let end = time[3].split(".");
             let endH = parseInt(end[0]);
-            if (time[4] === "PM" && time[3].indexOf("12") != 0) endH += 12;
+            if (time[4] === "PM" && time[3].indexOf("12") !== 0) endH += 12;
             let endM = parseInt(end[1]);
             duration += (endH - startH) * 12;
             duration += (endM - startM) / 5;
-            return {
-              key: index,
-              id: item._id,
-              days: item.days,
-              times: item.times,
-              startH: startH,
-              startM: startM,
-              duration: duration,
-              course_number: item.department_code + ' ' + item.course_number,
-              course_name: item.course_name,
-            };
+            if (!item.lecture_id) {
+              return {
+                key: index,
+                id: item._id,
+                days: item.days,
+                times: item.times,
+                startH: startH,
+                startM: startM,
+                duration: duration,
+                course_number: item.department_code + ' ' + item.course_number,
+                course_name: item.course_name,
+              };
+            } else {
+              return {
+                key: index,
+                id: item.lecture_id,
+                days: item.days,
+                times: item.times,
+                startH: startH,
+                startM: startM,
+                duration: duration,
+                course_number: item.section_number,
+                course_name: 'Recitation',
+              }
+            }
           })
         );
       })
@@ -150,7 +164,7 @@ const Schedule = () => {
         console.log(err);
         setIsLoggedIn(false);
       });
-  }, [jwtToken]);
+  }, [BASE_URL, jwtToken]);
 
   useEffect(() => {
     let scheduleRows = [];
