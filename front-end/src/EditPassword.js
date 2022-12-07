@@ -1,7 +1,13 @@
 import './EditInfo.css'
 import axios from "axios"
+import { useEffect } from 'react'
 
 const EditPassword = (prop) => {
+
+    useEffect(() => {
+        document.title = "Update Password - AlbertProMax";
+    }, []);
+
     const BASE_URL = process.env.REACT_APP_BASE_URL;
 
     const jwtToken = localStorage.getItem("token");

@@ -1,7 +1,13 @@
 import './Login.css'
 import axios from "axios"
+import { useEffect } from 'react'
 
 const Login = props => {
+
+    useEffect(() => {
+        document.title = "Login - AlbertProMax";
+    }, []);
+
     const BASE_URL = process.env.REACT_APP_BASE_URL;
 
     function handleClickLogin() {

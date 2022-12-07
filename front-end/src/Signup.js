@@ -1,7 +1,13 @@
 import './Signup.css'
 import axios from "axios"
+import { useEffect } from 'react'
 
 const Signup = props => {
+
+    useEffect(() => {
+        document.title = "Signup - AlbertProMax";
+    }, []);
+
     const BASE_URL = process.env.REACT_APP_BASE_URL;
 
     const handleClickSignup = (evt) => {

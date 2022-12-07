@@ -10,6 +10,11 @@ import axios from 'axios'
  * @returns The contents of this component, in JSX form.
  */
 const Profile = props => {
+
+  useEffect(() => {
+    document.title = "Profile - AlbertProMax";
+  }, []);
+
   const BASE_URL = process.env.REACT_APP_BASE_URL;
 
   const jwtToken = localStorage.getItem("token"); // the JWT token, if we have already received one and stored it in localStorage

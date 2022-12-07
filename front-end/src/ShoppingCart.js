@@ -5,6 +5,11 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 
 const ShoppingCart = () => {
+
+    useEffect(() => {
+        document.title = "Shopping Cart - AlbertProMax";
+    }, []);
+
     const BASE_URL = process.env.REACT_APP_BASE_URL;
 
     const jwtToken = localStorage.getItem("token"); // the JWT token, if we have already received one and stored it in localStorage
@@ -39,8 +44,8 @@ const ShoppingCart = () => {
                                 classNumber={cartItem.course.class_number}
                                 watch={cartItem.watch}
                                 show={cartItem.show}
-                                days = {cartItem.course.days}
-                                times= {cartItem.course.times}
+                                days={cartItem.course.days}
+                                times={cartItem.course.times}
                             />
                         );
                     }

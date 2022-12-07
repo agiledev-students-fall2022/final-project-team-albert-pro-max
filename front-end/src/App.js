@@ -13,7 +13,6 @@ import EditEmail from './EditEmail';
 import Schedule from "./Schedule";
 import Signup from "./Signup";
 import Login from './Login';
-import axios from 'axios';
 
 function App() {
   return (

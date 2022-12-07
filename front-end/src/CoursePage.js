@@ -12,6 +12,11 @@ import { Link } from 'react-router-dom'
  * @returns The contents of this component, in JSX form.
  */
 const CoursePage = props => {
+
+  useEffect(() => {
+    document.title = "Course Catalog - AlbertProMax";
+  }, []);
+
   const BASE_URL = process.env.REACT_APP_BASE_URL;
 
   const id = new URLSearchParams(useLocation().search).get("id");
