@@ -1,4 +1,5 @@
-![Python build & test](https://github.com/agiledev-students-fall2022/final-project-team-albert-pro-max/actions/workflows/node.js.yml/badge.svg)
+[![Node.js CI](https://github.com/agiledev-students-fall2022/final-project-team-albert-pro-max/actions/workflows/node.js.yml/badge.svg)](https://github.com/agiledev-students-fall2022/final-project-team-albert-pro-max/actions/workflows/node.js.yml)
+[![Continuous Deployment](https://github.com/agiledev-students-fall2022/final-project-team-albert-pro-max/actions/workflows/deploy.yml/badge.svg)](https://github.com/agiledev-students-fall2022/final-project-team-albert-pro-max/actions/workflows/deploy.yml)
 
 # Albert Pro Max
 
