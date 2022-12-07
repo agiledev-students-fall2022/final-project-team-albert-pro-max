@@ -57,16 +57,16 @@ const Profile = props => {
 
           <div className='options'>
             <Link to='/edituser'>
-              <button className="button" >reset username<br></br></button>
+              <button className="button" >Reset Username<br></br></button>
             </Link>
             <Link to='/editpassword'>
               <button className="button" >reset password<br></br></button>
             </Link>
             <Link to='/editemail'>
-              <button className="button" >reset email<br></br></button>
+              <button className="button" >Reset Email<br></br></button>
             </Link>
             <Link to='/login'>
-              <button className="button" onClick={clearUser}> log out <br></br></button>
+              <button className="button" onClick={clearUser}> Log Out <br></br></button>
             </Link>
           </div>
         </>
