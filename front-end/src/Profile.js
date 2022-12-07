@@ -61,7 +61,7 @@ const Profile = props => {
 
             </Link>
             <Link to='/editpassword'>
-              <button className="button" >reset password<br></br></button>
+              <button className="button" >Reset Password<br></br></button>
 
             </Link>
             <Link to='/editemail'>

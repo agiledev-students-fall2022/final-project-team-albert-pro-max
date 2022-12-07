@@ -43,6 +43,7 @@
 }
 
 .changebtn{
+    position: relative;
     font-size: medium;
     font-weight:500;
     background-color: rgb(176, 154, 192);
@@ -51,7 +52,7 @@
     border: 1px solid #e8e8e8;
     transition: all .3s;
     box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
-    margin: 30px;
+    margin: 60px;
 }
 
 .editlabel{
@@ -59,18 +60,24 @@
     left: 10%;
 }
 
-#newEmail{
+#confirmLabel{
+    position: absolute;
+    left: 10%;
+    top:20%
+}
+#newUsername ,#newPassword,#newEmail{
     position: absolute;
     left: 10%;
     right:10%;
     margin: 10px;
     padding:5px
 }
-
-#newUsername{
+#confirmPassword{
     position: absolute;
     left: 10%;
     right:10%;
     margin: 10px;
+    top:23%;
     padding:5px
 }
+    

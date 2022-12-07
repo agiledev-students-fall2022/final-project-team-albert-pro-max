@@ -41,9 +41,9 @@ const EditPassword = (prop) => {
     return (
         <div className="editinfo">
             <h2>Change Password</h2>
-            <label>New Password:</label><br></br>
+            <label className='editlabel'>New Password:</label><br></br>
             <input type="password" id="newPassword" name="newPassword" title="New password" /><br></br>
-            <label>Confirm Password:</label><br></br>
+            <label id='confirmLabel'>Confirm Password:</label><br></br>
             <input type="password" id="confirmPassword" name="confirmPassword" title="Confirm new password" /><br></br>
             <p className="form-actions">
                 <input className="changebtn" type="submit" value="Change Password" title="Change password" onClick={changePassword} />
