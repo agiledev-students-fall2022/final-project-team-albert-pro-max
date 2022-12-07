@@ -172,7 +172,7 @@ const CourseDetails = () => {
                 <Link to={{
                     pathname: '/coursepage',
                     search: `?id=${courseDetails.school_name + '-' + courseDetails.department_name}`
-                }}><button>Back</button></Link>
+                }}><button id='back'>Back</button></Link>
             </div>
         )
     }
