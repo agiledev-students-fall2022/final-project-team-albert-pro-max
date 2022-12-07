@@ -9,6 +9,8 @@ const CourseInCart = (props) => {
 
   function changeShow(cartItemId, cartItemTime) {
     // check conflict
+    // between lectures, between lecture and recitation,
+    // does NOT check conflict between recitations
     if (!props.show) {
       let thisTime = cartItemTime.split(" ");
       let thisB = thisTime[0].split(".");
