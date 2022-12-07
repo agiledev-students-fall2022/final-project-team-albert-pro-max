@@ -53,7 +53,7 @@ router.post('/update/password', passport.authenticate("jwt", { session: false })
         } else {
             user1.setPassword(req.body.newPassword, (err, users) => {
                 user.updateOne({_id:users._id},{hash:users.hash,salt:users.salt},(err,result)=>{
-                    console.log(users._id)
+                    //console.log(users._id)
                         if(err) {
                             res.json({success: false});
                         } else {
@@ -62,10 +62,10 @@ router.post('/update/password', passport.authenticate("jwt", { session: false })
                                 success: true, 
                                 msg: `${req.body.field} successfully updated`
                             });
-                        };
+                        }
                     })
-                    console.log("new")
-                    console.log(user)
+                    //console.log("new")
+                    //console.log(user)
                 });
             }
     });
