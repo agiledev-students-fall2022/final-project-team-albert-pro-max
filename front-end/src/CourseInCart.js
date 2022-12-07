@@ -7,21 +7,58 @@ const CourseInCart = (props) => {
 
   const jwtToken = localStorage.getItem("token");
 
-  function changeShow(cartItemId) {
-    axios.post(`${BASE_URL}/cart/show`, {
-      cartItemId: cartItemId,
-      newShow: props.show ? false : true
-    }, {
-      headers: { Authorization: `Bearer ${jwtToken}` },
-    }).then(response => {
-      console.log(response.data);
+  function changeShow(cartItemId, cartItemTime) {
+    // check conflict
+    if (!props.show) {
+      const thisTime = cartItemTime.split(" ")[0];
+      axios.get(`${BASE_URL}/schedule`, {
+        headers: { Authorization: `Bearer ${jwtToken}` },
+      })
+      .then((response) => {
+        let conflict = false;
+        for (const item of response.data) {
+          const thatTime = item.times.split(" ")[0];
+          if (thisTime === thatTime) {
+            alert("conflict! with " + item.class_number);
+            conflict = true;
+          }
+        }
+        if (!conflict) {
+          axios.post(`${BASE_URL}/cart/show`, {
+            cartItemId: cartItemId,
+            newShow: props.show ? false : true
+          }, {
+            headers: { Authorization: `Bearer ${jwtToken}` },
+          }).then(response => {
+            console.log(response.data);
+    
+            if (response.data.success) {
+              window.location.reload();
+            }
+          }).catch(err => {
+            console.log(err)
+          });
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      });
+    } else {
+      axios.post(`${BASE_URL}/cart/show`, {
+        cartItemId: cartItemId,
+        newShow: props.show ? false : true
+      }, {
+        headers: { Authorization: `Bearer ${jwtToken}` },
+      }).then(response => {
+        console.log(response.data);
 
-      if (response.data.success) {
-        window.location.reload();
-      }
-    }).catch(err => {
-      console.log(err)
-    });
+        if (response.data.success) {
+          window.location.reload();
+        }
+      }).catch(err => {
+        console.log(err)
+      });
+    }
   }
 
   function changeWatch(cartItemId) {
@@ -65,7 +102,7 @@ const CourseInCart = (props) => {
         {props.watch ? "Unwatch" : "Watch"}
       </button>
 
-      <button id="show" onClick={() => changeShow(props.id)}>
+      <button id="show" onClick={() => changeShow(props.id, props.times)}>
         {props.show ? "Unshow" : "Show"}
       </button>
 
