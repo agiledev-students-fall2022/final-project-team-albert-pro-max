@@ -102,6 +102,11 @@ const Block = ({ id, days, times, duration, course_number, course_name }) => {
 };
 
 const Schedule = () => {
+
+  useEffect(() => {
+    document.title = "Schedule - AlbertProMax";
+  }, []);
+
   const BASE_URL = process.env.REACT_APP_BASE_URL;
 
   const jwtToken = localStorage.getItem("token"); // the JWT token, if we have already received one and stored it in localStorage

@@ -6,6 +6,11 @@ import { Link } from 'react-router-dom'
 import './CourseDetails.css';
 
 const CourseDetails = () => {
+
+    useEffect(() => {
+        document.title = "Course Details - AlbertProMax";
+    }, []);
+
     const BASE_URL = process.env.REACT_APP_BASE_URL;
 
     const jwtToken = localStorage.getItem("token"); // the JWT token, if we have already received one and stored it in localStorage

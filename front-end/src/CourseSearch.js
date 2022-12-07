@@ -10,6 +10,10 @@ import { useEffect, useState } from 'react'
  */
 const CourseSearch = props => {
 
+  useEffect(() => {
+    document.title = "Course Search - AlbertProMax";
+  }, []);
+
   const BASE_URL = process.env.REACT_APP_BASE_URL;
 
   const [school, setSchool] = useState([])
