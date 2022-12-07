@@ -10,16 +10,44 @@ const CourseInCart = (props) => {
   function changeShow(cartItemId, cartItemTime) {
     // check conflict
     if (!props.show) {
-      const thisTime = cartItemTime.split(" ")[0];
+      let thisTime = cartItemTime.split(" ");
+      let thisB = thisTime[0].split(".");
+      let thisBegin = parseInt(thisB[0]);
+      if (thisTime[1] === "PM" && thisB[0] !== "12") thisBegin += 12;
+      thisBegin = thisBegin * 100 + parseInt(thisB[1]);
+      let thisE = thisTime[3].split(".");
+      let thisEnd = parseInt(thisE[0]);
+      if (thisTime[1] === "PM" && thisE[0] !== "12") thisEnd += 12;
+      thisEnd = thisEnd * 100 + parseInt(thisE[1]);
       axios.get(`${BASE_URL}/schedule`, {
         headers: { Authorization: `Bearer ${jwtToken}` },
       })
       .then((response) => {
         let conflict = false;
         for (const item of response.data) {
-          const thatTime = item.times.split(" ")[0];
-          if (thisTime === thatTime) {
-            alert("conflict! with " + item.class_number);
+          let thatTime = item.times.split(" ");
+          let thatB = thatTime[0].split(".");
+          let thatBegin = parseInt(thatB[0]);
+          if (thatTime[1] === "PM" && thatB[0] !== "12") thatBegin += 12;
+          thatBegin = thatBegin * 100 + parseInt(thatB[1]);
+          let thatE = thatTime[3].split(".");
+          let thatEnd = parseInt(thatE[0]);
+          if (thatTime[1] === "PM" && thatE[0] !== "12") thatEnd += 12;
+          thatEnd = thatEnd * 100 + parseInt(thatE[1]);
+          if ((thisBegin < thatEnd && thisEnd > thatBegin) || (thatBegin < thisEnd && thatEnd > thisBegin)) {
+            if (!item.lecture_id) {
+              alert("conflict! with #" + item.class_number);
+            } else {
+              axios.get(`${BASE_URL}/schedule`, {
+                headers: { Authorization: `Bearer ${jwtToken}` },
+              })
+              .then(response => {
+                alert("conflict! with recitation of #" + response.data[0].class_number);
+              })
+              .catch(err => {
+                console.log(err)
+              });
+            }
             conflict = true;
           }
         }
@@ -111,7 +139,7 @@ const CourseInCart = (props) => {
       </button>
 
       </h4>
-      {props.courseName}
+      {props.courseName + " #" + props.classNumber}
       <br/>
       {props.days+" "+props.times}
 
