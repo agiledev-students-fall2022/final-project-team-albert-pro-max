@@ -29,6 +29,7 @@ function App() {
             <Route path="/coursedetails" element={<CourseDetails />} />
             <Route path="/edituser" element={<EditUser />} />
             <Route path="/editemail" element={<EditEmail />} />
+            <Route path="/editpassword" element={<EditPassword />} />
             <Route path="/schedule" element={<Schedule />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
