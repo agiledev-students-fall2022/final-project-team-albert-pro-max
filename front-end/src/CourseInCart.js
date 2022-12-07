@@ -79,7 +79,7 @@ const CourseInCart = (props) => {
   }
 
   function handleDelete(cartItemId){
-    axios.post("http://localhost:3001/cart",{
+    axios.post(`${BASE_URL}/cart`,{
       cartItemId:cartItemId,
     },{
       headers:{ Authorization: `Bearer ${jwtToken}` },
