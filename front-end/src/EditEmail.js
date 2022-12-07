@@ -30,10 +30,10 @@ const EditEmail = (prop) => {
     return (
         <div className="editinfo">
             <h2>Change email</h2>
-            <label>New Email Address:</label><br></br>
+            <label className='editlabel'>New Email Address:</label><br></br>
             <input id="newEmail" name="newEmail" title="New Email" /><br></br>
             <p className="form-actions">
-                <input type="submit" value="Change Email" title="Change Email" onClick={changeEmail} />
+                <input className="changebtn" type="submit" value="Change Email" title="Change Email" onClick={changeEmail} />
             </p>
         </div>
 
