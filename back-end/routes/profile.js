@@ -47,25 +47,30 @@ router.post('/update/password', passport.authenticate("jwt", { session: false })
     // THIS IS /profile/update ROUTE
     // DO YOUR MAGIC
 
-    user.findOne({_id: req.user.id}, (err, user) => {
+    user.findOne({_id: req.user.id}, (err, user1) => {
         if(err) {
             res.json({success: false});
         } else {
-            user.setPassword(req.body.newPassword, function(err, user) {
-                console.log('newPassword: ', req.body.newPassword);
-                if(err) {
-                    res.json({success: false});
-                } else {
-                    console.log("enter here: succeeded in updating password??");
-                    res.json({
-                        success: true, 
-                        msg: `${req.body.field} successfully updated`
-                    });
-                }
-            });
-        }
+            user1.setPassword(req.body.newPassword, (err, users) => {
+                user.updateOne({_id:users._id},{hash:users.hash,salt:users.salt},(err,result)=>{
+                    console.log(users._id)
+                        if(err) {
+                            res.json({success: false});
+                        } else {
+                            //console.log("enter here: succeeded in updating password??");
+                            res.json({
+                                success: true, 
+                                msg: `${req.body.field} successfully updated`
+                            });
+                        };
+                    })
+                    console.log("new")
+                    console.log(user)
+                });
+            }
     });
 });
+
 
 router.post('/update/email', passport.authenticate("jwt", { session: false }), (req, res) => {
     // THIS IS /profile/update ROUTE
