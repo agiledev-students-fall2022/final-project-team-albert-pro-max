@@ -124,11 +124,11 @@ const Schedule = () => {
             let time = item.times.split(" ");
             let start = time[0].split(".");
             let startH = parseInt(start[0]);
-            if (time[1] === "PM" && time[0].indexOf("12") !== 0) startH += 12;
+            if (time[1] === "PM" && start[0] !== "12") startH += 12;
             let startM = parseInt(start[1]);
             let end = time[3].split(".");
             let endH = parseInt(end[0]);
-            if (time[4] === "PM" && time[3].indexOf("12") !== 0) endH += 12;
+            if (time[4] === "PM" && end[0] !== "12") endH += 12;
             let endM = parseInt(end[1]);
             duration += (endH - startH) * 12;
             duration += (endM - startM) / 5;

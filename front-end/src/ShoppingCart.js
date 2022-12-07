@@ -36,6 +36,7 @@ const ShoppingCart = () => {
                                 departmentCode={cartItem.course.department_code}
                                 courseNumber={cartItem.course.course_number}
                                 courseName={cartItem.course.course_name}
+                                classNumber={cartItem.course.class_number}
                                 watch={cartItem.watch}
                                 show={cartItem.show}
                                 days = {cartItem.course.days}
