@@ -48,6 +48,11 @@ const Signup = props => {
                 })
                 .catch(function (error) {
                     console.log(error);
+                    
+                    Toast.show({
+                        icon: 'fail',
+                        content: 'Registration Failed!',
+                    });
                 });
         }
 
