@@ -2,7 +2,7 @@ import { useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-import { Button, Modal, Space, Toast, Divider } from 'antd-mobile'
+import { Button, Toast } from 'antd-mobile'
 import './CourseDetails.css';
 
 const CourseDetails = () => {
@@ -97,14 +97,13 @@ const CourseDetails = () => {
             .then(function (response) {
                 // console.log(response.data);
                 console.log("responsehere",response.data.message);
-                return ( Modal.alert(
-                    {
-                    content:  response.data.message,
-                    confirmText: 'OK!',
-                    onConfirm: () => {
-                    console.log('Confirmed')
-                    },
-                }))
+                const icon_mes = response.data.message == "Course already in cart!" ? 'fail':'success'
+                return ( 
+                    Toast.show({
+                        icon: icon_mes,
+                        content: response.data.message,
+                    })
+                )
             })
             .catch(function (error) {
                 console.log(error);
