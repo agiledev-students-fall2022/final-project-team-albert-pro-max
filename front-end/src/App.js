@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { useEffect, useState } from 'react'
 import './App.css';
 import CoursePage from './CoursePage';
 import ShoppingCart from './ShoppingCart';
@@ -11,6 +10,7 @@ import EditPassword from './EditPassword';
 import EditUser from './EditUser';
 import EditEmail from './EditEmail';
 import Schedule from "./Schedule";
+import Calendar from "./Calendar";
 import Signup from "./Signup";
 import Login from './Login';
 import { SafeArea } from 'antd-mobile'
@@ -33,7 +33,7 @@ function App() {
             <Route path="/edituser" element={<EditUser />} />
             <Route path="/editemail" element={<EditEmail />} />
             <Route path="/editpassword" element={<EditPassword />} />
-            <Route path="/schedule" element={<Schedule />} />
+            <Route path="/schedule" element={<Calendar />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
           </Routes>
