@@ -1,6 +1,7 @@
 import './Signup.css'
 import axios from "axios"
 import { useEffect } from 'react'
+import { Form, Input, Button} from 'antd-mobile'
 
 const Signup = props => {
 
@@ -47,8 +48,8 @@ const Signup = props => {
     return (
         <div className='Signup'>
             <h2>Signup</h2>
-
-            <table>
+            
+            {/* <table>
                 <tbody>
                     <tr>
                         <th>Username: </th>
@@ -74,9 +75,26 @@ const Signup = props => {
                         </td>
                     </tr>
                 </tbody>
-            </table>
+            </table> */}
 
-            <button onClick={handleClickSignup}>Signup</button>
+            <Form layout='vertical'>
+                <Form.Item label='Username' name='username'>
+                    <Input id="username" type={"text"} placeholder='please enter username' clearable />
+                </Form.Item>
+                <Form.Item label='Email' name='email'>
+                    <Input id="email_signup" type={"text"} placeholder='please enter email' clearable />
+                </Form.Item>
+                <Form.Item label='Password' name='password'>
+                    <Input id="password" type={"password"} placeholder='please enter password' clearable />
+                </Form.Item>
+                <Form.Item label='Confirm Password' name='repassword'>
+                    <Input id="repassword" type={"password"} placeholder='please re-enter password' clearable />
+                </Form.Item>
+            </Form>     
+            <br/>
+            <br/>
+
+            <Button onClick={handleClickSignup}>Signup</Button>
         </div>
     )
 }

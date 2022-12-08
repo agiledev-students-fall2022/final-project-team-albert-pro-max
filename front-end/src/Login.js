@@ -1,6 +1,7 @@
 import './Login.css'
 import axios from "axios"
 import { useEffect } from 'react'
+import { Form, Input, Button} from 'antd-mobile'
 
 const Login = props => {
 
@@ -36,7 +37,7 @@ const Login = props => {
         <div className='Login'>
             <h2>Login</h2>
 
-            <table>
+            {/* <table>
                 <tbody>
                     <tr>
                         <th>Username: </th>
@@ -48,9 +49,19 @@ const Login = props => {
                         <td><input id="password" type={"password"} placeholder='Type your password here...'></input></td>
                     </tr>
                 </tbody>
-            </table>
+            </table> */}
 
-            <button onClick={handleClickLogin}>Login</button>
+        <Form layout='vertical'>
+          <Form.Item label='Username' name='username'>
+            <Input id="username" type={"text"} placeholder='please enter username' clearable />
+          </Form.Item>
+          <Form.Item label='Password' name='password'>
+            <Input id="password" type={"password"} placeholder='please enter password' clearable />
+          </Form.Item>
+        </Form> 
+        <br/>
+        <br/>
+            <Button onClick={handleClickLogin}>Login</Button>
             <p>Not registered yet? <a href='/signup'>Create an account</a></p>
         </div>
     )
