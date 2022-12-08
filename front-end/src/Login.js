@@ -1,6 +1,7 @@
 import './Login.css'
 import axios from "axios"
 import { useEffect } from 'react'
+import { Form, Input, Button, Toast} from 'antd-mobile'
 
 const Login = props => {
 
@@ -17,26 +18,33 @@ const Login = props => {
             username: username,
             password: password
         })
-            .then(function (response) {
-                console.log(response);
-                const res = response.data;
-                if (res.success && res.token) {
-                    localStorage.setItem("token", res.token);
-                    window.location.href = "/profile";
-                } else {
-                    window.location.href = "/login";
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
+        .then(function (response) {
+            console.log(response);
+            const res = response.data;
+            if (res.success && res.token) {
+                localStorage.setItem("token", res.token);
+                window.location.href = "/profile";
+            } else {
+                Toast.show({
+                    icon: 'fail',
+                    content: 'Login failed!',
+                });
+            }
+        })
+        .catch(function (error) {
+            console.log(error);
+            Toast.show({
+                icon: 'fail',
+                content: 'Login failed!',
             });
+        });
     }
 
     return (
         <div className='Login'>
             <h2>Login</h2>
 
-            <table>
+            {/* <table>
                 <tbody>
                     <tr>
                         <th>Username: </th>
@@ -48,9 +56,19 @@ const Login = props => {
                         <td><input id="password" type={"password"} placeholder='Type your password here...'></input></td>
                     </tr>
                 </tbody>
-            </table>
+            </table> */}
 
-            <button onClick={handleClickLogin}>Login</button>
+        <Form layout='vertical'>
+          <Form.Item label='Username' name='username'>
+            <Input id="username" type={"text"} placeholder='please enter username' clearable />
+          </Form.Item>
+          <Form.Item label='Password' name='password'>
+            <Input id="password" type={"password"} placeholder='please enter password' clearable />
+          </Form.Item>
+        </Form> 
+        <br/>
+        <br/>
+            <Button onClick={handleClickLogin}>Login</Button>
             <p>Not registered yet? <a href='/signup'>Create an account</a></p>
         </div>
     )

@@ -26,6 +26,14 @@ jobs:
         port: ${{ secrets.DEPLOY_PORT }}
         script: |
           cd final-project-team-albert-pro-max
+          
+          git reset --hard origin/master
           git pull
+          
+          docker container stop frontend
+          docker container rm frontend
+          
+          docker container stop backend
+          docker container rm backend
           
           docker compose up --build --detach

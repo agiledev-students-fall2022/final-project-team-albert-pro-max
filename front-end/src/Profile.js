@@ -1,5 +1,6 @@
 import './Profile.css'
 import ProfileLogo from './ProfileLogo.jpeg'
+import NYU from './NYU-Symbol.png'
 import { Link, Navigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
@@ -46,7 +47,7 @@ const Profile = props => {
       {isLoggedIn ? (
         <>
           <div className="image-txt-container">
-            <img src={ProfileLogo} alt="profile logo" width="120" height="120" />
+            <img src={NYU} alt="profile logo" width="120" height="120" />
             <h2>
               {user.username}
             </h2>
@@ -56,16 +57,18 @@ const Profile = props => {
 
           <div className='options'>
             <Link to='/edituser'>
-              <button className="button" >reset username<br></br></button>
+              <button className="button" >Reset Username<br></br></button>
+
             </Link>
             <Link to='/editpassword'>
-              <button className="button" >reset password<br></br></button>
+              <button className="button" >Reset Password<br></br></button>
+
             </Link>
             <Link to='/editemail'>
-              <button className="button" >reset email<br></br></button>
+              <button className="button" >Reset Email<br></br></button>
             </Link>
             <Link to='/login'>
-              <button className="button" onClick={clearUser}> log out <br></br></button>
+              <button className="button" onClick={clearUser}> Log Out <br></br></button>
             </Link>
           </div>
         </>

@@ -3,11 +3,14 @@ services:
     container_name: frontend
     build: ./front-end
     ports:
-      - "80:80"
+      - "443:443"
     depends_on:
       - backend
     environment:
-      - PORT=80
+      - PORT=443
+      - HTTPS=true 
+      - SSL_CRT_FILE=ca/cert.crt 
+      - SSL_KEY_FILE=ca/cert.key
 
   backend:
     container_name: backend

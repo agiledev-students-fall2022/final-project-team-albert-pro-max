@@ -1,6 +1,7 @@
 import './Signup.css'
 import axios from "axios"
 import { useEffect } from 'react'
+import { Form, Input, Button, Toast} from 'antd-mobile'
 
 const Signup = props => {
 
@@ -14,11 +15,15 @@ const Signup = props => {
         const username = document.getElementById("username").value;
         const password = document.getElementById("password").value;
         const repassword = document.getElementById("repassword").value;
-        const email = document.getElementById("email").value;
+        const email = document.getElementById("email_signup").value;
 
         if (password !== repassword) {
-            const popup = document.getElementById("myPopup");
-            popup.classList.toggle("show");
+            // const popup = document.getElementById("myPopup");
+            // popup.classList.toggle("show");
+            Toast.show({
+                icon: 'fail',
+                content: 'Confirm Password Failed!',
+            });
         }
         else {
             axios.post(`${BASE_URL}/register`, {
@@ -32,13 +37,22 @@ const Signup = props => {
                     if (res.success) {
                         window.location.href = "/login";
                     } else {
-                        const popup = document.getElementById("myPopup");
-                        popup.textContent = "Registered Failed!";
-                        popup.classList.toggle("show");
+                        // const popup = document.getElementById("myPopup");
+                        // popup.textContent = "Registered Failed!";
+                        // popup.classList.toggle("show");
+                        Toast.show({
+                            icon: 'fail',
+                            content: 'Registration Failed!',
+                        });
                     }
                 })
                 .catch(function (error) {
                     console.log(error);
+                    
+                    Toast.show({
+                        icon: 'fail',
+                        content: 'Registration Failed!',
+                    });
                 });
         }
 
@@ -47,8 +61,8 @@ const Signup = props => {
     return (
         <div className='Signup'>
             <h2>Signup</h2>
-
-            <table>
+            
+            {/* <table>
                 <tbody>
                     <tr>
                         <th>Username: </th>
@@ -57,7 +71,7 @@ const Signup = props => {
 
                     <tr>
                         <th>Email: </th>
-                        <td><input id="email" type={"text"} placeholder='Type your email here...'></input></td>
+                        <td><input id="email_signup" type={"text"} placeholder='Type your email here...'></input></td>
                     </tr>
 
                     <tr>
@@ -74,9 +88,26 @@ const Signup = props => {
                         </td>
                     </tr>
                 </tbody>
-            </table>
+            </table> */}
 
-            <button onClick={handleClickSignup}>Signup</button>
+            <Form layout='vertical'>
+                <Form.Item label='Username' name='username'>
+                    <Input id="username" type={"text"} placeholder='please enter username' clearable />
+                </Form.Item>
+                <Form.Item label='Email' name='email'>
+                    <Input id="email_signup" type={"text"} placeholder='please enter email' clearable />
+                </Form.Item>
+                <Form.Item label='Password' name='password'>
+                    <Input id="password" type={"password"} placeholder='please enter password' clearable />
+                </Form.Item>
+                <Form.Item label='Confirm Password' name='repassword'>
+                    <Input id="repassword" type={"password"} placeholder='please re-enter password' clearable />
+                </Form.Item>
+            </Form>     
+            <br/>
+            <br/>
+
+            <Button onClick={handleClickSignup}>Signup</Button>
         </div>
     )
 }

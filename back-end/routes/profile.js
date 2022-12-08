@@ -34,10 +34,10 @@ router.post('/update/username', passport.authenticate("jwt", { session: false })
         if(err) {
             res.json({success: false});
         } else {
-            console.log("Updated Docs : ", docs);
+            // console.log("Updated Docs : ", docs);
             res.json({
                 success: true, 
-                msg: `${req.body.field} successfully updated`
+                msg: "username is successfully updated"
             });
         }
     });
@@ -51,23 +51,28 @@ router.post('/update/password', passport.authenticate("jwt", { session: false })
         if(err) {
             res.json({success: false});
         } else {
-            user1.setPassword(req.body.newPassword, (err, users) => {
-                user.updateOne({_id:users._id},{hash:users.hash,salt:users.salt},(err,result)=>{
-                    //console.log(users._id)
+            user1.setPassword(req.body.newPassword, (err, user) => {
+                if(err) {
+                    res.json({
+                        success: false, 
+                        msg: "invalid password!"
+                    });
+                } else {
+                    user.updateOne({_id:user._id},{hash:user.hash,salt:user.salt},(err,result)=>{
+                        //console.log(users._id)
                         if(err) {
                             res.json({success: false});
                         } else {
                             //console.log("enter here: succeeded in updating password??");
                             res.json({
                                 success: true, 
-                                msg: `${req.body.field} successfully updated`
+                                msg: "password is successfully updated"
                             });
                         }
                     });
-                    //console.log("new")
-                    //console.log(user)
-                });
-            }
+                }
+            });
+        }
     });
 });
 
@@ -80,10 +85,10 @@ router.post('/update/email', passport.authenticate("jwt", { session: false }), (
         if(err) {
             res.json({success: false});
         } else {
-            console.log("Updated Docs : ", docs);
+            // console.log("Updated Docs : ", docs);
             res.json({
                 success: true, 
-                msg: `${req.body.field} successfully updated`
+                msg: "email is successfully updated"
             });
         }
     });
