@@ -56,7 +56,7 @@ const CourseDetails = () => {
                                 <td>{recitation.times}</td>
                                 <td>{recitation.instruction_mode}</td>
                                 <td>{recitation.building_room}</td>
-                                <td>{recitation.instructor}</td>
+                                <td>{recitation.class_status}</td>
                                 <td>
                                     <Button
                                             block
@@ -140,6 +140,10 @@ const CourseDetails = () => {
                                 <td>{courseDetails.instruction_mode}</td>
                             </tr>
                             <tr>
+                                <td>Class Status</td>
+                                <td>{courseDetails.class_status}</td>
+                            </tr>
+                            <tr>
                                 <td>Location</td>
                                 <td>{courseDetails.location}</td>
                             </tr>
@@ -176,7 +180,7 @@ const CourseDetails = () => {
                                         <th>Times</th>
                                         <th>Instruction Mode</th>
                                         <th>Building Room</th>
-                                        <th>Instructor</th>
+                                        <th>Status</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
