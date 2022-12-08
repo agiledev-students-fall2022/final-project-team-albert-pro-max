@@ -37,7 +37,7 @@ router.post('/update/username', passport.authenticate("jwt", { session: false })
             console.log("Updated Docs : ", docs);
             res.json({
                 success: true, 
-                msg: `${req.body.field} successfully updated`
+                msg: `${req.body.newUsername} successfully updated`
             });
         }
     });
