@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import axios from "axios";
-import { Link, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import {DayPilot, DayPilotCalendar} from "daypilot-pro-react";
+import "./Calendar.css"
 class Calendar extends Component {
 
   constructor(props) {
@@ -23,8 +24,7 @@ class Calendar extends Component {
       eventClickHandling: "Enabled",
       durationBarVisible: false,
       onEventClicked: (args) => {
-        //args.control.message("Event clicked: " + args.e.text());
-        console.log(args.e);
+        window.location.href = "/coursedetails?id=" + args.e.id();
       },
       eventHoverHandling: "Disabled",
     };
@@ -36,6 +36,15 @@ class Calendar extends Component {
     document.title = "Schedule - AlbertProMax";
   }
 
+  getRandomColor(seed) {
+    var letters = 'BCDEF'.split('');
+    var color = '#';
+    for (var i = 0; i < 6; i++ ) {
+        color += letters[Math.floor(Math.random() * letters.length)];
+    }
+    return color;
+  }
+
   componentDidMount() {
 
     axios.get(`${this.BASE_URL}/schedule`, {
@@ -44,7 +53,9 @@ class Calendar extends Component {
     .then(response => {
       // load resource and event data
       let list = [];
-      response.data.map((item, index) => {
+      response.data.map((e, index) => {
+        console.log(e);
+        let item = e.lec;
         let time = item.times.split(" ");
         let start = time[0].split(".");
         let startH = parseInt(start[0]);
@@ -57,6 +68,8 @@ class Calendar extends Component {
         let sTime = new DayPilot.Date("2022-12-05T00:00:00").addHours(startH).addMinutes(startM);
         let eTime = new DayPilot.Date("2022-12-05T00:00:00").addHours(endH).addMinutes(endM);
         let day = item.days.split(',');
+        let color = this.getRandomColor(parseInt(item.class_number));
+        console.log(color);
         for (const d of day) {
           let startTime = sTime;
           let endTime = eTime;
@@ -76,21 +89,53 @@ class Calendar extends Component {
             startTime = startTime.addDays(4);
             endTime = endTime.addDays(4);
           }
-          if (!item.lecture_id) {
-            list.push({
-              id: index,
-              text: item.department_code + ' ' + item.course_number,
-              start: startTime,
-              end: endTime
-            })
-          } else {
-            list.push({
-              id: index,
-              text: 'Recitation',
-              start: startTime,
-              end: endTime
-            })
+          list.push({
+            id: item._id,
+            text: 'Lecture:\n' + item.department_code + '\n' + item.course_number + '\n' + item.building_room,
+            start: startTime,
+            end: endTime,
+            backColor: color
+          })
+        }
+        if (e.rec) {
+          item = e.rec;
+          time = item.times.split(" ");
+          start = time[0].split(".");
+          startH = parseInt(start[0]);
+          if (time[1] === "PM" && start[0] !== "12") startH += 12;
+          startM = parseInt(start[1]);
+          end = time[3].split(".");
+          endH = parseInt(end[0]);
+          if (time[4] === "PM" && end[0] !== "12") endH += 12;
+          endM = parseInt(end[1]);
+          sTime = new DayPilot.Date("2022-12-05T00:00:00").addHours(startH).addMinutes(startM);
+          eTime = new DayPilot.Date("2022-12-05T00:00:00").addHours(endH).addMinutes(endM);
+          let startTime = sTime;
+          let endTime = eTime;
+          let d = item.days;
+          if (d === "Mon") {
+            startTime = startTime.addDays(0);
+            endTime = endTime.addDays(0);
+          } else if (d === "Tue") {
+            startTime = startTime.addDays(1);
+            endTime = endTime.addDays(1);
+          } else if (d === "Wed") {
+            startTime = startTime.addDays(2);
+            endTime = endTime.addDays(2);
+          } else if (d === "Thu") {
+            startTime = startTime.addDays(3);
+            endTime = endTime.addDays(3);
+          } else if (d === "Fri") {
+            startTime = startTime.addDays(4);
+            endTime = endTime.addDays(4);
           }
+          list.push({
+            id: item.lecture_id,
+            text: 'Recitation:\n' + e.lec.department_code + '\n' + e.lec.course_number + '\n' + item.building_room,
+            start: startTime,
+            end: endTime,
+            backColor: color
+          })
         }
       })
       this.setState({
