@@ -1,7 +1,7 @@
 [![Node.js CI](https://github.com/agiledev-students-fall2022/final-project-team-albert-pro-max/actions/workflows/node.js.yml/badge.svg)](https://github.com/agiledev-students-fall2022/final-project-team-albert-pro-max/actions/workflows/node.js.yml)
 [![Continuous Deployment](https://github.com/agiledev-students-fall2022/final-project-team-albert-pro-max/actions/workflows/deploy.yml/badge.svg)](https://github.com/agiledev-students-fall2022/final-project-team-albert-pro-max/actions/workflows/deploy.yml)
 
-# Albert Pro Max
+# [Albert Pro Max](https://albertpromax.com/)
 
 ## Product Vision Statement
 Albert Pro Max product is a upgraded version of our NYU Albert system. 
@@ -15,9 +15,6 @@ Specifically, our product will allow the following functions:
 - A search interface that allows students to filter their courses according to major / term / school
 - A shopping cart watchlist that tracks the course status
 - A well-designed and costumizable course schedule page that allow students to display various course combinations
-- A deployed URL
-
-
 
 ## Members
 - [Bernice Wu](https://github.com/Bernice55231)
