@@ -5,6 +5,7 @@ import random
 import time
 import pymongo
 import requests
+from bson.objectid import ObjectId
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -14,8 +15,10 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import NoSuchElementException
 
 from dotenv import dotenv_values
-
 config = dotenv_values()
+
+from sender import send_email
+
 
 cxn = pymongo.MongoClient(config['MONGO_URI'], serverSelectionTimeoutMS=5000)
 try:
@@ -83,6 +86,8 @@ class Scrapper:
         )
         term.click()
 
+        time.sleep(5)
+
         # Select Term Yes
         spring_2023 = WebDriverWait(driver, 5, 0.5).until(
             EC.element_to_be_clickable(
@@ -98,6 +103,8 @@ class Scrapper:
                 (By.XPATH, '//*[@id="NYU_CLS_WRK2_DESCR254$33$"]'))
         )
         school.click()
+
+        time.sleep(5)
 
         # Select CAS
         school = WebDriverWait(driver, 5, 0.5).until(
@@ -215,7 +222,7 @@ class Scrapper:
                 print("Times:", times)
 
                 if course_fields["Component"].strip() == RECITATION_NAME_MAP[department_code.strip()]:
-                    recitation_dict = {
+                    recitation_cur = {
                         "lecture_id": course_id_list[-1],
                         "class_number": course_fields["Class#"].strip(),
                         "session": course_fields["Session"].strip(),
@@ -230,10 +237,46 @@ class Scrapper:
                         "instructor": instructor,
                     }
 
-                    inserted_id = db.recitations.insert_one(recitation_dict).inserted_id
-                    print(f"\n[RECITATION] Inserted {course_fields['Component'].strip()} ID:", inserted_id)
+                    recitation_prev = db.recitations.find_one({"class_number": recitation_cur["class_number"]})
+
+                    if recitation_prev:
+                        old_status = recitation_prev["class_status"].split("(")[0].strip()
+                        new_status = recitation_cur["class_status"].split("(")[0].strip()
+
+                        if old_status != new_status:
+                            print(f'[RECITATION] Class#{recitation_cur["class_number"]} Status Changed from {old_status} to {recitation_cur["class_status"]}')
+
+                            course = db.courses.find_one({ "_id": ObjectId(recitation_cur["lecture_id"]) })
+
+                            users = db.users.find({ "cart": { "$elemMatch": { "recitation": ObjectId(recitation_prev["_id"]), "watch": True } } })
+                            users = list(users)
+                            
+                            for user in users:
+                                print(f'\tSending email to {user["email"]}...')
+                                send_email(
+                                    username=user["username"],
+                                    useremail=user["email"],
+                                    department_code=course["department_code"],
+                                    course_number=course["course_number"],
+                                    section_number=recitation_cur["section_number"],
+                                    course_name=course["course_name"],
+                                    old_status=old_status,
+                                    new_status=recitation_cur["class_status"]
+                                )
+
+
+                        return_id = db.recitations.find_one_and_update(
+                            {"class_number": recitation_cur["class_number"]},
+                            { '$set': recitation_cur },
+                            return_document = pymongo.ReturnDocument.AFTER
+                        )["_id"]
+
+                        print(f"[RECITATION] Updated {course_fields['Component'].strip()} ID:", return_id, "\n")
+                    else:
+                        return_id = db.recitations.insert_one(recitation_cur).inserted_id
+                        print(f"[RECITATION] Inserted {course_fields['Component'].strip()} ID:", return_id, "\n")
                 else:
-                    course_dict = {
+                    course_cur = {
                         "school_name": school_name,
                         "department_name": department_name,
                         "department_code": department_code.strip(),
@@ -256,10 +299,43 @@ class Scrapper:
                         "topic": topic.strip()
                     }
 
-                    inserted_id = db.courses.insert_one(course_dict).inserted_id
-                    print(f"\n[COURSES] Inserted {course_fields['Component'].strip()} ID:", inserted_id)
+                    course_prev = db.courses.find_one({"class_number": course_cur["class_number"]})
 
-                    course_id_list.append(inserted_id)
+                    if course_prev:
+                        old_status = course_prev["class_status"].split("(")[0].strip()
+                        new_status = course_cur["class_status"].split("(")[0].strip()
+
+                        if old_status != new_status:
+                            print(f'[COURSES] Class#{course_cur["class_number"]} Status Changed from {course_cur} to {course_cur["class_status"]}')
+
+                            users = db.users.find({ "cart": { "$elemMatch": { "course": ObjectId(course_prev["_id"]), "watch": True } } })
+                            users = list(users)
+                            
+                            for user in users:
+                                print(f'\tSending email to {user["email"]}...')
+                                send_email(
+                                    username=user["username"],
+                                    useremail=user["email"],
+                                    department_code=course_cur["department_code"],
+                                    course_number=course_cur["course_number"],
+                                    section_number=course_cur["section_number"],
+                                    course_name=course_cur["course_name"],
+                                    old_status=old_status,
+                                    new_status=course_cur["class_status"]
+                                )
+                        
+                        return_id = db.courses.find_one_and_update(
+                            {"class_number": course_cur["class_number"]},
+                            { '$set': course_cur },
+                            return_document = pymongo.ReturnDocument.AFTER
+                        )["_id"]
+                        
+                        print(f"[COURSES] Updated {course_fields['Component'].strip()} ID:", return_id, "\n")
+                    else:
+                        return_id = db.courses.insert_one(course_cur).inserted_id
+                        print(f"[COURSES] Inserted {course_fields['Component'].strip()} ID:", return_id, "\n")
+
+                    course_id_list.append(return_id)
 
                 print("------------------------------")
 
@@ -268,10 +344,10 @@ if __name__ == '__main__':
     scrapper = Scrapper()
 
     DEPARTMENT_NAME_A_ID_MAP = {
-        "College Core Curriculum": "LINK1$12",
-        "Computer Science": "LINK1$15",
+        # "College Core Curriculum": "LINK1$12",
+        # "Computer Science": "LINK1$15",
         "Data Science": "LINK1$17",
-        "Math": "LINK1$40"
+        # "Math": "LINK1$40"
     }
 
     SCHOOL_NAME = "College of Arts and Science"
