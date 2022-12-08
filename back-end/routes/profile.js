@@ -58,7 +58,7 @@ router.post('/update/password', passport.authenticate("jwt", { session: false })
                         msg: "invalid password!"
                     });
                 } else {
-                    user.updateOne({_id:users._id},{hash:users.hash,salt:users.salt},(err,result)=>{
+                    user.updateOne({_id:user._id},{hash:user.hash,salt:user.salt},(err,result)=>{
                         //console.log(users._id)
                         if(err) {
                             res.json({success: false});
