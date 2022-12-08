@@ -57,7 +57,7 @@ const Signup = props => {
 
                     <tr>
                         <th>Email: </th>
-                        <td><input id="email" type={"text"} placeholder='Type your email here...'></input></td>
+                        <td><input id="email_signup" type={"text"} placeholder='Type your email here...'></input></td>
                     </tr>
 
                     <tr>
