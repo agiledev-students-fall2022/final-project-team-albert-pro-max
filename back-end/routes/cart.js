@@ -23,7 +23,7 @@ router.post('/add', passport.authenticate("jwt", { session: false }), async (req
             course: courseId,
             recitation: recitationId,
             watch: false,
-            show: false
+            show: true
         };
 
         const updateResult = await user.updateOne({
@@ -86,8 +86,9 @@ router.post('/', passport.authenticate("jwt", { session: false }), async (req, r
     const { cartItemId } = req.body;
 
     const updateResult = await user.update(
-        {_id: req.user._id},
-        {$pull: { 'cart': { _id: cartItemId } }
+        { _id: req.user._id },
+        {
+            $pull: { 'cart': { _id: cartItemId } }
         }
     );
 
