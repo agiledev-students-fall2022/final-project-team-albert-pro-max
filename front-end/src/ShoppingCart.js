@@ -3,6 +3,7 @@ import './ShoppingCart.css'
 import { Link, Navigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { Empty } from 'antd-mobile'
 
 const ShoppingCart = () => {
 
@@ -46,6 +47,16 @@ const ShoppingCart = () => {
                                 show={cartItem.show}
                                 days={cartItem.course.days}
                                 times={cartItem.course.times}
+                            />
+                        );
+                    }
+
+                    if (cartCoursesLocal.length === 0) {
+                        cartCoursesLocal.push(
+                            <Empty
+                                style={{ padding: '64px 0' }}
+                                imageStyle={{ width: 128 }}
+                                description='Empty Cart'
                             />
                         );
                     }
