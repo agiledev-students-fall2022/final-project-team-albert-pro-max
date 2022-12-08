@@ -30,13 +30,13 @@ router.post('/update/username', passport.authenticate("jwt", { session: false })
     // THIS IS /profile/update ROUTE
     // DO YOUR MAGIC
 
-    user.updateOne({_id: req.user.id}, {username: req.body.newUsername}, (err, docs) => {
-        if(err) {
-            res.json({success: false});
+    user.updateOne({ _id: req.user.id }, { username: req.body.newUsername }, (err, docs) => {
+        if (err) {
+            res.json({ success: false });
         } else {
             // console.log("Updated Docs : ", docs);
             res.json({
-                success: true, 
+                success: true,
                 msg: "username is successfully updated"
             });
         }
@@ -47,25 +47,23 @@ router.post('/update/password', passport.authenticate("jwt", { session: false })
     // THIS IS /profile/update ROUTE
     // DO YOUR MAGIC
 
-    user.findOne({_id: req.user.id}, (err, user1) => {
-        if(err) {
-            res.json({success: false});
+    user.findOne({ _id: req.user.id }, (err, user1) => {
+        if (err) {
+            res.json({ success: false });
         } else {
-            user1.setPassword(req.body.newPassword, (err, user) => {
-                if(err) {
+            user1.setPassword(req.body.newPassword, (err, user2) => {
+                if (err) {
                     res.json({
-                        success: false, 
+                        success: false,
                         msg: "invalid password!"
                     });
                 } else {
-                    user.updateOne({_id:user._id},{hash:user.hash,salt:user.salt},(err,result)=>{
-                        //console.log(users._id)
-                        if(err) {
-                            res.json({success: false});
+                    user.updateOne({ _id: user2._id }, { hash: user2.hash, salt: user2.salt }, (err, result) => {
+                        if (err) {
+                            res.json({ success: false });
                         } else {
-                            //console.log("enter here: succeeded in updating password??");
                             res.json({
-                                success: true, 
+                                success: true,
                                 msg: "password is successfully updated"
                             });
                         }
@@ -81,13 +79,13 @@ router.post('/update/email', passport.authenticate("jwt", { session: false }), (
     // THIS IS /profile/update ROUTE
     // DO YOUR MAGIC
 
-    user.updateOne({_id: req.user.id}, {email: req.body.newEmail}, (err, docs) => {
-        if(err) {
-            res.json({success: false});
+    user.updateOne({ _id: req.user.id }, { email: req.body.newEmail }, (err, docs) => {
+        if (err) {
+            res.json({ success: false });
         } else {
             // console.log("Updated Docs : ", docs);
             res.json({
-                success: true, 
+                success: true,
                 msg: "email is successfully updated"
             });
         }
