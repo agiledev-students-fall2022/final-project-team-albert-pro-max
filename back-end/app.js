@@ -1,3 +1,5 @@
+const https = require('https');
+const fs = require('fs');
 const express = require('express');
 const passport = require('passport');
 const cors = require('cors');
@@ -39,19 +41,24 @@ mongoose.connection.on('connected', () => {
 });
 
 module.exports = (async function () {
+    const connectionUrl = "mongodb+srv://" + process.env.DB_USERNAME + ":" + process.env.DB_PASSWORD + "@" + process.env.DB_URL;
+    await mongoose.connect(connectionUrl);
+
+    let server;
+
     if (process.env.NODE_ENV === 'PRODUCTION') {
-        console.log("[INFO] Running <PRODUCTION> mode...");
+        const privateKey = fs.readFileSync('ca/cert.key', 'utf8');
+        const certificate = fs.readFileSync('ca/cert.crt', 'utf8');
+        const credentials = { key: privateKey, cert: certificate };
 
-        const connectionUrl = "mongodb+srv://" + process.env.DB_USERNAME + ":" + process.env.DB_PASSWORD + "@" + process.env.DB_URL;
-        await mongoose.connect(connectionUrl);
+        server = https.createServer(credentials, app).listen(PORT, () => {
+            console.log(`[INFO] Listening on port ${PORT}...`);
+        });
     } else {
-        console.log("[INFO] Running <DEV> mode...");
-        await mongoose.connect("mongodb://localhost/albert-pro-max-local");
+        server = app.listen(PORT, () => {
+            console.log(`[INFO] Listening on port ${PORT}...`);
+        });
     }
-
-    const server = app.listen(PORT, () => {
-        console.log(`[INFO] Listening on port ${PORT}...`);
-    });
 
     return server;
 })();
