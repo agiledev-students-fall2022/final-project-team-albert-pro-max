@@ -1,6 +1,7 @@
-import './EditInfo.css'
+// import './EditInfo.css'
 import axios from "axios"
 import { useEffect } from 'react'
+import { Form, Input, Button, Toast } from 'antd-mobile'
 
 const EditPassword = (prop) => {
 
@@ -29,11 +30,24 @@ const EditPassword = (prop) => {
                     console.log('enter here');
                     console.log(response);
                     localStorage.setItem("token", jwtToken);
-                    window.location.href = "/profile";
+
+                    if (response.data.success) {
+                        window.location.href = "/profile";
+                    } else {
+                        Toast.show({
+                            icon: 'fail',
+                            content: 'Update Failed!',
+                        });
+                    }
                 })
                 .catch(function (error) {
                     console.log('enter error');
                     console.log(error);
+
+                    Toast.show({
+                        icon: 'fail',
+                        content: 'Update Failed!',
+                    });
                 });
         }
     };
@@ -41,15 +55,24 @@ const EditPassword = (prop) => {
     return (
         <div className="editinfo">
             <h2>Change Password</h2>
-            <label className='editlabel'>New Password:</label><br></br>
-            <input type="password" id="newPassword" name="newPassword" title="New password" /><br></br>
-            <label id='confirmLabel'>Confirm Password:</label><br></br>
-            <input type="password" id="confirmPassword" name="confirmPassword" title="Confirm new password" /><br></br>
-            <p className="form-actions">
-                <input className="changebtn" type="submit" value="Change Password" title="Change password" onClick={changePassword} />
-                <br></br>
-                <span className="popuptext" id="myPopup">Confirm Password Failed</span>
-            </p>
+
+            <Form layout='vertical'>
+                <Form.Item label='New Password' name='newPassword'>
+                    <Input id="newPassword" type={"password"} placeholder='please enter new password' clearable />
+                </Form.Item>
+
+                <Form.Item label='Confirm Password' name='confirmPassword'>
+                    <Input id="confirmPassword" type={"password"} placeholder='please enter new password again' clearable />
+                </Form.Item>
+            </Form>
+
+            <br />
+            <br />
+
+            <Button block size='large' onClick={changePassword}>Change Password</Button>
+            <br />
+            <br />
+            <Button block size='large' onClick={() => { window.location.href = "/profile" }}>Back</Button>
         </div>
 
 
