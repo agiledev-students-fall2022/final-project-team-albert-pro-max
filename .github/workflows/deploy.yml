@@ -28,4 +28,10 @@ jobs:
           cd final-project-team-albert-pro-max
           git pull
           
+          docker container stop frontend
+          docker container rm frontend
+          
+          docker container stop backend
+          docker container rm backend
+          
           docker compose up --build --detach
