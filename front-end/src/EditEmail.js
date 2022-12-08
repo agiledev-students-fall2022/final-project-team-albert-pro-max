@@ -77,6 +77,7 @@ const EditEmail = (prop) => {
             <br/>
             <br/>
             <Button className="changebtn" onClick={changeEmail}>Confirm</Button>
+
             <br />
             <br />
             <Button className="changebtn" onClick={() => { window.location.href = "/profile" }}>Back</Button>

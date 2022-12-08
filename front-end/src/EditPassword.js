@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { Form, Input, Button, Toast} from 'antd-mobile'
 
 
+
 const EditPassword = (prop) => {
 
     useEffect(() => {
@@ -90,9 +91,11 @@ const EditPassword = (prop) => {
             <br/>
             <br/>
             <Button className="changebtn" onClick={changePassword}>Confirm</Button>
+
             <br />
             <br />
             <Button className="changebtn" onClick={() => { window.location.href = "/profile" }}>Back</Button>
+
                 {/* <span className="popuptext" id="myPopup">Confirm Password Failed</span> */}
 
             {/* <label className='editlabel'>New Password:</label><br></br>
@@ -104,6 +107,9 @@ const EditPassword = (prop) => {
                 <br></br>
                 <span className="popuptext" id="myPopup">Confirm Password Failed</span>
             </p> */}
+
+
+
 
         </div>
 

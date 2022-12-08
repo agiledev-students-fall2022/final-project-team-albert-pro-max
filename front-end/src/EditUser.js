@@ -3,6 +3,7 @@ import axios from "axios"
 import { useEffect } from 'react'
 import { Form, Input, Button, Toast} from 'antd-mobile'
 
+
 const EditUser = (prop) => {
 
     useEffect(() => {
@@ -61,6 +62,8 @@ const EditUser = (prop) => {
         <div className="editinfo">
             <h2>Change Username</h2>
 
+
+
             {/* <label className='editlabel'>New Username:</label><br></br>
             <input id="newUsername" name="newUsername" title="New UserName" /><br></br>
             <p className="form-actions">
@@ -77,6 +80,7 @@ const EditUser = (prop) => {
             <Button className="changebtn" onClick={changeUsername}>Confirm</Button>
             <br/><br/>
             <Button className="changebtn" onClick={() => { window.location.href = "/profile" }}>Back</Button>
+
 
         </div>
 
