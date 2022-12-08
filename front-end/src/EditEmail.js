@@ -2,7 +2,6 @@
 import axios from "axios"
 import { Form, Input, Button, Toast} from 'antd-mobile'
 import { useEffect } from 'react'
-import { Form, Input, Button, Toast } from 'antd-mobile'
 
 const EditEmail = (prop) => {
 

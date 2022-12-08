@@ -69,13 +69,13 @@
     left: 10%;
 
 }
-#newUsername ,#newPassword,#newEmail,#confirmPassword{
+/* #newUsername ,#newPassword,#newEmail,#confirmPassword{
     position: absolute;
     left: 10%;
     right:10%;
     margin: 10px;
     padding:5px
-}
+} */
 /* #confirmPassword{
     position: absolute;
     left: 10%;
