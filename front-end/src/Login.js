@@ -1,7 +1,7 @@
 import './Login.css'
 import axios from "axios"
 import { useEffect } from 'react'
-import { Form, Input, Button} from 'antd-mobile'
+import { Form, Input, Button, Toast} from 'antd-mobile'
 
 const Login = props => {
 
@@ -18,19 +18,26 @@ const Login = props => {
             username: username,
             password: password
         })
-            .then(function (response) {
-                console.log(response);
-                const res = response.data;
-                if (res.success && res.token) {
-                    localStorage.setItem("token", res.token);
-                    window.location.href = "/profile";
-                } else {
-                    window.location.href = "/login";
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
+        .then(function (response) {
+            console.log(response);
+            const res = response.data;
+            if (res.success && res.token) {
+                localStorage.setItem("token", res.token);
+                window.location.href = "/profile";
+            } else {
+                Toast.show({
+                    icon: 'fail',
+                    content: 'Login failed!',
+                });
+            }
+        })
+        .catch(function (error) {
+            console.log(error);
+            Toast.show({
+                icon: 'fail',
+                content: 'Login failed!',
             });
+        });
     }
 
     return (

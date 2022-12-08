@@ -1,7 +1,7 @@
 import './Signup.css'
 import axios from "axios"
 import { useEffect } from 'react'
-import { Form, Input, Button} from 'antd-mobile'
+import { Form, Input, Button, Toast} from 'antd-mobile'
 
 const Signup = props => {
 
@@ -15,11 +15,15 @@ const Signup = props => {
         const username = document.getElementById("username").value;
         const password = document.getElementById("password").value;
         const repassword = document.getElementById("repassword").value;
-        const email = document.getElementById("email").value;
+        const email = document.getElementById("email_signup").value;
 
         if (password !== repassword) {
-            const popup = document.getElementById("myPopup");
-            popup.classList.toggle("show");
+            // const popup = document.getElementById("myPopup");
+            // popup.classList.toggle("show");
+            Toast.show({
+                icon: 'fail',
+                content: 'Confirm Password Failed!',
+            });
         }
         else {
             axios.post(`${BASE_URL}/register`, {
@@ -33,13 +37,22 @@ const Signup = props => {
                     if (res.success) {
                         window.location.href = "/login";
                     } else {
-                        const popup = document.getElementById("myPopup");
-                        popup.textContent = "Registered Failed!";
-                        popup.classList.toggle("show");
+                        // const popup = document.getElementById("myPopup");
+                        // popup.textContent = "Registered Failed!";
+                        // popup.classList.toggle("show");
+                        Toast.show({
+                            icon: 'fail',
+                            content: 'Registration Failed!',
+                        });
                     }
                 })
                 .catch(function (error) {
                     console.log(error);
+                    
+                    Toast.show({
+                        icon: 'fail',
+                        content: 'Registration Failed!',
+                    });
                 });
         }
 
