@@ -23,7 +23,27 @@ describe("GET request to /profile route", () => {
     });
 });
 
-const jwtToken = process.env.TEST_TOKEN;
+let jwtToken;
+describe("GET request to /login", () => {
+    before(async function () {
+        server = await require("../app");
+    });
+
+    it("it should respond with an HTTP 200 status code", done => {
+        chai
+            .request(server)
+            .post(`/login`)
+            .send({ username: 'berber', password: 'hellohello'})
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.be.a("object");
+                res.body.should.have.property("success", true);
+                jwtToken = res.body.token;
+                res.body.should.have.property("token");
+                done();
+            });
+    });
+});
 describe("GET request to /profile/update/username route", () => {
     before(async function () {
         server = await require("../app");
