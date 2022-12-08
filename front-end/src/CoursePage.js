@@ -39,13 +39,7 @@ const CoursePage = props => {
   }, [])
 
   if (info[0] === "*" || info[1] === "*") {
-    return (
-      <div>
-        <h2>Invalid Search</h2>
-        <Link to="/coursesearch">
-          <button>back</button>
-        </Link></div>
-    )
+      window.location.href="/coursesearch"
   } else {
     return (
       <div className='CoursePage'>
