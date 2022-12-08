@@ -1,7 +1,7 @@
 // import './EditInfo.css'
 import axios from "axios"
 import { useEffect } from 'react'
-import { Form, Input, Button, Toast } from 'antd-mobile'
+import { Form, Input, Button, Toast} from 'antd-mobile'
 
 const EditUser = (prop) => {
 
@@ -17,6 +17,15 @@ const EditUser = (prop) => {
     const changeUsername = () => {
         const newUsername = document.getElementById("newUsername").value;
         console.log(newUsername);
+        if(newUsername===''){
+            return ( 
+                Toast.show({
+                    icon: 'fail',
+                    content: "Invalid username!",
+                })
+            )
+        }
+       else{
         axios.post(`${BASE_URL}/profile/update/username`, {
             newUsername: newUsername
         }, {
@@ -45,25 +54,30 @@ const EditUser = (prop) => {
                     content: 'Update Failed!',
                 });
             });
+       }
     };
 
     return (
         <div className="editinfo">
             <h2>Change Username</h2>
 
+            {/* <label className='editlabel'>New Username:</label><br></br>
+            <input id="newUsername" name="newUsername" title="New UserName" /><br></br>
+            <p className="form-actions">
+                <input className="changebtn" type="submit" value="Change Username" title="Change Username" onClick={changeUsername} />
+            </p> */}
             <Form layout='vertical'>
-                <Form.Item label='New Username' name='username'>
-                    <Input id="newUsername" type={"text"} placeholder='please enter new username' clearable />
-                </Form.Item>
-            </Form>
+            <Form.Item  label='New Username' className='editlabel' >
+            <br/>
+            <Input id="newUsername" name="newUsername" type={"text"} placeholder='please enter new username' clearable />
+             </Form.Item>
+            </Form> 
+            <br/>
+            <br/>
+            <Button className="changebtn" onClick={changeUsername}>Confirm</Button>
+            <br/><br/>
+            <Button className="changebtn" onClick={() => { window.location.href = "/profile" }}>Back</Button>
 
-            <br />
-            <br />
-
-            <Button block size='large' onClick={changeUsername}>Change Username</Button>
-            <br />
-            <br />
-            <Button block size='large' onClick={() => { window.location.href = "/profile" }}>Back</Button>
         </div>
 
 
