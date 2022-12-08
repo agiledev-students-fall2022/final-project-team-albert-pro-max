@@ -9,6 +9,11 @@ const schedule = require('./routes/schedule');
 const mongoose = require('mongoose');
 // const morgan = require("morgan"); // middleware for nice logging of incoming HTTP requests
 
+const https = require('https');
+const privateKey = fs.readFileSync('ca/cert.key', 'utf8');
+const certificate = fs.readFileSync('ca/cert.crt', 'utf8');
+const credentials = { key: privateKey, cert: certificate };
+
 require("dotenv").config({ silent: true }); // load environmental variables from a hidden file named .env
 
 require('./utils/db');
@@ -49,9 +54,17 @@ module.exports = (async function () {
         await mongoose.connect("mongodb://localhost/albert-pro-max-local");
     }
 
-    const server = app.listen(PORT, () => {
-        console.log(`[INFO] Listening on port ${PORT}...`);
-    });
+    let server;
+
+    if (process.env.NODE_ENV === 'PRODUCTION') {
+        server = https.createServer(credentials, app).listen(PORT, () => {
+            console.log(`[INFO] Listening on port ${PORT}...`);
+        });
+    } else {
+        server = app.listen(PORT, () => {
+            console.log(`[INFO] Listening on port ${PORT}...`);
+        });
+    }
 
     return server;
 })();

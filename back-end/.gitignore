@@ -131,3 +131,6 @@ dist
 
 # macOS folder
 .DS_Store
+
+# Certificate
+ca/
