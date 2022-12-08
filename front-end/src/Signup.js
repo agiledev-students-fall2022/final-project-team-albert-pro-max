@@ -15,7 +15,7 @@ const Signup = props => {
         const username = document.getElementById("username").value;
         const password = document.getElementById("password").value;
         const repassword = document.getElementById("repassword").value;
-        const email = document.getElementById("email").value;
+        const email = document.getElementById("email_signup").value;
 
         if (password !== repassword) {
             // const popup = document.getElementById("myPopup");
