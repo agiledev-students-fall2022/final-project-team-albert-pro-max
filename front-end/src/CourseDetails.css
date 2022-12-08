@@ -26,6 +26,7 @@
     font-size: medium;
     font-weight:600;
     background-color: rgb(176, 154, 192);
+    padding:4px
 }
 
 .course-recitation-info table {
