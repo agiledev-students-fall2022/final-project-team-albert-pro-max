@@ -2,7 +2,7 @@ import { useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-
+import { Button, Modal, Space, Toast, Divider } from 'antd-mobile'
 import './CourseDetails.css';
 
 const CourseDetails = () => {
@@ -21,6 +21,8 @@ const CourseDetails = () => {
     const [courseDetails, setCourseDetails] = useState({});
     const [recitations, setRecitations] = useState([]);
     const [recitationTableRows, setRecitationTableRows] = useState(<></>);
+
+
 
     useEffect(() => {
         return () => {
@@ -55,7 +57,17 @@ const CourseDetails = () => {
                                 <td>{recitation.instruction_mode}</td>
                                 <td>{recitation.building_room}</td>
                                 <td>{recitation.instructor}</td>
-                                <td><button onClick={() => AddCourse(response.data.courseDetails, recitation)}>Add</button></td>
+                                <td>
+                                    <Button
+                                            block
+                                            onClick={() =>{
+                                            (AddCourse(response.data.courseDetails, recitation))}
+                                        }
+                                        >
+                                            Add
+                                        </Button>
+                                    {/* <button onClick={() => AddCourse(response.data.courseDetails, recitation)}>Add</button> */}
+                                </td>
                             </tr>
                         );
                     }
@@ -83,11 +95,21 @@ const CourseDetails = () => {
                 headers: { Authorization: `Bearer ${jwtToken}` },
             })
             .then(function (response) {
-                console.log(response.data);
+                // console.log(response.data);
+                console.log("responsehere",response.data.message);
+                return ( Modal.alert(
+                    {
+                    content:  response.data.message,
+                    confirmText: 'OK!',
+                    onConfirm: () => {
+                    console.log('Confirmed')
+                    },
+                }))
             })
             .catch(function (error) {
                 console.log(error);
             });
+        
     }
 
     if (courseDetails) {
@@ -172,7 +194,7 @@ const CourseDetails = () => {
                 <Link to={{
                     pathname: '/coursepage',
                     search: `?id=${courseDetails.school_name + '-' + courseDetails.department_name}`
-                }}><button>Back</button></Link>
+                }}><button id='back'>Back</button></Link>
             </div>
         )
     }

@@ -36,10 +36,10 @@ const EditUser = (prop) => {
     return (
         <div className="editinfo">
             <h2>Change Username</h2>
-            <label>New Username:</label><br></br>
+            <label className='editlabel'>New Username:</label><br></br>
             <input id="newUsername" name="newUsername" title="New UserName" /><br></br>
             <p className="form-actions">
-                <input type="submit" value="Change username" title="Change username" onClick={changeUsername} />
+                <input className="changebtn" type="submit" value="Change Username" title="Change Username" onClick={changeUsername} />
             </p>
         </div>
 
