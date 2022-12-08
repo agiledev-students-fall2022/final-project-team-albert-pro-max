@@ -1,3 +1,5 @@
+const https = require('https');
+const fs = require('fs');
 const express = require('express');
 const passport = require('passport');
 const cors = require('cors');
@@ -8,11 +10,6 @@ const cart = require('./routes/cart');
 const schedule = require('./routes/schedule');
 const mongoose = require('mongoose');
 // const morgan = require("morgan"); // middleware for nice logging of incoming HTTP requests
-
-const https = require('https');
-const privateKey = fs.readFileSync('ca/cert.key', 'utf8');
-const certificate = fs.readFileSync('ca/cert.crt', 'utf8');
-const credentials = { key: privateKey, cert: certificate };
 
 require("dotenv").config({ silent: true }); // load environmental variables from a hidden file named .env
 
@@ -57,6 +54,10 @@ module.exports = (async function () {
     let server;
 
     if (process.env.NODE_ENV === 'PRODUCTION') {
+        const privateKey = fs.readFileSync('ca/cert.key', 'utf8');
+        const certificate = fs.readFileSync('ca/cert.crt', 'utf8');
+        const credentials = { key: privateKey, cert: certificate };
+
         server = https.createServer(credentials, app).listen(PORT, () => {
             console.log(`[INFO] Listening on port ${PORT}...`);
         });
