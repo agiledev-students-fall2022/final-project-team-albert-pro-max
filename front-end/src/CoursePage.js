@@ -62,6 +62,7 @@ const CoursePage = props => {
               times={item.times}
               instructor={item.instructor}
               instruction_mode={item.instruction_mode}
+              class_status={item.class_status}
             />
           } else {
             return <Course
@@ -75,6 +76,7 @@ const CoursePage = props => {
               times={item.times}
               instructor={item.instructor}
               instruction_mode={item.instruction_mode}
+              class_status={item.class_status}
             />
           }
         })}
