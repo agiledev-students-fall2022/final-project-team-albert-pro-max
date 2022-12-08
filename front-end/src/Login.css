@@ -16,3 +16,11 @@
 .Login th {
     width: 30%;
 }
+
+/* #username,#password,#email_signup,#repassword{
+    position: absolute;
+    left: 10%;
+    right:10%;
+    margin: 10px;
+    padding:5px
+} */
