@@ -12,9 +12,15 @@ router.get('/', passport.authenticate("jwt", { session: false }), async (req, re
         const c = await course.findOne({_id: item.course});
         if (item.recitation !== null) {
           const r = await recitation.findOne({_id: item.recitation});
-          list.push(r);
+          list.push({
+            lec: c,
+            rec: r
+          });
+        } else {
+          list.push({
+            lec: c
+          });
         }
-        list.push(c);
       }
     }));
     res.json(list);
