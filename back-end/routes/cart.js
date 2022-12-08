@@ -17,7 +17,7 @@ router.post('/add', passport.authenticate("jwt", { session: false }), async (req
     const userAddedCourses = req.user.cart.map(ele => ele.course.toString());
 
     if (userAddedCourses.indexOf(courseId) !== -1) {
-        res.json({ success: true, message: "Course already in cart" });
+        res.json({ success: true, message: "Course already in cart!" });
     } else {
         const cartItem = {
             course: courseId,
@@ -35,7 +35,7 @@ router.post('/add', passport.authenticate("jwt", { session: false }), async (req
         });
 
         if (updateResult.acknowledged) {
-            res.json({ success: true, message: "Added to shopping cart" });
+            res.json({ success: true, message: "Added to shopping cart!" });
         } else {
             res.json({ success: false, message: "Database error occurred" });
         }
