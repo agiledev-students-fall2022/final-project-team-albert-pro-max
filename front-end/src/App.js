@@ -13,10 +13,14 @@ import EditEmail from './EditEmail';
 import Schedule from "./Schedule";
 import Signup from "./Signup";
 import Login from './Login';
+import { SafeArea } from 'antd-mobile'
 
 function App() {
   return (
     <div className="App">
+      <div style={{ background: '#ace0ff' }}>
+        <SafeArea position='top' />
+      </div>
       <Router>
         <main className="App-main">
           <Routes>
@@ -36,6 +40,9 @@ function App() {
         </main>
         <Footer />
       </Router>
+      <div style={{ background: '#ffcfac' }}>
+        <SafeArea position='bottom' />
+      </div>
     </div>
   );
 }

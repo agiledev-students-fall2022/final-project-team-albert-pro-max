@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import './CourseSearch.css'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-
+import { Button, Toast } from 'antd-mobile'
 /**
  * A React component that represents the Home page of the app.
  * @param {*} param0 an object holding any props passed to this component from its parent component
@@ -64,13 +64,19 @@ const CourseSearch = props => {
         })}
       </select></div>
 
-      <Link to={{
-        pathname: '/coursepage',
-        search: `?id=${schoolID + '-' + majorID}`
-      }}>
         <br />
-        <button id="searchbtn">SEARCH !</button>
-      </Link>
+        <button id="searchbtn" onClick={()=>{
+          if(schoolID==="*"||majorID==="*"){
+            return(
+              Toast.show({
+              icon: 'fail',
+              content: "Invalid Search!"
+          }))}
+          else{
+            window.location.href='/coursepage?id='+schoolID + '-' + majorID
+          }  
+        }}>SEARCH !</button>
+
     </div>
   )
 }
