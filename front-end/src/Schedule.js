@@ -1,241 +1,168 @@
-import "./Schedule.css";
+import React, {Component} from 'react';
 import axios from "axios";
-import { Link, Navigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { Navigate } from "react-router-dom";
+import {DayPilot, DayPilotCalendar} from "daypilot-pro-react";
+import "./Schedule.css"
+class Schedule extends Component {
 
-const Block = ({ id, days, times, duration, course_number, course_name }) => {
-  let day = days.split(',');
-  return (
-    <>
-      {day.includes('Mon') ? (
-        <td rowSpan={duration}>
-          <Link
-            to={{
-              pathname: "/coursedetails",
-              search: `?id=${id}`,
-            }}
-          >
-            {times}
-            <br />
-            {course_number}
-            <br />
-            {course_name}
-          </Link>
-        </td>
-      ) : (
-        <td className="noshow"></td>
-      )}
-      {day.includes('Tue') ? (
-        <td rowSpan={duration}>
-          <Link
-            to={{
-              pathname: "/coursedetails",
-              search: `?id=${id}`,
-            }}
-          >
-            {times}
-            <br />
-            {course_number}
-            <br />
-            {course_name}
-          </Link>
-        </td>
-      ) : (
-        <td className="noshow"></td>
-      )}
-      {day.includes('Wed') ? (
-        <td rowSpan={duration}>
-          <Link
-            to={{
-              pathname: "/coursedetails",
-              search: `?id=${id}`,
-            }}
-          >
-            {times}
-            <br />
-            {course_number}
-            <br />
-            {course_name}
-          </Link>
-        </td>
-      ) : (
-        <td className="noshow"></td>
-      )}
-      {day.includes('Thu') ? (
-        <td rowSpan={duration}>
-          <Link
-            to={{
-              pathname: "/coursedetails",
-              search: `?id=${id}`,
-            }}
-          >
-            {times}
-            <br />
-            {course_number}
-            <br />
-            {course_name}
-          </Link>
-        </td>
-      ) : (
-        <td className="noshow"></td>
-      )}
-      {day.includes('Fri') ? (
-        <td rowSpan={duration}>
-          <Link
-            to={{
-              pathname: "/coursedetails",
-              search: `?id=${id}`,
-            }}
-          >
-            {times}
-            <br />
-            {course_number}
-            <br />
-            {course_name}
-          </Link>
-        </td>
-      ) : (
-        <td className="noshow"></td>
-      )}
-    </>
-  );
-};
-
-const Schedule = () => {
-
-  useEffect(() => {
+  constructor(props) {
+    super(props);
+    this.calendarRef = React.createRef();
+    this.state = {
+      viewType: "WorkWeek",
+      headerDateFormat: "ddd",
+      cellDuration: 5,
+      cellHeight: 4.5,
+      businessBeginsHour: 8,
+      businessEndsHour: 21,
+      dayBeginsHour: 8,
+      dayEndsHour: 21,
+      timeRangeSelectedHandling: "Disabled",
+      eventDeleteHandling: "Disabled",
+      eventMoveHandling: "Disabled",
+      eventResizeHandling: "Disabled",
+      eventClickHandling: "Enabled",
+      durationBarVisible: false,
+      onEventClicked: (args) => {
+        window.location.href = "/coursedetails?id=" + args.e.id();
+      },
+      eventHoverHandling: "Disabled",
+    };
+    
+    this.BASE_URL = process.env.REACT_APP_BASE_URL;
+    this.jwtToken = localStorage.getItem("token"); // the JWT token, if we have already received one and stored it in localStorage
+    this.isLoggedIn = this.jwtToken && true;
+    
     document.title = "Schedule - AlbertProMax";
-  }, []);
+  }
 
-  const BASE_URL = process.env.REACT_APP_BASE_URL;
-
-  const jwtToken = localStorage.getItem("token"); // the JWT token, if we have already received one and stored it in localStorage
-  // console.log(`JWT token: ${jwtToken}`); // debugging
-  const [isLoggedIn, setIsLoggedIn] = useState(jwtToken && true);
-
-  const [courseBlock, setCourseBlock] = useState(null);
-
-  // this array contains courses that are supposed to be showed
-  const [showedCourse, setShowedCourse] = useState([]);
-  useEffect(() => {
-    axios
-      .get(`${BASE_URL}/schedule`, {
-        headers: { Authorization: `Bearer ${jwtToken}` }, // pass the token, if any, to the server
-      })
-      .then((response) => {
-        setShowedCourse(
-          response.data.map((item, index) => {
-            let duration = 0;
-            let time = item.times.split(" ");
-            let start = time[0].split(".");
-            let startH = parseInt(start[0]);
-            if (time[1] === "PM" && start[0] !== "12") startH += 12;
-            let startM = parseInt(start[1]);
-            let end = time[3].split(".");
-            let endH = parseInt(end[0]);
-            if (time[4] === "PM" && end[0] !== "12") endH += 12;
-            let endM = parseInt(end[1]);
-            duration += (endH - startH) * 12;
-            duration += (endM - startM) / 5;
-            if (!item.lecture_id) {
-              return {
-                key: index,
-                id: item._id,
-                days: item.days,
-                times: item.times,
-                startH: startH,
-                startM: startM,
-                duration: duration,
-                course_number: item.department_code + ' ' + item.course_number,
-                course_name: item.course_name,
-              };
-            } else {
-              return {
-                key: index,
-                id: item.lecture_id,
-                days: item.days,
-                times: item.times,
-                startH: startH,
-                startM: startM,
-                duration: duration,
-                course_number: item.section_number,
-                course_name: 'Recitation',
-              }
-            }
-          })
-        );
-      })
-      .catch((err) => {
-        console.log(err);
-        setIsLoggedIn(false);
-      });
-  }, [BASE_URL, jwtToken]);
-
-  useEffect(() => {
-    let scheduleRows = [];
-    for (let hr = 8; hr <= 20; hr++) {
-      for (let min = 0; min <= 55; min += 5) {
-        let scheduleRow = [];
-
-        let hr_str, min_str;
-
-        if (hr < 10) {
-          hr_str = "0" + hr;
-        } else {
-          hr_str = "" + hr;
-        }
-        if (min < 10) {
-          min_str = "0" + min;
-        } else {
-          min_str = "" + min;
-        }
-
-        if (min % 30 === 0) {
-          scheduleRow.push(
-            <th id={hr_str + min_str} key={"th" + hr_str + min_str} rowSpan={6}>
-              {hr_str}:{min_str}
-            </th>
-          );
-        }
-
-        for (let i = 0; i < showedCourse.length; i++) {
-          if (showedCourse[i].startH === hr && showedCourse[i].startM === min) {
-            scheduleRow.push(<Block key={i} id={showedCourse[i].id} days={showedCourse[i].days} times={showedCourse[i].times} duration={showedCourse[i].duration} course_number={showedCourse[i].course_number} course_name={showedCourse[i].course_name} />);
-          }
-        }
-
-        scheduleRows.push(<tr key={"tr" + hr_str + min_str}>{scheduleRow}</tr>);
-      }
+  getRandomColor() {
+    var letters = 'BCDEF'.split('');
+    var color = '#';
+    for (var i = 0; i < 6; i++ ) {
+        color += letters[Math.floor(Math.random() * letters.length)];
     }
-    setCourseBlock(scheduleRows);
-  }, [showedCourse]);
+    return color;
+  }
 
-  return (
-    <>
-      {isLoggedIn ? (
-        <div className="Schedule">
-          <h2>Schedule</h2>
-          <center>
-            <table>
-              <thead>
-                <tr>
-                  <th id='firstblock'></th>
-                  <th className="weekday" id='M'>Mon</th>
-                  <th className="weekday" id='T'>Tue</th>
-                  <th className="weekday" id='W'>Wed</th>
-                  <th className="weekday" id='Th'>Thu</th>
-                  <th className="weekday" id='F'>Fri</th>
-                </tr>
-              </thead>
-              <tbody>{courseBlock}</tbody>
-            </table>
-          </center>
-        </div>
-      ) : (
-        <Navigate to="/login" />
-      )}
-    </>
-  );
-};
+  componentDidMount() {
+
+    axios.get(`${this.BASE_URL}/schedule`, {
+      headers: { Authorization: `Bearer ${this.jwtToken}` }, // pass the token, if any, to the server
+    })
+    .then(response => {
+      // load resource and event data
+      let list = [];
+      for (const e of response.data) {
+        let item = e.lec;
+        let time = item.times.split(" ");
+        let start = time[0].split(".");
+        let startH = parseInt(start[0]);
+        if (time[1] === "PM" && start[0] !== "12") startH += 12;
+        let startM = parseInt(start[1]);
+        let end = time[3].split(".");
+        let endH = parseInt(end[0]);
+        if (time[4] === "PM" && end[0] !== "12") endH += 12;
+        let endM = parseInt(end[1]);
+        let sTime = new DayPilot.Date("2022-12-05T00:00:00").addHours(startH).addMinutes(startM);
+        let eTime = new DayPilot.Date("2022-12-05T00:00:00").addHours(endH).addMinutes(endM);
+        let day = item.days.split(',');
+        let color = this.getRandomColor(parseInt(item.class_number));
+        for (const d of day) {
+          let startTime = sTime;
+          let endTime = eTime;
+          if (d === "Mon") {
+            startTime = startTime.addDays(0);
+            endTime = endTime.addDays(0);
+          } else if (d === "Tue") {
+            startTime = startTime.addDays(1);
+            endTime = endTime.addDays(1);
+          } else if (d === "Wed") {
+            startTime = startTime.addDays(2);
+            endTime = endTime.addDays(2);
+          } else if (d === "Thu") {
+            startTime = startTime.addDays(3);
+            endTime = endTime.addDays(3);
+          } else if (d === "Fri") {
+            startTime = startTime.addDays(4);
+            endTime = endTime.addDays(4);
+          }
+          list.push({
+            id: item._id,
+            text: 'Lecture:\n' + item.department_code + '\n' + item.course_number + '\n' + item.building_room,
+            start: startTime,
+            end: endTime,
+            backColor: color
+          })
+        }
+        if (e.rec) {
+          item = e.rec;
+          time = item.times.split(" ");
+          start = time[0].split(".");
+          startH = parseInt(start[0]);
+          if (time[1] === "PM" && start[0] !== "12") startH += 12;
+          startM = parseInt(start[1]);
+          end = time[3].split(".");
+          endH = parseInt(end[0]);
+          if (time[4] === "PM" && end[0] !== "12") endH += 12;
+          endM = parseInt(end[1]);
+          sTime = new DayPilot.Date("2022-12-05T00:00:00").addHours(startH).addMinutes(startM);
+          eTime = new DayPilot.Date("2022-12-05T00:00:00").addHours(endH).addMinutes(endM);
+          let startTime = sTime;
+          let endTime = eTime;
+          let d = item.days;
+          if (d === "Mon") {
+            startTime = startTime.addDays(0);
+            endTime = endTime.addDays(0);
+          } else if (d === "Tue") {
+            startTime = startTime.addDays(1);
+            endTime = endTime.addDays(1);
+          } else if (d === "Wed") {
+            startTime = startTime.addDays(2);
+            endTime = endTime.addDays(2);
+          } else if (d === "Thu") {
+            startTime = startTime.addDays(3);
+            endTime = endTime.addDays(3);
+          } else if (d === "Fri") {
+            startTime = startTime.addDays(4);
+            endTime = endTime.addDays(4);
+          }
+          list.push({
+            id: item.lecture_id,
+            text: 'Recitation:\n' + e.lec.department_code + '\n' + e.lec.course_number + '\n' + item.building_room,
+            start: startTime,
+            end: endTime,
+            backColor: color
+          })
+        }
+      }
+      this.setState({
+        events: list
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+
+  get calendar() {
+    return this.calendarRef.current.control;
+  }
+
+  render() {
+    return (
+      <div>
+        {this.isLoggedIn ? (
+          <DayPilotCalendar
+            {...this.state}
+            ref={this.calendarRef}
+          />
+        ) : (
+          <Navigate to="/login" />
+        )}
+      </div>
+    );
+  }
+}
 
 export default Schedule;

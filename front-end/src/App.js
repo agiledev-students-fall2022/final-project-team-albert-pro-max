@@ -10,7 +10,6 @@ import EditPassword from './EditPassword';
 import EditUser from './EditUser';
 import EditEmail from './EditEmail';
 import Schedule from "./Schedule";
-import Calendar from "./Calendar";
 import Signup from "./Signup";
 import Login from './Login';
 
@@ -29,7 +28,7 @@ function App() {
             <Route path="/edituser" element={<EditUser />} />
             <Route path="/editemail" element={<EditEmail />} />
             <Route path="/editpassword" element={<EditPassword />} />
-            <Route path="/schedule" element={<Calendar />} />
+            <Route path="/schedule" element={<Schedule />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
           </Routes>

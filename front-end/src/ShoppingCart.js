@@ -1,6 +1,6 @@
 import CourseInCart from './CourseInCart'
 import './ShoppingCart.css'
-import { Link, Navigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Empty } from 'antd-mobile'
@@ -14,9 +14,8 @@ const ShoppingCart = () => {
     const BASE_URL = process.env.REACT_APP_BASE_URL;
 
     const jwtToken = localStorage.getItem("token"); // the JWT token, if we have already received one and stored it in localStorage
-    const [isLoggedIn, setIsLoggedIn] = useState(jwtToken && true);
+    const isLoggedIn = jwtToken && true;
 
-    const [userCart, setUserCart] = useState([]);
     const [cartCourses, setCartCourses] = useState([]);
 
     useEffect(() => {
@@ -27,8 +26,6 @@ const ShoppingCart = () => {
                 })
                 .then(response => {
                     console.log("response.data:", response.data);
-
-                    setUserCart(response.data.cart);
 
                     let cartCoursesLocal = [];
 

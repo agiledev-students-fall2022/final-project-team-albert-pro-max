@@ -1,8 +1,7 @@
-import { Link } from 'react-router-dom'
 import './CourseSearch.css'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import { Button, Toast } from 'antd-mobile'
+import { Toast } from 'antd-mobile'
 /**
  * A React component that represents the Home page of the app.
  * @param {*} param0 an object holding any props passed to this component from its parent component

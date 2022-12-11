@@ -1,11 +1,11 @@
-require("./db");
+require("./utils");
 const fs = require("fs");
 const path = require("path");
 const mongoose = require("mongoose");
 
 const Course = mongoose.model("Course");
 
-const filePath = path.resolve("mockdata/Econ.json");
+const filePath = path.resolve("place_holder");
 
 fs.readFile(filePath, (err, jsonString) => {
   if (err) {

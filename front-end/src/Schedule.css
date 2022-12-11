@@ -1,53 +1,5 @@
-.Schedule table {
-    width: 100%;
-}
-
-.Schedule td {
-    font-size: 10px;
-    text-align: left;
-}
-
-.Schedule .weekday {
-    width: 16%;
-}
-
-.Schedule table,
-.Schedule th,
-.Schedule td {
-    border: 1px solid;
-    border-color: rgb(89, 27, 133);
-}
-
-.Schedule .noshow {
-    visibility: hidden;
-}
-
-#M{
-    background-color: rgb(198, 136, 56);
-    color:rgb(249,211,165)
-}
-#T{
-    background-color:rgb(158, 134, 70) ;
-    color:rgb(227,220,192)
-}
-#W{
-    background-color: rgb(174, 94, 87);
-    color:rgb(234,195,184);
-}
-#Th{
-    background-color: rgb(98, 126, 151);
-    color:rgb(193,210,214)
-}
-#F{
-    background-color: rgb(83, 104, 4);
-    color:rgb(193,204,137)
-}
-
-.Schedule th{
-    background-color: rgb(89, 27, 133);
-    color:rgb(204, 190, 211)
-}
-#firstblock{
-    background-color: rgb(176, 154, 192);
-
+.calendar_default_event_inner {
+  font-size: 7pt;
+  text-align: left;
+  padding-left: 1px;
 }

@@ -14,7 +14,7 @@ const CourseDetails = () => {
     const BASE_URL = process.env.REACT_APP_BASE_URL;
 
     const jwtToken = localStorage.getItem("token"); // the JWT token, if we have already received one and stored it in localStorage
-    const [isLoggedIn, setIsLoggedIn] = useState(jwtToken && true);
+    const isLoggedIn = jwtToken && true;
 
     const courseId = new URLSearchParams(useLocation().search).get("id");
 
@@ -33,7 +33,7 @@ const CourseDetails = () => {
                 .then(response => {
                     console.log("response.data:", response.data);
 
-                    if (response.data.multi_topics == 1) {
+                    if (response.data.multi_topics === 1) {
                         response.data.course_name += " " + response.data.topic
                     }
 
@@ -45,7 +45,7 @@ const CourseDetails = () => {
                     for (let i = 0; i < response.data.recitations.length; i++) {
                         let recitation = response.data.recitations[i];
 
-                        if (recitation.instructor.length == 0) {
+                        if (recitation.instructor.length === 0) {
                             recitation.instructor.push("TBD");
                         }
 
@@ -97,7 +97,7 @@ const CourseDetails = () => {
             .then(function (response) {
                 // console.log(response.data);
                 console.log("responsehere",response.data.message);
-                const icon_mes = response.data.message == "Course already in cart!" ? 'fail':'success'
+                const icon_mes = response.data.message === "Course already in cart!" ? 'fail':'success'
                 return ( 
                     Toast.show({
                         icon: icon_mes,
@@ -155,7 +155,7 @@ const CourseDetails = () => {
                                 <td>Syllabus</td>
                                 <td><a href={courseDetails.syllabus}>Link to Course Syllabus</a></td>
                             </tr>
-                            {recitations.length == 0 ? (
+                            {recitations.length === 0 ? (
                                 <tr>
                                     <td>Cart</td>
                                     <td><button onClick={() => AddCourse(courseDetails)}>Add to Shopping Cart</button></td>

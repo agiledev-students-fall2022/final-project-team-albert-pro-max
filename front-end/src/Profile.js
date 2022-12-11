@@ -1,5 +1,4 @@
 import './Profile.css'
-import ProfileLogo from './ProfileLogo.jpeg'
 import NYU from './NYU-Symbol.png'
 import { Link, Navigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
