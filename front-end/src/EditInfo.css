@@ -1,0 +1,87 @@
+/* .editinfo {
+    position:absolute;
+    place-items: center;
+    border: 1px;
+    background-color: rgb(228, 225, 225);
+    border-style: inset;
+    width: 80%;
+    left: 10%;
+    top: 5%;
+    height: 80%;
+}*/
+/* .popuptext {
+    visibility: hidden;
+    width: 100px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    z-index: 1;
+    font-size: 10px;
+}
+.popuptext::after {
+    content: "";
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+.show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+} */
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+    from {opacity: 0;} 
+    to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
+}
+
+
+/* .changebtn{ */
+
+    /* position: relative;
+    /* font-size: medium; */
+    /* background-color: rgb(176, 154, 192); */
+    /* padding: 4px;
+    border-radius: 0.5em;
+    border: 1px solid #e8e8e8;
+    transition: all .3s;
+    box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+    margin: 90px; */
+
+/* } */
+
+
+/* .editlabel{
+    position: absolute;
+    left: 10%; 
+    bottom: 5%;
+} */
+
+#confirmLabel{
+    position: absolute;
+    left: 10%;
+
+}
+/* #newUsername ,#newPassword,#newEmail,#confirmPassword{
+    position: absolute;
+    left: 10%;
+    right:10%;
+    margin: 10px;
+    padding:5px
+} */
+/* #confirmPassword{
+    position: absolute;
+    left: 10%;
+    right:10%;
+    margin: 10px;
+    top:23%;
+    padding:5px
+}
+     */

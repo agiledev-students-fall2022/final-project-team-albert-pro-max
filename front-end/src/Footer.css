@@ -1,0 +1,28 @@
+.Footer-footer{
+    position:sticky;
+    min-height: 4%;
+    border-top-color: grey 2px;
+    background-color: rgb(89, 27, 133);
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 3%;
+}
+
+#schedule{
+    position: absolute;
+    left: 8%;
+}
+#search{
+    position: absolute;
+    left: 33%;
+}
+#profile{
+    position: absolute;
+    left: 58%;
+}
+#cart{
+    position: absolute;
+    left: 82%;
+}

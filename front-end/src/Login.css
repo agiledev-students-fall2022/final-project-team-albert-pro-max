@@ -1,0 +1,26 @@
+.Login table,
+.Login tr,
+.Login td,
+.Login th {
+    border: 0;
+}
+
+.Login input {
+    width: 80%;
+}
+
+.Login table {
+    width: 100%;
+}
+
+.Login th {
+    width: 30%;
+}
+
+/* #username,#password,#email_signup,#repassword{
+    position: absolute;
+    left: 10%;
+    right:10%;
+    margin: 10px;
+    padding:5px
+} */

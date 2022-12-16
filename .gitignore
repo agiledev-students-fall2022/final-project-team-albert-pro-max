@@ -124,3 +124,14 @@ typings/
 ## Jekyll artifacts
 **/.jekyll-cache
 **/_site/
+back-end/myvar.env
+
+# IDE junks
+.vscode
+.idea
+
+# Python
+__pycache__
+
+# Certificate
+ca/

@@ -1,20 +1,43 @@
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-c66648af7eb3fe8bc4f294546bfd86ef473780cde1dea487d3c4ff354943c9ae.svg)](https://classroom.github.com/online_ide?assignment_repo_id=8717071&assignment_repo_type=AssignmentRepo)
-# Project Repository
+[![Node.js CI](https://github.com/agiledev-students-fall2022/final-project-team-albert-pro-max/actions/workflows/node.js.yml/badge.svg)](https://github.com/agiledev-students-fall2022/final-project-team-albert-pro-max/actions/workflows/node.js.yml)
+[![Continuous Deployment](https://github.com/agiledev-students-fall2022/final-project-team-albert-pro-max/actions/workflows/deploy.yml/badge.svg)](https://github.com/agiledev-students-fall2022/final-project-team-albert-pro-max/actions/workflows/deploy.yml)
 
-This repository will be used for team projects.
+# [Albert Pro Max](https://albertpromax.com/)
 
-Several sets of instructions are included in this repository. They should each be treated as separate assignments with their own due dates and sets of requirements.
+## Product Vision Statement
+Albert Pro Max product is a upgraded version of our NYU Albert system. 
 
-1. See the [App Map & Wireframes](instructions-0a-app-map-wireframes.md) and [Prototyping](./instructions-0b-prototyping.md) instructions for the requirements of the initial user experience design of the app.
+Students hate scrolling all the way down to the end of course lists and trying to lookup the time, recitation sections and enroll status. They also have to keep track of the times of the selected courses by themselves in order to avoid course conflict. To make the course registration process easier for students, we want to build a online platform that allows students to easily gets the course information they have to spend days to look for and help students to plan the most reasonable schedule for the semester.
 
-1. Delete the contents of this file and replace with the contents of a proper README.md, as described in the [project setup instructions](./instructions-0c-project-setup.md)
+Therefore, our product combines the course status tracking system, search engine and calendar system together, offering a user-friendly and well-designed app to our target customers. 
 
-1. See the [Sprint Planning instructions](instructions-0d-sprint-planning.md) for the requirements of Sprint Planning for each Sprint.
+Specifically, our product will allow the following functions:
+- An up-to-date catalog of all the courses
+- A search interface that allows students to filter their courses according to major / term / school
+- A shopping cart watchlist that tracks the course status
+- A well-designed and costumizable course schedule page that allow students to display various course combinations
 
-1. See the [Front-End Development instructions](./instructions-1-front-end.md) for the requirements of the initial Front-End Development.
+## Members
+- [Bernice Wu](https://github.com/Bernice55231)
 
-1. See the [Back-End Development instructions](./instructions-2-back-end.md) for the requirements of the initial Back-End Development.
+- [Elaine Shan](https://github.com/Yilin310)
 
-1. See the [Database Integration instructions](./instructions-3-database.md) for the requirements of integrating a database into the back-end.
+- [Larry Li](https://github.com/86larryli)
 
-1. See the [Deployment instructions](./instructions-4-deployment.md) for the requirements of deploying an app.
+- [Richard Xu](https://github.com/Rxu64)
+
+- [Jiaming Li](https://github.com/ljm297)
+
+## Project History
+Our project is brought up by Larry Li, and the other team members felt the same way and thus brain-storming about what functions the upgraded Albert should equip with. We listed all the ideas on the Google Doc and discussed the major functions that we could apply.
+
+## Contributions
+Please see the [CONTRIBUTING.md](https://github.com/agiledev-students-fall2022/final-project-team-albert-pro-max/blob/master/CONTRIBUTING.md)
+
+## Project Roles
+
+|   Week   |  Product Owner  |  Scrum Master  |
+| -------- | --------------- | -------------- |
+|  Sprint 1  |   Elaine Shan   |   Bernice Wu   |
+|  Sprint 2  |   Larry Li   |   Jiaming Li   |
+|  Sprint 3  |   Bernice Wu   |   Richard Xu   |
+|  Sprint 4  |   Jiaming Li   |   Elaine Shan   |

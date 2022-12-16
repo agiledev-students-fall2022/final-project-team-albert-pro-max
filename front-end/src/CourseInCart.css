@@ -1,0 +1,29 @@
+#watch{
+    position: absolute;
+    right: 25%;
+    width: 15%;
+
+}
+#show{
+    position: absolute;
+    right: 5%;
+    width: 15%;
+}
+#delete{
+    position: absolute;
+    right: 45%;
+    width: 15%;
+}
+.CourseInCart{
+    border: 3px;
+    border-color: rgb(89, 27, 133);;
+    border-radius: 5px;
+    background-color: rgb(176, 154, 192);
+    border-style:groove;
+    padding: 15px;
+    margin: 10px;
+}
+#dep{
+    margin-block-start: 0;
+    margin-block-end:0.25em;
+}
