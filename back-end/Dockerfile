@@ -12,10 +12,10 @@ COPY package*.json ./
 RUN npm ci --only=production
 
 # Install nodemon
-RUN npm install nodemon -g
+RUN npm install nodemon forever -g
 
 # Bundle app source
 COPY . .
 
 EXPOSE 3001
-CMD [ "nodemon", "app.js" ]
+CMD [ "forever", "-o", "out.log", "-e", "err.log", "app.js" ]
