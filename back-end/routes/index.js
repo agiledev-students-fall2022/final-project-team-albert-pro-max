@@ -1,10 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
+const nodemailer = require('nodemailer');
 const jwt = require("jsonwebtoken"),
     passportJWT = require("passport-jwt"),
     ExtractJWT = passportJWT.ExtractJwt;
+
 require("dotenv").config();
+
 const jwtOptions = {
     jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
     secretOrKey: process.env.JWT_SECRET
@@ -13,6 +16,16 @@ const jwtOptions = {
 const mongoose = require('mongoose');
 require('../utils/db');
 const User = mongoose.model("User");
+
+const transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 587,
+    auth: {
+        user: process.env.SENDER_ADDRESS,
+        pass: process.env.SENDER_PASSWORD,
+    },
+});
+transporter.verify().then(console.log).catch(console.error);
 
 router.get('/', (req, res) => {
     // THIS IS / ROUTE
@@ -40,11 +53,19 @@ router.post('/register', (req, res) => {
             res.json({ error: 1, message: 'Your registration information is not valid' });
         } else {
             passport.authenticate('local')(req, res, function () {
-                // console.log("enter here, authentication", user);
                 const payload = { id: user.id }; // some data we'll encode into the token
                 const token = jwt.sign(payload, jwtOptions.secretOrKey);
                 res.json({ success: true, username: user.username, token: token });
-                // res.json({ success: 1});
+
+                transporter.sendMail({
+                    from: `"AlbertProMax" ${process.env.SENDER_ADDRESS}`, // sender address
+                    to: email,
+                    subject: "Welcome! - Albert Pro Max", // Subject line
+                    text: `Hi ${username}!\n\nThank you for using AlbertProMax.\n\nYou will receive email notifications when the course status in your watchlist changes.\n\nTo edit your watchlist, go to https://albertpromax.com/shoppingcart.\n\nAlbertProMax`, // plain text body
+                    html: `<b>Hi ${username}!</b><p>Thank you for using AlbertProMax.</p><p>You will receive email notifications when the course status in your watchlist changes.</p><p>To edit your watchlist, go to <a href="https://albertpromax.com/shoppingcart">your shopping cart</a>.</p><b>AlbertProMax</b>`, // html body
+                }).then(info => {
+                    console.log({ info });
+                }).catch(console.error);
             });
         }
     });
